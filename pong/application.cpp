@@ -2,18 +2,25 @@
 
 #include <iostream>
 
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
+
+#include "pong/config.hpp"
+
 using namespace std;
+using namespace sf;
 
 namespace pong {
 
 void Application::exit(int errorCode) {
     this->errorCode = errorCode;
-    running = false;
+    window.close();
 }
 
 int Application::run() {
     create();
-    while (running) {
+
+    while (window.isOpen()) {
         update();
     }
 
@@ -22,6 +29,7 @@ int Application::run() {
 }
 
 void Application::create() {
+    window.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
 }
 
 void Application::destroy() {
@@ -34,12 +42,19 @@ void Application::update() {
 }
 
 void Application::handleInput() {
+    while (window.pollEvent(event)) {
+        if (event.type == Event::Closed) {
+            exit(true);
+        }
+    }
 }
 
 void Application::processLogic() {
 }
 
 void Application::draw() {
+    window.clear(Color::Black);
+    window.display();
 } 
 
 } /* namespace pong */ 

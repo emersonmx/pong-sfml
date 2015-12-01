@@ -1,0 +1,8 @@
+#ifndef PONG_CONFIG_HPP
+#define PONG_CONFIG_HPP
+
+#define WINDOW_TITLE L"Pong"
+#define WINDOW_WIDTH 640
+#define WINDOW_HEIGHT 480
+
+#endif /* PONG_CONFIG_HPP */

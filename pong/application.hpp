@@ -1,6 +1,9 @@
 #ifndef PONG_APPLICATION_HPP
 #define PONG_APPLICATION_HPP
 
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
+
 namespace pong {
 
 class Application {
@@ -20,8 +23,10 @@ class Application {
         virtual void processLogic();
         virtual void draw();
 
+        sf::RenderWindow window;
+        sf::Event event;
+
     private:
-        bool running = true;
         int errorCode = 0;
 };
 
