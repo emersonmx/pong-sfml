@@ -58,15 +58,17 @@ void Application::processLogic() {
 void Application::draw() {
     window.clear(Color::Black);
 
+    window.draw(midfieldPartShape);
     window.draw(topWallShape);
     window.draw(bottomWallShape);
-    window.draw(midfieldPartShape);
 
     window.draw(playerOneScoreText);
     window.draw(playerTwoScoreText);
 
     window.draw(playerOneShape);
     window.draw(playerTwoShape);
+
+    window.draw(ballShape);
 
     window.display();
 }
@@ -110,6 +112,12 @@ void Application::setupShapes() {
     playerTwoShape.setFillColor(Color::White);
     playerTwoShape.setPosition(Vector2f(config.windowWidth - paddleSize.x - 10,
         config.windowHeight / 2 - paddleSize.y / 2)); 
+
+    Vector2f ballSize(10, 10);
+    ballShape.setSize(ballSize);
+    ballShape.setFillColor(Color::White);
+    ballShape.setPosition(Vector2f(config.windowWidth / 2 - ballSize.x / 2,
+        config.windowHeight / 2 - ballSize.y / 2));
 }
 
 void Application::setupFonts() {
