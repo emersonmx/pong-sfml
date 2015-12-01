@@ -1,8 +1,6 @@
-#include <iostream>
-
-using namespace std;
+#include "pong/application.hpp"
 
 int main() {
-    cout << "Hello world!\n";
-    return 0;
+    pong::Application app;
+    return app.run();
 }
