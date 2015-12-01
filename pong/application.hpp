@@ -17,6 +17,7 @@ class Application {
         int run();
 
     protected:
+
         virtual void create();
         virtual void destroy();
 
@@ -30,9 +31,25 @@ class Application {
 
         Config config;
 
+        sf::RectangleShape playerOneShape;
+        sf::RectangleShape playerTwoShape;
+        sf::RectangleShape ballShape;
+        sf::RectangleShape topWallShape;
+        sf::RectangleShape bottomWallShape;
+        sf::RectangleShape midfieldPartShape;
+
+        sf::Font sansFont;
+        sf::Text playerOneScoreText;
+        sf::Text playerTwoScoreText;
+
+        int playerOneScore;
+        int playerTwoScore;
+
     private:
         void setupConfig();
         void setupWindow();
+        void setupShapes();
+        void setupFonts();
 
         int errorCode = 0;
 };
