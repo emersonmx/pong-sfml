@@ -29,11 +29,12 @@ int Application::run() {
 }
 
 void Application::create() {
-    window.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
+    setupConfig();
+    setupWindow();
 }
 
 void Application::destroy() {
-} 
+}
 
 void Application::update() {
     handleInput();
@@ -55,6 +56,17 @@ void Application::processLogic() {
 void Application::draw() {
     window.clear(Color::Black);
     window.display();
+}
+
+void Application::setupConfig() {
+    config.windowTitle = L"Pong";
+    config.windowWidth = 640;
+    config.windowHeight = 480;
+}
+
+void Application::setupWindow() {
+    window.create(VideoMode(config.windowWidth, config.windowHeight),
+        config.windowTitle);
 } 
 
-} /* namespace pong */ 
+} /* namespace pong */

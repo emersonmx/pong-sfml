@@ -1,8 +1,20 @@
 #ifndef PONG_CONFIG_HPP
 #define PONG_CONFIG_HPP
 
-#define WINDOW_TITLE L"Pong"
-#define WINDOW_WIDTH 640
-#define WINDOW_HEIGHT 480
+#include <sstream>
+
+namespace pong {
+
+class Config {
+    public:
+        Config() {}
+        virtual ~Config() {}
+
+        std::wstring windowTitle;
+        int windowWidth;
+        int windowHeight;
+};
+
+} /* namespace pong */ 
 
 #endif /* PONG_CONFIG_HPP */

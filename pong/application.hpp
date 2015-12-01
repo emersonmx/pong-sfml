@@ -4,6 +4,8 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
+#include "pong/config.hpp"
+
 namespace pong {
 
 class Application {
@@ -26,7 +28,12 @@ class Application {
         sf::RenderWindow window;
         sf::Event event;
 
+        Config config;
+
     private:
+        void setupConfig();
+        void setupWindow();
+
         int errorCode = 0;
 };
 
