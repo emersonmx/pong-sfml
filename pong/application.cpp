@@ -5,8 +5,6 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-#include "pong/config.hpp"
-
 using namespace std;
 using namespace sf;
 
@@ -29,7 +27,6 @@ int Application::run() {
 }
 
 void Application::create() {
-    setupConfig();
     setupWindow();
     setupShapes();
     setupFonts();
@@ -73,51 +70,37 @@ void Application::draw() {
     window.display();
 }
 
-void Application::setupConfig() {
-    config.windowTitle = L"Pong";
-    config.windowWidth = 640;
-    config.windowHeight = 480;
-    config.scoreFontSize = 42;
-}
-
 void Application::setupWindow() {
-    window.create(VideoMode(config.windowWidth, config.windowHeight),
-        config.windowTitle);
+    window.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
 } 
 
 void Application::setupShapes() {
-    Vector2f wallSize(config.windowWidth, 10);
-
-    topWallShape.setSize(wallSize);
-    topWallShape.setFillColor(Color::White);
+    topWallShape = factory.makeWall(); 
+    auto wallRect = topWallShape.getLocalBounds();
     topWallShape.setPosition(Vector2f(0, 0));
+    bottomWallShape = factory.makeWall();
+    bottomWallShape.setOrigin(0, wallRect.height);
+    bottomWallShape.setPosition(Vector2f(0, WINDOW_HEIGHT));
 
-    bottomWallShape.setSize(wallSize);
-    bottomWallShape.setFillColor(Color::White);
-    bottomWallShape.setPosition(Vector2f(0, config.windowHeight - wallSize.y));
+    midfieldPartShape = factory.makeMidfieldPart();
+    auto midfieldPartRect = midfieldPartShape.getLocalBounds();
+    midfieldPartShape.setOrigin(midfieldPartRect.width / 2, 0);
+    midfieldPartShape.setPosition(Vector2f(WINDOW_WIDTH / 2, 0)); 
 
-    Vector2f midfieldPartSize (2, config.windowHeight);
-    midfieldPartShape.setSize(midfieldPartSize);
-    midfieldPartShape.setFillColor(Color::White);
-    midfieldPartShape.setPosition(Vector2f(config.windowWidth / 2 - midfieldPartSize.x / 2,
-        0));
+    int paddleOffset = 10;
+    playerOneShape = factory.makePaddle();
+    auto paddleRect = playerOneShape.getLocalBounds();
+    playerOneShape.setOrigin(0, paddleRect.height / 2);
+    playerOneShape.setPosition(Vector2f(paddleOffset, WINDOW_HEIGHT/ 2)); 
+    playerTwoShape = factory.makePaddle();
+    playerTwoShape.setOrigin(paddleRect.width, paddleRect.height / 2);
+    playerTwoShape.setPosition(Vector2f(WINDOW_WIDTH - paddleOffset,
+        WINDOW_HEIGHT / 2)); 
 
-    Vector2f paddleSize(20, 80);
-
-    playerOneShape.setSize(paddleSize);
-    playerOneShape.setFillColor(Color::White);
-    playerOneShape.setPosition(Vector2f(10, config.windowHeight / 2 - paddleSize.y / 2));
-
-    playerTwoShape.setSize(paddleSize);
-    playerTwoShape.setFillColor(Color::White);
-    playerTwoShape.setPosition(Vector2f(config.windowWidth - paddleSize.x - 10,
-        config.windowHeight / 2 - paddleSize.y / 2)); 
-
-    Vector2f ballSize(10, 10);
-    ballShape.setSize(ballSize);
-    ballShape.setFillColor(Color::White);
-    ballShape.setPosition(Vector2f(config.windowWidth / 2 - ballSize.x / 2,
-        config.windowHeight / 2 - ballSize.y / 2));
+    ballShape = factory.makeBall();
+    auto ballRect = ballShape.getLocalBounds();
+    ballShape.setOrigin(ballRect.width / 2, ballRect.height / 2);
+    ballShape.setPosition(Vector2f(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2));
 }
 
 void Application::setupFonts() {
@@ -126,23 +109,16 @@ void Application::setupFonts() {
         exit(1);
     }
 
+    int scoreTextOffset = 25;
     playerOneScore = 0;
-    playerOneScoreText.setFont(sansFont);
-    playerOneScoreText.setCharacterSize(config.scoreFontSize);
-    playerOneScoreText.setColor(Color::White);
-    playerOneScoreText.setString(to_string(playerOneScore)); 
-    FloatRect playerOneRect = playerOneScoreText.getLocalBounds();
-    playerOneScoreText.setOrigin(playerOneRect.left + playerOneRect.width, 0);
-    playerOneScoreText.setPosition(Vector2f(config.windowWidth / 2 - 25, 30));
+    playerOneScoreText = factory.makePlayerOneScoreText(sansFont,
+        to_string(playerOneScore));
+    playerOneScoreText.setPosition(Vector2f(WINDOW_WIDTH / 2 - scoreTextOffset, 30));
 
     playerTwoScore = 0;
-    playerTwoScoreText.setFont(sansFont);
-    playerTwoScoreText.setCharacterSize(config.scoreFontSize);
-    playerTwoScoreText.setColor(Color::White);
-    playerTwoScoreText.setString(to_string(playerTwoScore)); 
-    FloatRect playerTwoRect = playerTwoScoreText.getLocalBounds();
-    playerTwoScoreText.setOrigin(playerTwoRect.left, 0);
-    playerTwoScoreText.setPosition(Vector2f(config.windowWidth / 2 + 25, 30));
+    playerTwoScoreText = factory.makePlayerTwoScoreText(sansFont,
+        to_string(playerTwoScore));
+    playerTwoScoreText.setPosition(Vector2f(WINDOW_WIDTH / 2 + scoreTextOffset, 30));
 }
 
 } /* namespace pong */

@@ -4,7 +4,8 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-#include "pong/config.hpp"
+#include "pong/defs.hpp"
+#include "pong/factory.hpp"
 
 namespace pong {
 
@@ -29,8 +30,6 @@ class Application {
         sf::RenderWindow window;
         sf::Event event;
 
-        Config config;
-
         sf::RectangleShape playerOneShape;
         sf::RectangleShape playerTwoShape;
         sf::RectangleShape ballShape;
@@ -42,11 +41,12 @@ class Application {
         sf::Text playerOneScoreText;
         sf::Text playerTwoScoreText;
 
+        DefaultGameObjectFactory factory;
+
         int playerOneScore;
         int playerTwoScore;
 
     private:
-        void setupConfig();
         void setupWindow();
         void setupShapes();
         void setupFonts();
