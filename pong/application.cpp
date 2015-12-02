@@ -81,7 +81,7 @@ void Application::loadAssets() {
         exit(1);
     }
 
-    factory.setDefaultFont(sansFont); 
+    factory.setDefaultFont(sansFont);
 }
 
 void Application::setupShapes() {
