@@ -13,5 +13,5 @@ constexpr int WINDOW_HEIGHT = 480;
 constexpr int DEFAULT_FONT_SIZE = 32;
 constexpr int SCORE_FONT_SIZE = 42;
 
-} /* namespace pong */ 
+} /* namespace pong */
 #endif /* PONG_DEFS_HPP */

@@ -27,7 +27,8 @@ int Application::run() {
 }
 
 void Application::create() {
-    setupWindow();
+    createWindow();
+    loadAssets();
     setupShapes();
     setupFonts();
 }
@@ -70,55 +71,37 @@ void Application::draw() {
     window.display();
 }
 
-void Application::setupWindow() {
+void Application::createWindow() {
     window.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
-} 
-
-void Application::setupShapes() {
-    topWallShape = factory.makeWall(); 
-    auto wallRect = topWallShape.getLocalBounds();
-    topWallShape.setPosition(Vector2f(0, 0));
-    bottomWallShape = factory.makeWall();
-    bottomWallShape.setOrigin(0, wallRect.height);
-    bottomWallShape.setPosition(Vector2f(0, WINDOW_HEIGHT));
-
-    midfieldPartShape = factory.makeMidfieldPart();
-    auto midfieldPartRect = midfieldPartShape.getLocalBounds();
-    midfieldPartShape.setOrigin(midfieldPartRect.width / 2, 0);
-    midfieldPartShape.setPosition(Vector2f(WINDOW_WIDTH / 2, 0)); 
-
-    int paddleOffset = 10;
-    playerOneShape = factory.makePaddle();
-    auto paddleRect = playerOneShape.getLocalBounds();
-    playerOneShape.setOrigin(0, paddleRect.height / 2);
-    playerOneShape.setPosition(Vector2f(paddleOffset, WINDOW_HEIGHT/ 2)); 
-    playerTwoShape = factory.makePaddle();
-    playerTwoShape.setOrigin(paddleRect.width, paddleRect.height / 2);
-    playerTwoShape.setPosition(Vector2f(WINDOW_WIDTH - paddleOffset,
-        WINDOW_HEIGHT / 2)); 
-
-    ballShape = factory.makeBall();
-    auto ballRect = ballShape.getLocalBounds();
-    ballShape.setOrigin(ballRect.width / 2, ballRect.height / 2);
-    ballShape.setPosition(Vector2f(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2));
 }
 
-void Application::setupFonts() {
+void Application::loadAssets() {
     if (!sansFont.loadFromFile("assets/DejaVuSans.ttf")) {
         cout << "Não foi possível carregar a fonte.\n";
         exit(1);
     }
 
-    int scoreTextOffset = 25;
+    factory.setDefaultFont(sansFont); 
+}
+
+void Application::setupShapes() {
+    topWallShape = factory.makeTopWall();
+    bottomWallShape = factory.makeBottomWall();
+
+    midfieldPartShape = factory.makeMidfieldPart();
+
+    playerOneShape = factory.makePlayerOnePaddle();
+    playerTwoShape = factory.makePlayerTwoPaddle();
+
+    ballShape = factory.makeBall();
+}
+
+void Application::setupFonts() {
     playerOneScore = 0;
-    playerOneScoreText = factory.makePlayerOneScoreText(sansFont,
-        to_string(playerOneScore));
-    playerOneScoreText.setPosition(Vector2f(WINDOW_WIDTH / 2 - scoreTextOffset, 30));
+    playerOneScoreText = factory.makePlayerOneScoreText(to_string(playerOneScore));
 
     playerTwoScore = 0;
-    playerTwoScoreText = factory.makePlayerTwoScoreText(sansFont,
-        to_string(playerTwoScore));
-    playerTwoScoreText.setPosition(Vector2f(WINDOW_WIDTH / 2 + scoreTextOffset, 30));
+    playerTwoScoreText = factory.makePlayerTwoScoreText(to_string(playerTwoScore));
 }
 
 } /* namespace pong */

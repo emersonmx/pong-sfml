@@ -47,12 +47,13 @@ class Application {
         int playerTwoScore;
 
     private:
-        void setupWindow();
+        void createWindow();
+        void loadAssets();
         void setupShapes();
         void setupFonts();
 
         int errorCode = 0;
 };
 
-} /* namespace pong */ 
+} /* namespace pong */
 #endif /* PONG_APPLICATION_HPP */
