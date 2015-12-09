@@ -45,6 +45,7 @@ add_executable(${PROJECT_NAME}
     pong/application.cpp
     pong/util.cpp
     pong/factory.cpp
+    pong/game_objects.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}

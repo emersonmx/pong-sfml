@@ -42,7 +42,7 @@ class Application {
         sf::Text playerOneScoreText;
         sf::Text playerTwoScoreText;
 
-        DefaultGameObjectFactory factory;
+        DefaultGameObjectFactory gameObjectFactory;
 
         int playerOneScore;
         int playerTwoScore;

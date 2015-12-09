@@ -85,27 +85,27 @@ void Application::loadAssets() {
         exit(1);
     }
 
-    factory.setDefaultFont(sansFont);
+    gameObjectFactory.setDefaultFont(sansFont);
 }
 
 void Application::setupShapes() {
-    topWallShape = factory.makeTopWall();
-    bottomWallShape = factory.makeBottomWall();
+    topWallShape = gameObjectFactory.makeTopWall();
+    bottomWallShape = gameObjectFactory.makeBottomWall();
 
-    midfieldPartShape = factory.makeMidfieldPart();
+    midfieldPartShape = gameObjectFactory.makeMidfieldPart();
 
-    playerOneShape = factory.makePlayerOnePaddle();
-    playerTwoShape = factory.makePlayerTwoPaddle();
+    playerOneShape = gameObjectFactory.makePlayerOnePaddle();
+    playerTwoShape = gameObjectFactory.makePlayerTwoPaddle();
 
-    ballShape = factory.makeBall();
+    ballShape = gameObjectFactory.makeBall();
 }
 
 void Application::setupFonts() {
     playerOneScore = 0;
-    playerOneScoreText = factory.makePlayerOneScoreText(to_string(playerOneScore));
+    playerOneScoreText = gameObjectFactory.makePlayerOneScoreText(to_string(playerOneScore));
 
     playerTwoScore = 0;
-    playerTwoScoreText = factory.makePlayerTwoScoreText(to_string(playerTwoScore));
+    playerTwoScoreText = gameObjectFactory.makePlayerTwoScoreText(to_string(playerTwoScore));
 }
 
 } /* namespace pong */
