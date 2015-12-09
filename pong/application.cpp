@@ -10,15 +10,19 @@ using namespace sf;
 
 namespace pong {
 
+void Application::exit() {
+    exit(0);
+}
+
 void Application::exit(int errorCode) {
     this->errorCode = errorCode;
-    window.close();
+    running = false;
 }
 
 int Application::run() {
     create();
 
-    while (window.isOpen()) {
+    while (running) {
         update();
     }
 
@@ -45,7 +49,7 @@ void Application::update() {
 void Application::handleInput() {
     while (window.pollEvent(event)) {
         if (event.type == Event::Closed) {
-            exit(true);
+            exit();
         }
     }
 }

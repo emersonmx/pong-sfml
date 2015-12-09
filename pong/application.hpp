@@ -14,7 +14,8 @@ class Application {
         Application() {}
         virtual ~Application() {}
 
-        void exit(int errorCode=0);
+        void exit();
+        void exit(int errorCode);
         int run();
 
     protected:
@@ -53,6 +54,7 @@ class Application {
         void setupFonts();
 
         int errorCode = 0;
+        bool running = true;
 };
 
 } /* namespace pong */
