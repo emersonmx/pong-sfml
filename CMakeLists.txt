@@ -28,12 +28,11 @@ if (SFML_FOUND)
     set(EXTRA_LIBS ${EXTRA_LIBS} ${SFML_LIBRARIES})
 endif()
 
-find_package(Box2D)
+find_package(Box2D REQUIRED)
 if (BOX2D_FOUND)
     set(EXTRA_INCLUDES ${EXTRA_INCLUDES} ${BOX2D_INCLUDE_DIR})
     set(EXTRA_LIBS ${EXTRA_LIBS} ${BOX2D_LIBRARIES})
 endif()
-
 
 # Executable settings
 include_directories(${PROJECT_SOURCE_DIR}
