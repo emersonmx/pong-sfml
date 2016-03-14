@@ -2,6 +2,15 @@
 cmake_minimum_required(VERSION 2.6)
 project(pong)
 
+set(pong_VERSION_MAJOR 0)
+set(pong_VERSION_MINOR 1)
+set(pong_VERSION_REVISION 0)
+
+configure_file(
+    "${PROJECT_SOURCE_DIR}/pong/config.hpp.in"
+    "${PROJECT_BINARY_DIR}/config.hpp"
+)
+
 # Compiler settings
 if (CMAKE_BUILD_TYPE STREQUAL "")
     set(CMAKE_BUILD_TYPE Debug)
@@ -36,6 +45,7 @@ endif()
 
 # Executable settings
 include_directories(${PROJECT_SOURCE_DIR}
+    ${PROJECT_BINARY_DIR}
     ${EXTRA_INCLUDES}
 )
 
