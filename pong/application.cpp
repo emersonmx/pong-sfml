@@ -10,6 +10,10 @@ using namespace sf;
 
 namespace pong {
 
+void Application::changeState(State* state) {
+    this->currentState->hide();
+}
+
 void Application::exit() {
     exit(0);
 }

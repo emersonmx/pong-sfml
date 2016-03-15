@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "pong/defs.hpp"
+#include "pong/state.hpp"
 
 namespace pong {
 
@@ -12,6 +13,9 @@ class Application {
     public:
         Application() {}
         virtual ~Application() {}
+
+        void changeState(State* state);
+        State* getCurrentState() { return currentState; }
 
         void exit();
         void exit(int errorCode);
@@ -33,6 +37,8 @@ class Application {
 
     private:
         void createWindow();
+
+        State* currentState = nullptr;
 
         int errorCode = 0;
         bool running = true;
