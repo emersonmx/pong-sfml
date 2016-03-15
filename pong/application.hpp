@@ -5,7 +5,6 @@
 #include <SFML/Graphics.hpp>
 
 #include "pong/defs.hpp"
-#include "pong/factory.hpp"
 
 namespace pong {
 
@@ -30,28 +29,10 @@ class Application {
 
         sf::RenderWindow window;
         sf::Event event;
-
-        sf::RectangleShape playerOneShape;
-        sf::RectangleShape playerTwoShape;
-        sf::RectangleShape ballShape;
-        sf::RectangleShape topWallShape;
-        sf::RectangleShape bottomWallShape;
-        sf::RectangleShape midfieldPartShape;
-
-        sf::Font sansFont;
-        sf::Text playerOneScoreText;
-        sf::Text playerTwoScoreText;
-
-        DefaultGameObjectFactory gameObjectFactory;
-
-        int playerOneScore;
-        int playerTwoScore;
+        sf::Clock clock;
 
     private:
         void createWindow();
-        void loadAssets();
-        void setupShapes();
-        void setupFonts();
 
         int errorCode = 0;
         bool running = true;
