@@ -1,6 +1,8 @@
 #ifndef PONG_APPLICATION_HPP
 #define PONG_APPLICATION_HPP
 
+#include <memory>
+
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
@@ -15,7 +17,7 @@ class Application {
         virtual ~Application() {}
 
         void changeState(State* state);
-        State* getCurrentState() { return currentState; }
+        State* getCurrentState() { return currentState.get(); }
 
         void exit();
         void exit(int errorCode);
@@ -27,9 +29,6 @@ class Application {
         virtual void destroy();
 
         virtual void update();
-        virtual void handleInput();
-        virtual void processLogic();
-        virtual void draw();
 
         sf::RenderWindow window;
         sf::Event event;
@@ -38,7 +37,7 @@ class Application {
     private:
         void createWindow();
 
-        State* currentState = nullptr;
+        std::unique_ptr<State> currentState = make_unique<GameState>();
 
         int errorCode = 0;
         bool running = true;

@@ -11,7 +11,14 @@ using namespace sf;
 namespace pong {
 
 void Application::changeState(State* state) {
-    this->currentState->hide();
+    if (state == nullptr) {
+        cout << "Ignoring null state.\n";
+        return;
+    }
+
+    currentState->exit();
+    currentState.reset(state);
+    currentState->enter();
 }
 
 void Application::exit() {
@@ -40,35 +47,30 @@ void Application::create() {
 }
 
 void Application::destroy() {
+    window.close();
 }
 
 void Application::update() {
-    clock.restart();
-
-    handleInput();
-    processLogic();
-    draw();
-}
-
-void Application::handleInput() {
-    while (window.pollEvent(event)) {
-        if (event.type == Event::Closed) {
+    static int i = 0;
+    static int j = 0;
+    i++;
+    if (i > 10) {
+        j++;
+        if (j > 5) {
             exit();
+            return;
         }
+        changeState(new GameState());
+        i=0;
     }
-}
 
-void Application::processLogic() {
-}
-
-void Application::draw() {
-    window.clear(Color::Black);
-
-    window.display();
+    clock.restart();
+    currentState->update();
 }
 
 void Application::createWindow() {
     window.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
+    window.setFramerateLimit(GAME_FRAMES_PER_SECOND);
 }
 
 } /* namespace pong */

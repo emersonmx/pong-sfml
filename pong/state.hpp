@@ -5,30 +5,24 @@
 
 using namespace std;
 
-#include "pong/application.hpp"
-
 namespace pong {
+
+class Application;
 
 class State {
     public:
         virtual ~State() {}
 
-        virtual void create() = 0;
-        virtual void destroy() = 0;
-
-        virtual void show() = 0;
-        virtual void hide() = 0;
+        virtual void enter() = 0;
+        virtual void exit() = 0;
 
         virtual void update() = 0;
 };
 
 class DefaultState: public State {
     public:
-        virtual void create() {}
-        virtual void destroy() {}
-
-        virtual void show() {}
-        virtual void hide() {}
+        virtual void enter() {}
+        virtual void exit() {}
 
         virtual void update() {}
 };
@@ -36,10 +30,10 @@ class DefaultState: public State {
 class BaseState: public DefaultState {
     public:
         BaseState() : application(nullptr) {}
-        BaseState(Application* application) : this->application(application) {}
+        BaseState(Application* application) : application(application) {}
 
         void setApplication(Application* application) {
-            $this->application = application;
+            this->application = application;
         }
         Application* getApplication() { return application; }
 
@@ -49,22 +43,16 @@ class BaseState: public DefaultState {
 
 class GameState: public BaseState {
     public:
-        virtual void create() {
-            cout << "Create\n";
-        }
-        virtual void destroy() {
-            cout << "Destroy\n";
+        virtual void enter() {
+            cout << "Enter " << this << endl;
         }
 
-        virtual void show() {
-            cout << "Show\n";
-        }
-        virtual void hide() {
-            cout << "Hide\n";
+        virtual void exit() {
+            cout << "Exit " << this << endl;
         }
 
         virtual void update() {
-            cout << "Update\n";
+            cout << "Update " << this << endl;
         }
 };
 
