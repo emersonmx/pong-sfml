@@ -38,6 +38,8 @@ class Application {
     private:
         void createWindow();
 
+        void handleEvents();
+
         std::unique_ptr<State> currentState_ = make_unique<DefaultState>();
 
         int errorCode_ = 0;

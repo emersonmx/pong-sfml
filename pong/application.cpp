@@ -52,12 +52,21 @@ void Application::destroy() {
 
 void Application::update() {
     sf::Time time = clock_.restart();
+    handleEvents();
     currentState_->update(time);
 }
 
 void Application::createWindow() {
     window_.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
     window_.setFramerateLimit(GAME_FRAMES_PER_SECOND);
+}
+
+void Application::handleEvents() {
+    while (window_.pollEvent(event_)) {
+        if (event_.type == sf::Event::Closed) {
+            exit();
+        }
+    }
 }
 
 } /* namespace pong */

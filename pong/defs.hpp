@@ -15,5 +15,7 @@ constexpr const int WINDOW_WIDTH = 640;
 constexpr const int WINDOW_HEIGHT = 480;
 constexpr const int GAME_FRAMES_PER_SECOND = 60;
 
+constexpr const int PIXELS_PER_METER = 64.0f;
+
 } /* namespace pong */
 #endif /* PONG_DEFS_HPP */
