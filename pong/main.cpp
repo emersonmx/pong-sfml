@@ -2,5 +2,5 @@
 
 int main() {
     pong::Application app;
-    return app.Run();
+    return app.run();
 }

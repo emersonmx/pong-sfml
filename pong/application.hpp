@@ -18,29 +18,29 @@ class Application {
 
         sf::RenderWindow& window() { return window_; }
 
-        void ChangeState(State* state);
+        void changeState(State* state);
 
-        void Exit();
-        void Exit(int errorCode);
-        int Run();
+        void exit();
+        void exit(int errorCode);
+        int run();
 
     protected:
 
-        virtual void Create();
-        virtual void Destroy();
+        virtual void create();
+        virtual void destroy();
 
-        virtual void Update();
+        virtual void update();
 
         sf::RenderWindow window_;
         sf::Event event_;
         sf::Clock clock_;
 
     private:
-        void CreateWindow();
+        void createWindow();
 
-        std::unique_ptr<State> current_state_ = make_unique<DefaultState>();
+        std::unique_ptr<State> currentState_ = make_unique<DefaultState>();
 
-        int error_code_ = 0;
+        int errorCode_ = 0;
         bool running_ = true;
 };
 

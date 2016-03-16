@@ -10,52 +10,52 @@ using namespace sf;
 
 namespace pong {
 
-void Application::ChangeState(State* state) {
+void Application::changeState(State* state) {
     if (state == nullptr) {
         cout << "Ignoring null state.\n";
         return;
     }
 
-    current_state_->Exit();
-    current_state_.reset(state);
-    current_state_->Enter();
+    currentState_->exit();
+    currentState_.reset(state);
+    currentState_->enter();
 }
 
-void Application::Exit() {
+void Application::exit() {
     exit(0);
 }
 
-void Application::Exit(int error_code) {
-    this->error_code_ = error_code;
+void Application::exit(int errorCode) {
+    errorCode_ = errorCode;
     running_ = false;
 }
 
-int Application::Run() {
-    Create();
+int Application::run() {
+    create();
 
     clock_.restart();
     while (running_) {
-        Update();
+        update();
     }
 
-    Destroy();
-    return error_code_;
+    destroy();
+    return errorCode_;
 }
 
-void Application::Create() {
-    CreateWindow();
+void Application::create() {
+    createWindow();
 }
 
-void Application::Destroy() {
+void Application::destroy() {
     window_.close();
 }
 
-void Application::Update() {
+void Application::update() {
     sf::Time time = clock_.restart();
-    current_state_->Update(time);
+    currentState_->update(time);
 }
 
-void Application::CreateWindow() {
+void Application::createWindow() {
     window_.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
     window_.setFramerateLimit(GAME_FRAMES_PER_SECOND);
 }

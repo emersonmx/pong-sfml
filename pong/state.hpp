@@ -15,18 +15,18 @@ class State {
     public:
         virtual ~State() {}
 
-        virtual void Enter() = 0;
-        virtual void Exit() = 0;
+        virtual void enter() = 0;
+        virtual void exit() = 0;
 
-        virtual void Update(sf::Time& time) = 0;
+        virtual void update(sf::Time& time) = 0;
 };
 
 class DefaultState: public State {
     public:
-        virtual void Enter() {}
-        virtual void Exit() {}
+        virtual void enter() {}
+        virtual void exit() {}
 
-        virtual void Update(sf::Time& time) {}
+        virtual void update(sf::Time& time) {}
 };
 
 } /* namespace pong */
