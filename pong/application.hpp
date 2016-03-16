@@ -16,31 +16,32 @@ class Application {
         Application() {}
         virtual ~Application() {}
 
-        void changeState(State* state);
-        State* getCurrentState() { return currentState.get(); }
+        sf::RenderWindow& window() { return window_; }
 
-        void exit();
-        void exit(int errorCode);
-        int run();
+        void ChangeState(State* state);
+
+        void Exit();
+        void Exit(int errorCode);
+        int Run();
 
     protected:
 
-        virtual void create();
-        virtual void destroy();
+        virtual void Create();
+        virtual void Destroy();
 
-        virtual void update();
+        virtual void Update();
 
-        sf::RenderWindow window;
-        sf::Event event;
-        sf::Clock clock;
+        sf::RenderWindow window_;
+        sf::Event event_;
+        sf::Clock clock_;
 
     private:
-        void createWindow();
+        void CreateWindow();
 
-        std::unique_ptr<State> currentState = make_unique<GameState>();
+        std::unique_ptr<State> current_state_ = make_unique<DefaultState>();
 
-        int errorCode = 0;
-        bool running = true;
+        int error_code_ = 0;
+        bool running_ = true;
 };
 
 } /* namespace pong */

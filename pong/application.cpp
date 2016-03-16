@@ -10,67 +10,54 @@ using namespace sf;
 
 namespace pong {
 
-void Application::changeState(State* state) {
+void Application::ChangeState(State* state) {
     if (state == nullptr) {
         cout << "Ignoring null state.\n";
         return;
     }
 
-    currentState->exit();
-    currentState.reset(state);
-    currentState->enter();
+    current_state_->Exit();
+    current_state_.reset(state);
+    current_state_->Enter();
 }
 
-void Application::exit() {
+void Application::Exit() {
     exit(0);
 }
 
-void Application::exit(int errorCode) {
-    this->errorCode = errorCode;
-    running = false;
+void Application::Exit(int error_code) {
+    this->error_code_ = error_code;
+    running_ = false;
 }
 
-int Application::run() {
-    create();
+int Application::Run() {
+    Create();
 
-    clock.restart();
-    while (running) {
-        update();
+    clock_.restart();
+    while (running_) {
+        Update();
     }
 
-    destroy();
-    return errorCode;
+    Destroy();
+    return error_code_;
 }
 
-void Application::create() {
-    createWindow();
+void Application::Create() {
+    CreateWindow();
 }
 
-void Application::destroy() {
-    window.close();
+void Application::Destroy() {
+    window_.close();
 }
 
-void Application::update() {
-    static int i = 0;
-    static int j = 0;
-    i++;
-    if (i > 10) {
-        j++;
-        if (j > 5) {
-            exit();
-            return;
-        }
-        changeState(new GameState());
-        i=0;
-    }
-
-    clock.restart();
-    currentState->update();
+void Application::Update() {
+    sf::Time time = clock_.restart();
+    current_state_->Update(time);
 }
 
-void Application::createWindow() {
-    window.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
-    window.setFramerateLimit(GAME_FRAMES_PER_SECOND);
+void Application::CreateWindow() {
+    window_.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
+    window_.setFramerateLimit(GAME_FRAMES_PER_SECOND);
 }
 
 } /* namespace pong */
