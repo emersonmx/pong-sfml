@@ -10,10 +10,10 @@ mkdir -p $BUILD_DIR
 pushd build > /dev/null
 
 echo "Configuring..."
-cmake ..
+cmake -DCMAKE_BUILD_TYPE=Debug ..
 
 echo "Building..."
-make
+make -j
 popd > /dev/null
 
 echo "Running..."
