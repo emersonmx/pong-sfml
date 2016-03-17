@@ -14,7 +14,7 @@ void GameState::exit() {
 void GameState::update(sf::Time& time) {
 }
 
-void GameState::render(sf::RenderWindow& window) {
+void GameState::render(sf::RenderTarget& renderTarget) {
 }
 
 } /* namespace pong */

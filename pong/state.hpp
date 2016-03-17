@@ -19,7 +19,7 @@ class State {
         virtual void exit() = 0;
 
         virtual void update(sf::Time& time) = 0;
-        virtual void render(sf::RenderWindow& window) = 0;
+        virtual void render(sf::RenderTarget& renderTarget) = 0;
 };
 
 class DefaultState: public State {
@@ -28,7 +28,7 @@ class DefaultState: public State {
         virtual void exit() {}
 
         virtual void update(sf::Time& time) {}
-        virtual void render(sf::RenderWindow& window) {}
+        virtual void render(sf::RenderTarget& renderTarget) {}
 };
 
 class BaseState: public DefaultState {
@@ -36,7 +36,7 @@ class BaseState: public DefaultState {
         virtual void setup(Application* application) {}
 
         virtual void update(sf::Time& time) {}
-        virtual void render(sf::RenderWindow& window) {}
+        virtual void render(sf::RenderTarget& renderTarget) {}
 };
 
 class GameState: public BaseState {
@@ -47,7 +47,7 @@ class GameState: public BaseState {
         virtual void exit();
 
         virtual void update(sf::Time& time);
-        virtual void render(sf::RenderWindow& window);
+        virtual void render(sf::RenderTarget& renderTarget);
 };
 
 } /* namespace pong */
