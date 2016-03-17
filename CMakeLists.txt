@@ -53,6 +53,7 @@ add_executable(${PROJECT_NAME}
     pong/main.cpp
     pong/application.cpp
     pong/state.cpp
+    pong/game_state.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}
