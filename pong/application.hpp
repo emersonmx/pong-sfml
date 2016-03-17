@@ -16,8 +16,6 @@ class Application {
         Application() {}
         virtual ~Application() {}
 
-        sf::RenderWindow& window() { return window_; }
-
         void changeState(State* state);
 
         void exit();
@@ -29,15 +27,13 @@ class Application {
         virtual void create();
         virtual void destroy();
 
-        virtual void update();
+        virtual void tick();
 
         sf::RenderWindow window_;
         sf::Event event_;
         sf::Clock clock_;
 
     private:
-        void createWindow();
-
         void handleEvents();
 
         std::unique_ptr<State> currentState_ = make_unique<DefaultState>();

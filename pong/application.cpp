@@ -35,7 +35,7 @@ int Application::run() {
 
     clock_.restart();
     while (running_) {
-        update();
+        tick();
     }
 
     destroy();
@@ -43,22 +43,27 @@ int Application::run() {
 }
 
 void Application::create() {
-    createWindow();
+    window_.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
+
+    GameState* gameState = new GameState();
+    gameState->setApplication(this);
+    changeState(gameState);
 }
 
 void Application::destroy() {
     window_.close();
 }
 
-void Application::update() {
+void Application::tick() {
     sf::Time time = clock_.restart();
-    handleEvents();
-    currentState_->update(time);
-}
 
-void Application::createWindow() {
-    window_.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
-    window_.setFramerateLimit(GAME_FRAMES_PER_SECOND);
+    handleEvents();
+
+    currentState_->update(time);
+
+    window_.clear();
+    currentState_->render(window_);
+    window_.display();
 }
 
 void Application::handleEvents() {

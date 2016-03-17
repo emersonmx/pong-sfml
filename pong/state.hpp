@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include <SFML/System/Time.hpp>
+#include <SFML/Graphics.hpp>
 
 using namespace std;
 
@@ -19,6 +19,7 @@ class State {
         virtual void exit() = 0;
 
         virtual void update(sf::Time& time) = 0;
+        virtual void render(sf::RenderWindow& window) = 0;
 };
 
 class DefaultState: public State {
@@ -27,6 +28,30 @@ class DefaultState: public State {
         virtual void exit() {}
 
         virtual void update(sf::Time& time) {}
+        virtual void render(sf::RenderWindow& window) {}
+};
+
+class BaseState: public DefaultState {
+    public:
+        Application* application() { return application_; }
+        void setApplication(Application* application) {
+            application_ = application;
+        }
+
+        virtual void update(sf::Time& time) {}
+        virtual void render(sf::RenderWindow& window) {}
+
+    protected:
+        Application* application_;
+};
+
+class GameState: public BaseState {
+    public:
+        virtual void enter();
+        virtual void exit();
+
+        virtual void update(sf::Time& time);
+        virtual void render(sf::RenderWindow& window);
 };
 
 } /* namespace pong */
