@@ -34,9 +34,6 @@ class DefaultState: public State {
 class BaseState: public DefaultState {
     public:
         virtual void setup(Application* application) {}
-
-        virtual void update(sf::Time& time) {}
-        virtual void render(sf::RenderTarget& renderTarget) {}
 };
 
 class GameState: public BaseState {
