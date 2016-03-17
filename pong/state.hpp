@@ -33,17 +33,16 @@ class DefaultState: public State {
 
 class BaseState: public DefaultState {
     public:
-        void setup(Application* application);
+        virtual void setup(Application* application) {}
 
         virtual void update(sf::Time& time) {}
         virtual void render(sf::RenderWindow& window) {}
-
-    protected:
-        Application* application_;
 };
 
 class GameState: public BaseState {
     public:
+        virtual void setup(Application* application);
+
         virtual void enter();
         virtual void exit();
 

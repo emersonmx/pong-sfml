@@ -2,6 +2,9 @@
 
 namespace pong {
 
+void GameState::setup(Application* application) {
+}
+
 void GameState::enter() {
 }
 
