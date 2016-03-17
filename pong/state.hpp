@@ -33,10 +33,7 @@ class DefaultState: public State {
 
 class BaseState: public DefaultState {
     public:
-        Application* application() { return application_; }
-        void setApplication(Application* application) {
-            application_ = application;
-        }
+        void setup(Application* application);
 
         virtual void update(sf::Time& time) {}
         virtual void render(sf::RenderWindow& window) {}

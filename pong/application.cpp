@@ -46,7 +46,7 @@ void Application::create() {
     window_.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
 
     GameState* gameState = new GameState();
-    gameState->setApplication(this);
+    gameState->setup(this);
     changeState(gameState);
 }
 

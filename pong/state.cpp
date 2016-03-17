@@ -4,6 +4,10 @@
 
 namespace pong {
 
+void BaseState::setup(Application* application) {
+    application_ = application;
+}
+
 void GameState::enter() {
 }
 
