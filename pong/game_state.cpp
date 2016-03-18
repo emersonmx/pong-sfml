@@ -1,6 +1,7 @@
 #include "pong/state.hpp"
 
 #include "pong/defs.hpp"
+#include "pong/helpers.hpp"
 
 namespace pong {
 
@@ -26,16 +27,8 @@ void GameState::exit() {
 void GameState::update() {
     gameWorld_.update();
 
-    updateTransformable(box_, gameWorld_.box());
-    updateTransformable(ground_, gameWorld_.ground());
-}
-
-void GameState::updateTransformable(sf::Transformable& transformable, b2Body* body) {
-    b2Vec2 position = body->GetPosition();
-    float angle = body->GetAngle();
-    transformable.setPosition(position.x * PIXELS_PER_METER,
-                          position.y * PIXELS_PER_METER);
-    transformable.setRotation(angle);
+    syncBodyToTransformable(gameWorld_.box(), box_);
+    syncBodyToTransformable(gameWorld_.ground(), ground_);
 }
 
 void GameState::render(sf::RenderTarget& renderTarget) {
