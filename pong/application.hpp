@@ -40,6 +40,8 @@ class Application {
 
         int errorCode_ = 0;
         bool running_ = true;
+
+        float timeAccumulator_ = 0.0f;
 };
 
 } /* namespace pong */

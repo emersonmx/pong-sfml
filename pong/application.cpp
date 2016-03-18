@@ -62,7 +62,11 @@ void Application::tick() {
 
     handleEvents();
 
-    currentState_->update(time);
+    timeAccumulator_ += time.asSeconds();
+    if (timeAccumulator_ >= GAME_TIME_STEP) {
+        currentState_->update();
+        timeAccumulator_ -= GAME_TIME_STEP;
+    }
 
     window_.clear();
     currentState_->render(window_);
