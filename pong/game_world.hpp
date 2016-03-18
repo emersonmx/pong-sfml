@@ -16,14 +16,14 @@ class GameWorld {
 
         void create() {
             b2Vec2 gravity(0, -10);
-            world.reset(new b2World(gravity));
+            world_.reset(new b2World(gravity));
 
             ground_ = createGround();
-            box_ = createBox(); 
+            box_ = createBox();
         }
 
         void update() {
-            world->Step(GAME_TIME_STEP, GAME_VELOCITY_ITERATIONS, 
+            world_->Step(GAME_TIME_STEP, GAME_VELOCITY_ITERATIONS,
                         GAME_POSITION_ITERATIONS);
         }
 
@@ -31,13 +31,13 @@ class GameWorld {
         virtual b2Body* createBox() {
             b2BodyDef boxDef;
             boxDef.type = b2_dynamicBody;
-            boxDef.position.Set((WINDOW_WIDTH / 2) / (float) PIXELS_PER_METER, 
+            boxDef.position.Set((WINDOW_WIDTH / 2) / (float) PIXELS_PER_METER,
                                 (WINDOW_HEIGHT - 100) / (float) PIXELS_PER_METER);
-            b2Body* body = world->CreateBody(&boxDef);
+            b2Body* body = world_->CreateBody(&boxDef);
             b2PolygonShape dynamicBox;
             dynamicBox.SetAsBox(25 / (float) PIXELS_PER_METER,
                                 25 / (float) PIXELS_PER_METER);
-            b2FixtureDef fixDef; 
+            b2FixtureDef fixDef;
             fixDef.shape = &dynamicBox;
             fixDef.density = 1;
             fixDef.friction = 0.3;
@@ -48,9 +48,9 @@ class GameWorld {
 
         virtual b2Body* createGround() {
             b2BodyDef groundDef;
-            groundDef.position.Set((WINDOW_WIDTH / 2) / (float) PIXELS_PER_METER, 
+            groundDef.position.Set((WINDOW_WIDTH / 2) / (float) PIXELS_PER_METER,
                                    10 / (float) PIXELS_PER_METER);
-            b2Body* body = world->CreateBody(&groundDef);
+            b2Body* body = world_->CreateBody(&groundDef);
             b2PolygonShape groundBox;
             groundBox.SetAsBox(WINDOW_WIDTH / (float) PIXELS_PER_METER,
                                10 / (float) PIXELS_PER_METER);
@@ -59,8 +59,8 @@ class GameWorld {
             return body;
         }
 
-    private: 
-        std::unique_ptr<b2World> world;
+    private:
+        std::unique_ptr<b2World> world_;
         b2Body* box_;
         b2Body* ground_;
 };
