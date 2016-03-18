@@ -16,6 +16,8 @@ constexpr const int WINDOW_HEIGHT = 480;
 
 constexpr const int GAME_FRAMES_PER_SECOND = 60;
 constexpr const float GAME_TIME_STEP = 1.0f / GAME_FRAMES_PER_SECOND;
+constexpr const int GAME_VELOCITY_ITERATIONS = 8;
+constexpr const int GAME_POSITION_ITERATIONS = 3;
 
 constexpr const int PIXELS_PER_METER = 64;
 
