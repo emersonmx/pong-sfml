@@ -5,6 +5,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "pong/game_world.hpp"
+
 using namespace std;
 
 namespace pong {
@@ -18,7 +20,7 @@ class State {
         virtual void enter() = 0;
         virtual void exit() = 0;
 
-        virtual void update(sf::Time& time) = 0;
+        virtual void update() = 0;
         virtual void render(sf::RenderTarget& renderTarget) = 0;
 };
 
@@ -27,7 +29,7 @@ class DefaultState: public State {
         virtual void enter() {}
         virtual void exit() {}
 
-        virtual void update(sf::Time& time) {}
+        virtual void update() {}
         virtual void render(sf::RenderTarget& renderTarget) {}
 };
 
@@ -43,8 +45,13 @@ class GameState: public BaseState {
         virtual void enter();
         virtual void exit();
 
-        virtual void update(sf::Time& time);
+        virtual void update();
         virtual void render(sf::RenderTarget& renderTarget);
+
+    private:
+        GameWorld gameWorld_;
+        sf::RectangleShape box_;
+        sf::RectangleShape ground_;
 };
 
 } /* namespace pong */
