@@ -1,8 +1,6 @@
 #ifndef PONG_STATE_HPP
 #define PONG_STATE_HPP
 
-#include <iostream>
-
 #include <SFML/Graphics.hpp>
 
 #include "pong/game_world.hpp"
