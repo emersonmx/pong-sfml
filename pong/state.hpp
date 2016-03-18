@@ -49,6 +49,8 @@ class GameState: public BaseState {
         virtual void render(sf::RenderTarget& renderTarget);
 
     private:
+        static void updateTransformable(sf::Transformable& transformable, b2Body* body);
+
         GameWorld gameWorld_;
         sf::RectangleShape box_;
         sf::RectangleShape ground_;

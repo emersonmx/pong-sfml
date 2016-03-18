@@ -26,17 +26,16 @@ void GameState::exit() {
 void GameState::update() {
     gameWorld_.update();
 
-    b2Body* body = gameWorld_.box();
-    b2Vec2 pos = body->GetPosition();
-    float angle = body->GetAngle();
-    box_.setPosition(pos.x * PIXELS_PER_METER, pos.y * PIXELS_PER_METER);
-    box_.setRotation(angle);
+    updateTransformable(box_, gameWorld_.box());
+    updateTransformable(ground_, gameWorld_.ground());
+}
 
-    body = gameWorld_.ground();
-    pos = body->GetPosition();
-    angle = body->GetAngle();
-    ground_.setPosition(pos.x * PIXELS_PER_METER, pos.y * PIXELS_PER_METER);
-    ground_.setRotation(angle);
+void GameState::updateTransformable(sf::Transformable& transformable, b2Body* body) {
+    b2Vec2 position = body->GetPosition();
+    float angle = body->GetAngle();
+    transformable.setPosition(position.x * PIXELS_PER_METER,
+                          position.y * PIXELS_PER_METER);
+    transformable.setRotation(angle);
 }
 
 void GameState::render(sf::RenderTarget& renderTarget) {
