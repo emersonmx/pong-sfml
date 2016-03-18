@@ -44,6 +44,9 @@ int Application::run() {
 
 void Application::create() {
     window_.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
+    sf::View view = window_.getDefaultView();
+    view.setSize(WINDOW_WIDTH, -WINDOW_HEIGHT);
+    window_.setView(view);
 
     GameState* gameState = new GameState();
     gameState->setup(this);
