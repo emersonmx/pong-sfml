@@ -34,22 +34,23 @@ void GameState::exit() {
 
 void GameState::update() {
     gameWorld_.update();
-
-    syncBodyToTransformable(gameWorld_.box(), box_);
-    syncBodyToTransformable(gameWorld_.ground(), ground_);
 }
 
 void GameState::render(sf::RenderTarget& renderTarget) {
+#ifndef NDEBUG
     gameWorld_.world()->DrawDebugData();
+#endif /* ifndef NDEBUG  */
 }
 
 void GameState::setupGameWorld() {
     gameWorld_.create();
 
+#ifndef NDEBUG
     b2World* world = gameWorld_.world();
     debugDraw_.reset(new SFMLDebugDraw(application_->window(), pong::PIXELS_PER_METER));
     world->SetDebugDraw(debugDraw_.get());
     debugDraw_->SetFlags(b2Draw::e_shapeBit);
+#endif /* ifndef NDEBUG */
 }
 
 } /* namespace pong */

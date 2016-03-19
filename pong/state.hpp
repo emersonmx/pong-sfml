@@ -49,7 +49,9 @@ class GameState: public DefaultState {
         sf::RectangleShape box_;
         sf::RectangleShape ground_;
 
+#ifndef NDEBUG
         std::unique_ptr<SFMLDebugDraw> debugDraw_;
+#endif /* ifndef NDEBUG */
 };
 
 } /* namespace pong */
