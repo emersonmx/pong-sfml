@@ -5,8 +5,6 @@
 
 #include "pong/game_world.hpp"
 
-using namespace std;
-
 namespace pong {
 
 class Application;
