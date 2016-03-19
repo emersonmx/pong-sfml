@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "pong/game_world.hpp"
+#include "pong/debug_draw.hpp"
 
 namespace pong {
 
@@ -13,7 +14,7 @@ class State {
     public:
         virtual ~State() {}
 
-        virtual void enter() = 0;
+        virtual void enter(Application* application) = 0;
         virtual void exit() = 0;
 
         virtual void update() = 0;
@@ -22,32 +23,29 @@ class State {
 
 class DefaultState: public State {
     public:
-        virtual void enter() {}
+        virtual void enter(Application* application) {}
         virtual void exit() {}
 
         virtual void update() {}
         virtual void render(sf::RenderTarget& renderTarget) {}
 };
 
-class BaseState: public DefaultState {
+class GameState: public DefaultState {
     public:
-        virtual void setup(Application* application) {}
-};
-
-class GameState: public BaseState {
-    public:
-        virtual void setup(Application* application);
-
-        virtual void enter();
+        virtual void enter(Application* application);
         virtual void exit();
 
         virtual void update();
         virtual void render(sf::RenderTarget& renderTarget);
 
     private:
+        Application* application_;
+        sf::RenderTarget* renderTarget_;
         GameWorld gameWorld_;
         sf::RectangleShape box_;
         sf::RectangleShape ground_;
+
+        DebugDraw debugDraw_;
 };
 
 } /* namespace pong */

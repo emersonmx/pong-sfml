@@ -16,6 +16,8 @@ class Application {
         Application() {}
         virtual ~Application() {}
 
+        sf::RenderWindow& window() { return window_; }
+
         void changeState(State* state);
 
         void exit();

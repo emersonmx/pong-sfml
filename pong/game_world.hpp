@@ -11,6 +11,7 @@ namespace pong {
 
 class GameWorld {
     public:
+        b2World* world() { return world_.get(); }
         b2Body* box() { return box_; }
         b2Body* ground() { return ground_; }
 
@@ -24,7 +25,7 @@ class GameWorld {
 
         void update() {
             world_->Step(GAME_TIME_STEP, GAME_VELOCITY_ITERATIONS,
-                        GAME_POSITION_ITERATIONS);
+                         GAME_POSITION_ITERATIONS);
         }
 
     protected:

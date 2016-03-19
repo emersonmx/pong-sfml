@@ -1,5 +1,8 @@
 #include "pong/state.hpp"
 
+#include <Box2D/Box2D.h>
+
+#include "pong/application.hpp"
 #include "pong/defs.hpp"
 
 namespace pong {
@@ -19,10 +22,9 @@ void syncBodyToTransformable(b2Body* body, sf::Transformable& transformable) {
     transformable.setRotation(angle);
 }
 
-void GameState::setup(Application* application) {
-}
+void GameState::enter(Application* application) {
+    application_ = application;
 
-void GameState::enter() {
     gameWorld_.create();
 
     box_ = createRectangleShape(50, 50);
@@ -31,6 +33,16 @@ void GameState::enter() {
     ground_ = createRectangleShape(WINDOW_WIDTH, 20);
     ground_.setPosition(WINDOW_WIDTH / 2, 10);
     ground_.setFillColor(sf::Color::Green);
+
+    renderTarget_ = &application->window();
+    debugDraw_.setup(renderTarget_);
+    debugDraw_.AppendFlags(b2Draw::e_shapeBit);
+    debugDraw_.AppendFlags(b2Draw::e_centerOfMassBit);
+    debugDraw_.AppendFlags(b2Draw::e_aabbBit);
+    debugDraw_.AppendFlags(b2Draw::e_jointBit);
+    debugDraw_.AppendFlags(b2Draw::e_pairBit);
+    b2World* world = gameWorld_.world();
+    world->SetDebugDraw(&debugDraw_);
 }
 
 void GameState::exit() {
@@ -46,6 +58,8 @@ void GameState::update() {
 void GameState::render(sf::RenderTarget& renderTarget) {
     renderTarget.draw(box_);
     renderTarget.draw(ground_);
+
+    gameWorld_.world()->DrawDebugData();
 }
 
 } /* namespace pong */

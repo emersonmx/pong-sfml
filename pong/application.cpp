@@ -18,7 +18,7 @@ void Application::changeState(State* state) {
 
     currentState_->exit();
     currentState_.reset(state);
-    currentState_->enter();
+    currentState_->enter(this);
 }
 
 void Application::exit() {
@@ -49,7 +49,6 @@ void Application::create() {
     window_.setView(view);
 
     GameState* gameState = new GameState();
-    gameState->setup(this);
     changeState(gameState);
 }
 
