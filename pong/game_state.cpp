@@ -32,17 +32,12 @@ void GameState::enter(Application* application) {
     box_.setFillColor(sf::Color::Red);
     ground_ = createRectangleShape(WINDOW_WIDTH, 20);
     ground_.setPosition(WINDOW_WIDTH / 2, 10);
-    ground_.setFillColor(sf::Color::Green);
+    ground_.setFillColor(sf::Color(0, 255, 0, 128));
 
-    renderTarget_ = &application->window();
-    debugDraw_.setup(renderTarget_);
-    debugDraw_.AppendFlags(b2Draw::e_shapeBit);
-    debugDraw_.AppendFlags(b2Draw::e_centerOfMassBit);
-    debugDraw_.AppendFlags(b2Draw::e_aabbBit);
-    debugDraw_.AppendFlags(b2Draw::e_jointBit);
-    debugDraw_.AppendFlags(b2Draw::e_pairBit);
     b2World* world = gameWorld_.world();
-    world->SetDebugDraw(&debugDraw_);
+    debugDraw_.reset(new SFMLDebugDraw(application->window(), pong::PIXELS_PER_METER));
+    world->SetDebugDraw(debugDraw_.get());
+    debugDraw_->SetFlags(b2Draw::e_shapeBit);
 }
 
 void GameState::exit() {
@@ -57,9 +52,14 @@ void GameState::update() {
 
 void GameState::render(sf::RenderTarget& renderTarget) {
     renderTarget.draw(box_);
-    renderTarget.draw(ground_);
+    renderTarget.draw(ground_); 
 
+    sf::View currentView = renderTarget.getView();
+    sf::View debugDrawView = renderTarget.getView();
+    debugDrawView.setViewport(sf::FloatRect(0, 0, 0.1, -1));
+    renderTarget.setView(debugDrawView);
     gameWorld_.world()->DrawDebugData();
+    renderTarget.setView(currentView);
 }
 
 } /* namespace pong */

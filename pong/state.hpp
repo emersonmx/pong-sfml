@@ -1,10 +1,12 @@
 #ifndef PONG_STATE_HPP
 #define PONG_STATE_HPP
 
+#include <memory>
+
 #include <SFML/Graphics.hpp>
 
 #include "pong/game_world.hpp"
-#include "pong/debug_draw.hpp"
+#include "SFMLDebugDraw.h"
 
 namespace pong {
 
@@ -45,7 +47,7 @@ class GameState: public DefaultState {
         sf::RectangleShape box_;
         sf::RectangleShape ground_;
 
-        DebugDraw debugDraw_;
+        std::unique_ptr<SFMLDebugDraw> debugDraw_;
 };
 
 } /* namespace pong */

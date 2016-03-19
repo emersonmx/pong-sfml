@@ -8,20 +8,39 @@ using namespace std;
 
 namespace pong {
 
-sf::Color convertColor(const b2Color& color) {
-    return sf::Color(color.r, color.g, color.b, color.a);
-}
-
 void DebugDraw::setup(sf::RenderTarget* renderTarget) {
     renderTarget_ = renderTarget;
+    SetFlags(e_shapeBit | e_centerOfMassBit | e_aabbBit | e_jointBit | e_pairBit);
 }
 
 void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color) {
     cout << "DrawPolygon\n";
+    sf::Color polygonColor = sf::Color::White;
+    sf::VertexArray vertexArray(sf::LinesStrip, vertexCount);
+
+    b2Vec2 vertex;
+    for (int i = 0; i < vertexCount; i++) { 
+        vertex = vertices[i];
+        vertexArray[i].position = sf::Vector2f(vertex.x, vertex.y);
+        vertexArray[i].color = polygonColor;
+    }
+
+    renderTarget_->draw(vertexArray);
 }
 
 void DebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color) {
     cout << "DrawSolidPolygon\n";
+    sf::Color polygonColor = sf::Color::Red;
+    sf::VertexArray vertexArray(sf::Quads, vertexCount);
+
+    b2Vec2 vertex;
+    for (int i = 0; i < vertexCount; i++) { 
+        vertex = vertices[i];
+        vertexArray[i].position = sf::Vector2f(vertex.x, vertex.y);
+        vertexArray[i].color = polygonColor;
+    }
+
+    renderTarget_->draw(vertexArray);
 }
 
 void DebugDraw::DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color) {

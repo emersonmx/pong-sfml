@@ -18,6 +18,7 @@ class GameWorld {
         void create() {
             b2Vec2 gravity(0, -10);
             world_.reset(new b2World(gravity));
+            world_->SetAllowSleeping(true);
 
             ground_ = createGround();
             box_ = createBox();
