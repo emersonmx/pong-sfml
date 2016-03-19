@@ -44,10 +44,7 @@ class GameState: public DefaultState {
         void setupGameWorld();
 
         Application* application_;
-        sf::RenderTarget* renderTarget_;
         GameWorld gameWorld_;
-        sf::RectangleShape box_;
-        sf::RectangleShape ground_;
 
 #ifndef NDEBUG
         std::unique_ptr<SFMLDebugDraw> debugDraw_;
