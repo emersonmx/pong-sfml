@@ -6,8 +6,6 @@
 
 namespace pong {
 
-sf::RectangleShape createRectangleShape(float width, float height);
-void syncBodyToTransformable(b2Body* body, sf::Transformable& transformable);
 
 } /* namespace pong */
 #endif /* PONG_HELPERS_HPP */
