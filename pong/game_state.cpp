@@ -7,7 +7,8 @@
 
 namespace pong {
 
-sf::RectangleShape createRectangleShape(float width, float height) { sf::RectangleShape shape;
+sf::RectangleShape createRectangleShape(float width, float height) {
+    sf::RectangleShape shape;
     shape.setOrigin(width / 2, height / 2);
     shape.setSize(sf::Vector2f(width, height));
     shape.setFillColor(sf::Color::White);
@@ -39,15 +40,7 @@ void GameState::update() {
 }
 
 void GameState::render(sf::RenderTarget& renderTarget) {
-    renderTarget.draw(box_);
-    renderTarget.draw(ground_);
-
-    sf::View currentView = renderTarget.getView();
-    sf::View debugDrawView = renderTarget.getView();
-    debugDrawView.setViewport(sf::FloatRect(0, 0, 0.1, -1));
-    renderTarget.setView(debugDrawView);
     gameWorld_.world()->DrawDebugData();
-    renderTarget.setView(currentView);
 }
 
 void GameState::setupGameWorld() {
