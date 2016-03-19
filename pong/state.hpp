@@ -41,6 +41,8 @@ class GameState: public DefaultState {
         virtual void render(sf::RenderTarget& renderTarget);
 
     private:
+        void setupGameWorld();
+
         Application* application_;
         sf::RenderTarget* renderTarget_;
         GameWorld gameWorld_;

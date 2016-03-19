@@ -25,19 +25,7 @@ void syncBodyToTransformable(b2Body* body, sf::Transformable& transformable) {
 void GameState::enter(Application* application) {
     application_ = application;
 
-    gameWorld_.create();
-
-    box_ = createRectangleShape(50, 50);
-    box_.setPosition(WINDOW_WIDTH / 2, WINDOW_HEIGHT - 100);
-    box_.setFillColor(sf::Color::Red);
-    ground_ = createRectangleShape(WINDOW_WIDTH, 20);
-    ground_.setPosition(WINDOW_WIDTH / 2, 10);
-    ground_.setFillColor(sf::Color(0, 255, 0, 128));
-
-    b2World* world = gameWorld_.world();
-    debugDraw_.reset(new SFMLDebugDraw(application->window(), pong::PIXELS_PER_METER));
-    world->SetDebugDraw(debugDraw_.get());
-    debugDraw_->SetFlags(b2Draw::e_shapeBit);
+    setupGameWorld();
 }
 
 void GameState::exit() {
@@ -60,6 +48,15 @@ void GameState::render(sf::RenderTarget& renderTarget) {
     renderTarget.setView(debugDrawView);
     gameWorld_.world()->DrawDebugData();
     renderTarget.setView(currentView);
+}
+
+void GameState::setupGameWorld() {
+    gameWorld_.create();
+
+    b2World* world = gameWorld_.world();
+    debugDraw_.reset(new SFMLDebugDraw(application_->window(), pong::PIXELS_PER_METER));
+    world->SetDebugDraw(debugDraw_.get());
+    debugDraw_->SetFlags(b2Draw::e_shapeBit);
 }
 
 } /* namespace pong */
