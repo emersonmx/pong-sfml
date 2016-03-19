@@ -30,7 +30,7 @@ sf::Color SFMLDebugDraw::GLColorToSFML(const b2Color& color, sf::Uint8 alpha) {
 sf::Vector2f SFMLDebugDraw::B2VecToSFVec(const b2Vec2& vector, bool scaleToPixels) {
     return sf::Vector2f(vector.x * (scaleToPixels ? scale_: 1.f),
                         vector.y * (scaleToPixels ? scale_ : 1.f));
-} 
+}
 
 void SFMLDebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color) {
 	sf::ConvexShape polygon(vertexCount);

@@ -52,7 +52,7 @@ void GameState::update() {
 
 void GameState::render(sf::RenderTarget& renderTarget) {
     renderTarget.draw(box_);
-    renderTarget.draw(ground_); 
+    renderTarget.draw(ground_);
 
     sf::View currentView = renderTarget.getView();
     sf::View debugDrawView = renderTarget.getView();

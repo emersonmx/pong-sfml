@@ -5,5 +5,5 @@ namespace pong {
 
 
 
-} /* namespace pong */ 
+} /* namespace pong */
 #endif /* PONG_UTIL_HPP */

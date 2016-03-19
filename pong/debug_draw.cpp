@@ -19,7 +19,7 @@ void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2C
     sf::VertexArray vertexArray(sf::LinesStrip, vertexCount);
 
     b2Vec2 vertex;
-    for (int i = 0; i < vertexCount; i++) { 
+    for (int i = 0; i < vertexCount; i++) {
         vertex = vertices[i];
         vertexArray[i].position = sf::Vector2f(vertex.x, vertex.y);
         vertexArray[i].color = polygonColor;
@@ -34,7 +34,7 @@ void DebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, cons
     sf::VertexArray vertexArray(sf::Quads, vertexCount);
 
     b2Vec2 vertex;
-    for (int i = 0; i < vertexCount; i++) { 
+    for (int i = 0; i < vertexCount; i++) {
         vertex = vertices[i];
         vertexArray[i].position = sf::Vector2f(vertex.x, vertex.y);
         vertexArray[i].color = polygonColor;
