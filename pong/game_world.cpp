@@ -2,6 +2,21 @@
 
 namespace pong {
 
+void GameWorld::create() {
+    b2Vec2 gravity(0, 0);
+    world_.reset(new b2World(gravity));
+    world_->SetAllowSleeping(true);
+
+    topWall_ = createTopWall();
+    bottomWall_ = createBottomWall();
+    ball_ = createBall();
+}
+
+void GameWorld::update() {
+    world_->Step(GAME_TIME_STEP, GAME_VELOCITY_ITERATIONS,
+                 GAME_POSITION_ITERATIONS);
+}
+
 b2Body* GameWorld::createTopWall() {
     float width = WINDOW_WIDTH / 2.0f;
     float height = 5.0f;

@@ -17,24 +17,13 @@ class GameWorld {
         b2Body* bottomWall() { return bottomWall_; }
         b2Body* ball() { return ball_; }
 
-        void create() {
-            b2Vec2 gravity(0, 0);
-            world_.reset(new b2World(gravity));
-            world_->SetAllowSleeping(true);
+        void create();
 
-            topWall_ = createTopWall();
-            bottomWall_ = createBottomWall();
-            ball_ = createBall();
-        }
-
-        void update() {
-            world_->Step(GAME_TIME_STEP, GAME_VELOCITY_ITERATIONS,
-                         GAME_POSITION_ITERATIONS);
-        }
+        void update();
 
     protected:
-        virtual b2Body* createTopWall(); 
-        virtual b2Body* createBottomWall(); 
+        virtual b2Body* createTopWall();
+        virtual b2Body* createBottomWall();
         virtual b2Body* createBall();
 
     private:
