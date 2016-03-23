@@ -54,6 +54,7 @@ add_executable(${PROJECT_NAME}
     pong/main.cpp
     pong/application.cpp
     pong/game_state.cpp
+    pong/game_world.cpp
     lib/SFMLDebugDraw.cpp
 )
 

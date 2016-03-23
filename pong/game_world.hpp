@@ -12,16 +12,19 @@ namespace pong {
 class GameWorld {
     public:
         b2World* world() { return world_.get(); }
-        b2Body* box() { return box_; }
-        b2Body* ground() { return ground_; }
+
+        b2Body* topWall() { return topWall_; }
+        b2Body* bottomWall() { return bottomWall_; }
+        b2Body* ball() { return ball_; }
 
         void create() {
-            b2Vec2 gravity(0, -10);
+            b2Vec2 gravity(0, 0);
             world_.reset(new b2World(gravity));
             world_->SetAllowSleeping(true);
 
-            ground_ = createGround();
-            box_ = createBox();
+            topWall_ = createTopWall();
+            bottomWall_ = createBottomWall();
+            ball_ = createBall();
         }
 
         void update() {
@@ -30,41 +33,15 @@ class GameWorld {
         }
 
     protected:
-        virtual b2Body* createBox() {
-            b2BodyDef boxDef;
-            boxDef.type = b2_dynamicBody;
-            boxDef.position.Set((WINDOW_WIDTH / 2) / (float) PIXELS_PER_METER,
-                                (WINDOW_HEIGHT - 100) / (float) PIXELS_PER_METER);
-            b2Body* body = world_->CreateBody(&boxDef);
-            b2PolygonShape dynamicBox;
-            dynamicBox.SetAsBox(25 / (float) PIXELS_PER_METER,
-                                25 / (float) PIXELS_PER_METER);
-            b2FixtureDef fixDef;
-            fixDef.shape = &dynamicBox;
-            fixDef.density = 1;
-            fixDef.friction = 0.3;
-            body->CreateFixture(&fixDef);
-
-            return body;
-        }
-
-        virtual b2Body* createGround() {
-            b2BodyDef groundDef;
-            groundDef.position.Set((WINDOW_WIDTH / 2) / (float) PIXELS_PER_METER,
-                                   10 / (float) PIXELS_PER_METER);
-            b2Body* body = world_->CreateBody(&groundDef);
-            b2PolygonShape groundBox;
-            groundBox.SetAsBox(WINDOW_WIDTH / (float) PIXELS_PER_METER,
-                               10 / (float) PIXELS_PER_METER);
-            body->CreateFixture(&groundBox, 0);
-
-            return body;
-        }
+        virtual b2Body* createTopWall(); 
+        virtual b2Body* createBottomWall(); 
+        virtual b2Body* createBall();
 
     private:
         std::unique_ptr<b2World> world_;
-        b2Body* box_;
-        b2Body* ground_;
+        b2Body* topWall_;
+        b2Body* bottomWall_;
+        b2Body* ball_;
 };
 
 } /* namespace pong */
