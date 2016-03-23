@@ -77,6 +77,13 @@ void Application::handleEvents() {
         if (event_.type == sf::Event::Closed) {
             exit();
         }
+#ifndef NDEBUG
+        if (event_.type == sf::Event::KeyPressed) {
+            if (event_.key.code == sf::Keyboard::R) {
+                changeState(new GameState());
+            }
+        }
+#endif /* ifndef NDEBUG  */
     }
 }
 
