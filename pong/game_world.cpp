@@ -27,6 +27,7 @@ void GameWorld::update() {
                  GAME_POSITION_ITERATIONS);
 
     if (hardReset_) {
+        create();
         hardReset_ = false;
     } else if (softReset_) {
         world_->DestroyBody(ball_);
