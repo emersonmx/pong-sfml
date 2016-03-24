@@ -21,5 +21,7 @@ constexpr const int GAME_POSITION_ITERATIONS = 3;
 
 constexpr const int PIXELS_PER_METER = 64;
 
+constexpr const float RAQUET_BASE_SPEED = 5.0f;
+
 } /* namespace pong */
 #endif /* PONG_DEFS_HPP */

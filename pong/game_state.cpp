@@ -33,6 +33,15 @@ void GameState::exit() {
 }
 
 void GameState::update() {
+    b2Body* raquet = gameWorld_.leftRaquet();
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+        raquet->SetLinearVelocity(b2Vec2(0.0f, RAQUET_BASE_SPEED));
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+        raquet->SetLinearVelocity(b2Vec2(0.0f, -RAQUET_BASE_SPEED));
+    } else {
+        raquet->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+    }
     gameWorld_.update();
 }
 
