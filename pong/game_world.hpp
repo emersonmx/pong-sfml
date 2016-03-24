@@ -9,7 +9,7 @@
 
 namespace pong {
 
-class GameWorld {
+class GameWorld: public b2ContactListener {
     public:
         enum Filter {
             NONE = 0,
@@ -18,6 +18,14 @@ class GameWorld {
             WALL = 4,
             GAME_AREA = 8,
             ALL = 15
+        };
+
+        class ScoreListener {
+            public:
+                virtual ~ScoreListener() {}
+
+                virtual void leftScored(GameWorld& gameWorld) {}
+                virtual void rightScored(GameWorld& gameWorld) {}
         };
 
         b2World* world() { return world_.get(); }
@@ -31,9 +39,17 @@ class GameWorld {
         b2Joint* leftRaquetJoint() { return leftRaquetJoint_; }
         b2Joint* rightRaquetJoint() { return rightRaquetJoint_; }
 
-        void create();
+        void addScoreListener(ScoreListener* listener) {
+            scoreListener_ = listener;
+        }
 
+        void create();
         void update();
+
+        void resetBall() { softReset_ = true; }
+        void restart() { hardReset_ = true; }
+
+        virtual void EndContact(b2Contact* contact);
 
     protected:
         virtual b2Body* createTopWall();
@@ -44,6 +60,9 @@ class GameWorld {
         virtual b2Body* createGameArea();
         virtual b2Joint* createLeftRaquetJoint();
         virtual b2Joint* createRightRaquetJoint();
+
+        void fireScoreLeft();
+        void fireScoreRight();
 
     private:
         std::unique_ptr<b2World> world_;
@@ -56,6 +75,11 @@ class GameWorld {
 
         b2Joint* leftRaquetJoint_;
         b2Joint* rightRaquetJoint_;
+
+        ScoreListener* scoreListener_;
+
+        bool softReset_ = false;
+        bool hardReset_ = false;
 };
 
 } /* namespace pong */

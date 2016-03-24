@@ -1,5 +1,7 @@
 #include "pong/state.hpp"
 
+#include <iostream>
+
 #include <Box2D/Box2D.h>
 
 #include "pong/application.hpp"
@@ -44,8 +46,19 @@ void GameState::render(sf::RenderTarget& renderTarget) {
 #endif /* ifndef NDEBUG  */
 }
 
+void GameState::leftScored(GameWorld& gameWorld) {
+    std::cout << "Left scored\n";
+    gameWorld.resetBall();
+}
+
+void GameState::rightScored(GameWorld& gameWorld) {
+    std::cout << "Right scored\n";
+    gameWorld.resetBall();
+}
+
 void GameState::setupGameWorld() {
     gameWorld_.create();
+    gameWorld_.addScoreListener(this);
 
 #ifndef NDEBUG
     b2World* world = gameWorld_.world();

@@ -33,13 +33,16 @@ class DefaultState: public State {
         virtual void render(sf::RenderTarget& renderTarget) {}
 };
 
-class GameState: public DefaultState {
+class GameState: public DefaultState, GameWorld::ScoreListener {
     public:
         virtual void enter(Application* application);
         virtual void exit();
 
         virtual void update();
         virtual void render(sf::RenderTarget& renderTarget);
+
+        virtual void leftScored(GameWorld& gameWorld);
+        virtual void rightScored(GameWorld& gameWorld);
 
     private:
         void setupGameWorld();

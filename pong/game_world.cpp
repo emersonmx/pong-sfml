@@ -18,11 +18,49 @@ void GameWorld::create() {
 
     leftRaquetJoint_ = createLeftRaquetJoint();
     rightRaquetJoint_ = createRightRaquetJoint();
+
+    world_->SetContactListener(this);
 }
 
 void GameWorld::update() {
     world_->Step(GAME_TIME_STEP, GAME_VELOCITY_ITERATIONS,
                  GAME_POSITION_ITERATIONS);
+
+    if (hardReset_) {
+        hardReset_ = false;
+    } else if (softReset_) {
+        world_->DestroyBody(ball_);
+        ball_ = createBall();
+        softReset_ = false;
+    }
+}
+
+void GameWorld::EndContact(b2Contact* contact) {
+    b2Fixture* fixtureA = contact->GetFixtureA();
+    b2Fixture* fixtureB = contact->GetFixtureB();
+    uint16 categoryA = fixtureA->GetFilterData().categoryBits;
+    uint16 categoryB = fixtureB->GetFilterData().categoryBits;
+    b2Body* ball = nullptr;
+    b2Body* gameArea = nullptr;
+
+    if (categoryA == BALL && categoryB == GAME_AREA) {
+        ball = fixtureA->GetBody();
+        gameArea = fixtureB->GetBody();
+    } else if(categoryA == GAME_AREA && categoryB == BALL) {
+        ball = fixtureB->GetBody();
+        gameArea = fixtureA->GetBody();
+    } else {
+        return;
+    }
+
+    b2Vec2 ballPosition = ball->GetPosition();
+    b2Vec2 gameAreaPosition = gameArea->GetPosition();
+
+    if (ballPosition.x < gameAreaPosition.x) {
+        fireScoreRight();
+    } else if (ballPosition.x > gameAreaPosition.x) {
+        fireScoreLeft();
+    }
 }
 
 b2Body* GameWorld::createTopWall() {
@@ -225,6 +263,18 @@ b2Joint* GameWorld::createRightRaquetJoint() {
     jointDef.enableLimit = true;
 
     return world_->CreateJoint(&jointDef);
+}
+
+void GameWorld::fireScoreLeft() {
+    if (scoreListener_ != nullptr) {
+        scoreListener_->leftScored(*this);
+    }
+}
+
+void GameWorld::fireScoreRight() {
+    if (scoreListener_ != nullptr) {
+        scoreListener_->rightScored(*this);
+    }
 }
 
 } /* namespace pong */
