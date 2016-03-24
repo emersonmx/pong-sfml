@@ -27,21 +27,14 @@ void GameState::enter(Application* application) {
     application_ = application;
 
     setupGameWorld();
+    setupGamepads();
 }
 
 void GameState::exit() {
 }
 
 void GameState::update() {
-    b2Body* raquet = gameWorld_.leftRaquet();
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        raquet->SetLinearVelocity(b2Vec2(0.0f, RAQUET_BASE_SPEED));
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        raquet->SetLinearVelocity(b2Vec2(0.0f, -RAQUET_BASE_SPEED));
-    } else {
-        raquet->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
-    }
+    handleGamepads();
     gameWorld_.update();
 }
 
@@ -60,6 +53,39 @@ void GameState::setupGameWorld() {
     world->SetDebugDraw(debugDraw_.get());
     debugDraw_->SetFlags(b2Draw::e_shapeBit);
 #endif /* ifndef NDEBUG */
+}
+
+void GameState::setupGamepads() {
+    firstPlayer_.reset(new KeyboardGamepad());
+    firstPlayer_->setupButton(Gamepad::UP, sf::Keyboard::W);
+    firstPlayer_->setupButton(Gamepad::DOWN, sf::Keyboard::S);
+    firstPlayer_->setupButton(Gamepad::START, sf::Keyboard::Return);
+
+    secondPlayer_.reset(new KeyboardGamepad());
+    secondPlayer_->setupButton(Gamepad::UP, sf::Keyboard::Up);
+    secondPlayer_->setupButton(Gamepad::DOWN, sf::Keyboard::Down);
+    secondPlayer_->setupButton(Gamepad::START, sf::Keyboard::Return);
+}
+
+void GameState::handleGamepads() {
+    b2Body* leftRaquet = gameWorld_.leftRaquet();
+    b2Body* rightRaquet = gameWorld_.rightRaquet();
+
+    if (firstPlayer_->isButtonPressed(Gamepad::UP)) {
+        leftRaquet->SetLinearVelocity(b2Vec2(0.0f, RAQUET_BASE_SPEED));
+    } else if (firstPlayer_->isButtonPressed(Gamepad::DOWN)) {
+        leftRaquet->SetLinearVelocity(b2Vec2(0.0f, -RAQUET_BASE_SPEED));
+    } else {
+        leftRaquet->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+    }
+
+    if (secondPlayer_->isButtonPressed(Gamepad::UP)) {
+        rightRaquet->SetLinearVelocity(b2Vec2(0.0f, RAQUET_BASE_SPEED));
+    } else if (secondPlayer_->isButtonPressed(Gamepad::DOWN)) {
+        rightRaquet->SetLinearVelocity(b2Vec2(0.0f, -RAQUET_BASE_SPEED));
+    } else {
+        rightRaquet->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+    }
 }
 
 } /* namespace pong */
