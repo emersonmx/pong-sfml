@@ -93,6 +93,7 @@ b2Body* GameWorld::createLeftRaquet() {
 
     b2BodyDef bodyDef;
     bodyDef.type = b2_kinematicBody;
+    bodyDef.fixedRotation = true;
     bodyDef.position.Set(
         15.0f / static_cast<float>(PIXELS_PER_METER),
         (WINDOW_HEIGHT / 2.0f) / static_cast<float>(PIXELS_PER_METER)
@@ -114,6 +115,7 @@ b2Body* GameWorld::createRightRaquet() {
 
     b2BodyDef bodyDef;
     bodyDef.type = b2_kinematicBody;
+    bodyDef.fixedRotation = true;
     bodyDef.position.Set(
         (WINDOW_WIDTH - 15.0f) / static_cast<float>(PIXELS_PER_METER),
         (WINDOW_HEIGHT / 2.0f) / static_cast<float>(PIXELS_PER_METER)
@@ -130,7 +132,27 @@ b2Body* GameWorld::createRightRaquet() {
 }
 
 b2Body* GameWorld::createGameArea() {
-    return nullptr;
+    float halfWidth = WINDOW_WIDTH / 2.0f;
+    float halfHeight = WINDOW_HEIGHT / 2.0f - 10.0f;
+
+    b2BodyDef bodyDef;
+    bodyDef.position.Set(
+        (WINDOW_WIDTH / 2.0f) / static_cast<float>(PIXELS_PER_METER),
+        (WINDOW_HEIGHT / 2.0f) / static_cast<float>(PIXELS_PER_METER)
+    );
+    b2Body* body = world_->CreateBody(&bodyDef);
+    b2PolygonShape shape;
+    shape.SetAsBox(
+        halfWidth / static_cast<float>(PIXELS_PER_METER),
+        halfHeight / static_cast<float>(PIXELS_PER_METER)
+    );
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &shape;
+    fixtureDef.isSensor = true;
+
+    body->CreateFixture(&fixtureDef);
+
+    return body;
 }
 
 } /* namespace pong */
