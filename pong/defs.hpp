@@ -21,6 +21,10 @@ constexpr const int GAME_POSITION_ITERATIONS = 3;
 
 constexpr const int PIXELS_PER_METER = 64;
 
+constexpr const float BALL_MIN_SPEED = 5.0f;
+constexpr const float BALL_MAX_SPEED = 20.0f;
+constexpr const float BALL_MIN_ROTATION_SPEED = -10.0f;
+constexpr const float BALL_MAX_ROTATION_SPEED = 10.0f;
 constexpr const float RAQUET_BASE_SPEED = 5.0f;
 
 } /* namespace pong */

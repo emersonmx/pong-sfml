@@ -1,5 +1,7 @@
 #include "pong/game_world.hpp"
 
+#include "Random.hpp"
+
 namespace pong {
 
 void GameWorld::create() {
@@ -72,6 +74,7 @@ b2Body* GameWorld::createBottomWall() {
 }
 
 b2Body* GameWorld::createBall() {
+    Random random;
     float halfWidth = 5.0f;
     float halfHeight = 5.0f;
 
@@ -81,7 +84,14 @@ b2Body* GameWorld::createBall() {
         (WINDOW_WIDTH / 2.0f) / static_cast<float>(PIXELS_PER_METER),
         (WINDOW_HEIGHT / 2.0f) / static_cast<float>(PIXELS_PER_METER)
     );
-    bodyDef.linearVelocity.x = -10.0f;
+    bodyDef.linearVelocity.x = random.nextInt() % 2 == 0 ? -1 : 1;
+    bodyDef.linearVelocity.y = random.nextFloat(-1, 1);
+    bodyDef.linearVelocity *= BALL_MIN_SPEED;
+    bodyDef.angularVelocity = random.nextFloat(
+        BALL_MIN_ROTATION_SPEED,
+        BALL_MAX_ROTATION_SPEED
+    );
+
     b2Body* body = world_->CreateBody(&bodyDef);
     b2PolygonShape shape;
     shape.SetAsBox(
