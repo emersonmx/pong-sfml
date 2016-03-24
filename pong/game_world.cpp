@@ -10,6 +10,9 @@ void GameWorld::create() {
     topWall_ = createTopWall();
     bottomWall_ = createBottomWall();
     ball_ = createBall();
+    leftRaquet_ = createLeftRaquet();
+    rightRaquet_ = createRightRaquet();
+    gameArea_ = createGameArea();
 }
 
 void GameWorld::update() {
@@ -18,62 +21,62 @@ void GameWorld::update() {
 }
 
 b2Body* GameWorld::createTopWall() {
-    float width = WINDOW_WIDTH / 2.0f;
-    float height = 5.0f;
+    float halfWidth = WINDOW_WIDTH / 2.0f;
+    float halfHeight = 5.0f;
 
     b2BodyDef bodyDef;
     bodyDef.position.Set(
-            width / static_cast<float>(PIXELS_PER_METER),
-            height / static_cast<float>(PIXELS_PER_METER)
-            );
+        halfWidth / static_cast<float>(PIXELS_PER_METER),
+        halfHeight / static_cast<float>(PIXELS_PER_METER)
+    );
     b2Body* body = world_->CreateBody(&bodyDef);
     b2PolygonShape shape;
     shape.SetAsBox(
-            width / static_cast<float>(PIXELS_PER_METER),
-            height / static_cast<float>(PIXELS_PER_METER)
-            );
+        halfWidth / static_cast<float>(PIXELS_PER_METER),
+        halfHeight / static_cast<float>(PIXELS_PER_METER)
+    );
     body->CreateFixture(&shape, 0.0f);
 
     return body;
 }
 
 b2Body* GameWorld::createBottomWall() {
-    float width = WINDOW_WIDTH / 2.0f;
-    float height = 5.0f;
+    float halfWidth = WINDOW_WIDTH / 2.0f;
+    float halfHeight = 5.0f;
 
     b2BodyDef bodyDef;
     bodyDef.position.Set(
-            width / static_cast<float>(PIXELS_PER_METER),
-            (WINDOW_HEIGHT - height) / static_cast<float>(PIXELS_PER_METER)
-            );
+        halfWidth / static_cast<float>(PIXELS_PER_METER),
+        (WINDOW_HEIGHT - halfHeight) / static_cast<float>(PIXELS_PER_METER)
+    );
     b2Body* body = world_->CreateBody(&bodyDef);
     b2PolygonShape shape;
     shape.SetAsBox(
-            width / static_cast<float>(PIXELS_PER_METER),
-            height / static_cast<float>(PIXELS_PER_METER)
-            );
+        halfWidth / static_cast<float>(PIXELS_PER_METER),
+        halfHeight / static_cast<float>(PIXELS_PER_METER)
+    );
     body->CreateFixture(&shape, 0.0f);
 
     return body;
 }
 
 b2Body* GameWorld::createBall() {
-    float width = 5.0f;
-    float height = 5.0f;
+    float halfWidth = 5.0f;
+    float halfHeight = 5.0f;
 
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.position.Set(
-            (WINDOW_WIDTH / 2.0f) / static_cast<float>(PIXELS_PER_METER),
-            (WINDOW_HEIGHT / 2.0f) / static_cast<float>(PIXELS_PER_METER)
-            );
+        (WINDOW_WIDTH / 2.0f) / static_cast<float>(PIXELS_PER_METER),
+        (WINDOW_HEIGHT / 2.0f) / static_cast<float>(PIXELS_PER_METER)
+    );
     bodyDef.linearVelocity.y = -10.0f;
     b2Body* body = world_->CreateBody(&bodyDef);
     b2PolygonShape shape;
     shape.SetAsBox(
-            width / static_cast<float>(PIXELS_PER_METER),
-            height / static_cast<float>(PIXELS_PER_METER)
-            );
+        halfWidth / static_cast<float>(PIXELS_PER_METER),
+        halfHeight / static_cast<float>(PIXELS_PER_METER)
+    );
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &shape;
     fixtureDef.density = 1.0f;
@@ -82,6 +85,52 @@ b2Body* GameWorld::createBall() {
     body->CreateFixture(&fixtureDef);
 
     return body;
+}
+
+b2Body* GameWorld::createLeftRaquet() {
+    float halfWidth = 10.0f;
+    float halfHeight = 40.0f;
+
+    b2BodyDef bodyDef;
+    bodyDef.type = b2_kinematicBody;
+    bodyDef.position.Set(
+        15.0f / static_cast<float>(PIXELS_PER_METER),
+        (WINDOW_HEIGHT / 2.0f) / static_cast<float>(PIXELS_PER_METER)
+    );
+    b2Body* body = world_->CreateBody(&bodyDef);
+    b2PolygonShape shape;
+    shape.SetAsBox(
+        halfWidth / static_cast<float>(PIXELS_PER_METER),
+        halfHeight / static_cast<float>(PIXELS_PER_METER)
+    );
+    body->CreateFixture(&shape, 0.0f);
+
+    return body;
+}
+
+b2Body* GameWorld::createRightRaquet() {
+    float halfWidth = 10.0f;
+    float halfHeight = 40.0f;
+
+    b2BodyDef bodyDef;
+    bodyDef.type = b2_kinematicBody;
+    bodyDef.position.Set(
+        (WINDOW_WIDTH - 15.0f) / static_cast<float>(PIXELS_PER_METER),
+        (WINDOW_HEIGHT / 2.0f) / static_cast<float>(PIXELS_PER_METER)
+    );
+    b2Body* body = world_->CreateBody(&bodyDef);
+    b2PolygonShape shape;
+    shape.SetAsBox(
+        halfWidth / static_cast<float>(PIXELS_PER_METER),
+        halfHeight / static_cast<float>(PIXELS_PER_METER)
+    );
+    body->CreateFixture(&shape, 0.0f);
+
+    return body;
+}
+
+b2Body* GameWorld::createGameArea() {
+    return nullptr;
 }
 
 } /* namespace pong */

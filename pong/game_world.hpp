@@ -16,6 +16,9 @@ class GameWorld {
         b2Body* topWall() { return topWall_; }
         b2Body* bottomWall() { return bottomWall_; }
         b2Body* ball() { return ball_; }
+        b2Body* leftRaquet() { return leftRaquet_; }
+        b2Body* rightRaquet() { return rightRaquet_; }
+        b2Body* gameArea() { return gameArea_; }
 
         void create();
 
@@ -25,12 +28,18 @@ class GameWorld {
         virtual b2Body* createTopWall();
         virtual b2Body* createBottomWall();
         virtual b2Body* createBall();
+        virtual b2Body* createLeftRaquet();
+        virtual b2Body* createRightRaquet();
+        virtual b2Body* createGameArea();
 
     private:
         std::unique_ptr<b2World> world_;
         b2Body* topWall_;
         b2Body* bottomWall_;
         b2Body* ball_;
+        b2Body* leftRaquet_;
+        b2Body* rightRaquet_;
+        b2Body* gameArea_;
 };
 
 } /* namespace pong */
