@@ -13,6 +13,9 @@ void GameWorld::create() {
     leftRaquet_ = createLeftRaquet();
     rightRaquet_ = createRightRaquet();
     gameArea_ = createGameArea();
+
+    leftRaquetJoint_ = createLeftRaquetJoint();
+    rightRaquetJoint_ = createRightRaquetJoint();
 }
 
 void GameWorld::update() {
@@ -35,7 +38,11 @@ b2Body* GameWorld::createTopWall() {
         halfWidth / static_cast<float>(PIXELS_PER_METER),
         halfHeight / static_cast<float>(PIXELS_PER_METER)
     );
-    body->CreateFixture(&shape, 0.0f);
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &shape;
+    fixtureDef.filter.categoryBits = WALL;
+    fixtureDef.filter.maskBits = BALL;
+    body->CreateFixture(&fixtureDef);
 
     return body;
 }
@@ -55,7 +62,11 @@ b2Body* GameWorld::createBottomWall() {
         halfWidth / static_cast<float>(PIXELS_PER_METER),
         halfHeight / static_cast<float>(PIXELS_PER_METER)
     );
-    body->CreateFixture(&shape, 0.0f);
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &shape;
+    fixtureDef.filter.categoryBits = WALL;
+    fixtureDef.filter.maskBits = BALL;
+    body->CreateFixture(&fixtureDef);
 
     return body;
 }
@@ -70,7 +81,7 @@ b2Body* GameWorld::createBall() {
         (WINDOW_WIDTH / 2.0f) / static_cast<float>(PIXELS_PER_METER),
         (WINDOW_HEIGHT / 2.0f) / static_cast<float>(PIXELS_PER_METER)
     );
-    bodyDef.linearVelocity.y = -10.0f;
+    bodyDef.linearVelocity.x = -10.0f;
     b2Body* body = world_->CreateBody(&bodyDef);
     b2PolygonShape shape;
     shape.SetAsBox(
@@ -80,8 +91,10 @@ b2Body* GameWorld::createBall() {
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &shape;
     fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.3f;
+    fixtureDef.friction = 0.1f;
     fixtureDef.restitution = 1.0f;
+    fixtureDef.filter.categoryBits = BALL;
+    fixtureDef.filter.maskBits = ALL;
     body->CreateFixture(&fixtureDef);
 
     return body;
@@ -92,7 +105,7 @@ b2Body* GameWorld::createLeftRaquet() {
     float halfHeight = 40.0f;
 
     b2BodyDef bodyDef;
-    bodyDef.type = b2_kinematicBody;
+    bodyDef.type = b2_dynamicBody;
     bodyDef.fixedRotation = true;
     bodyDef.position.Set(
         15.0f / static_cast<float>(PIXELS_PER_METER),
@@ -104,7 +117,14 @@ b2Body* GameWorld::createLeftRaquet() {
         halfWidth / static_cast<float>(PIXELS_PER_METER),
         halfHeight / static_cast<float>(PIXELS_PER_METER)
     );
-    body->CreateFixture(&shape, 0.0f);
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &shape;
+    fixtureDef.friction = 1.0f;
+    fixtureDef.density = 1.0f;
+    fixtureDef.filter.categoryBits = RAQUET;
+    fixtureDef.filter.maskBits = BALL;
+
+    body->CreateFixture(&fixtureDef);
 
     return body;
 }
@@ -114,7 +134,7 @@ b2Body* GameWorld::createRightRaquet() {
     float halfHeight = 40.0f;
 
     b2BodyDef bodyDef;
-    bodyDef.type = b2_kinematicBody;
+    bodyDef.type = b2_dynamicBody;
     bodyDef.fixedRotation = true;
     bodyDef.position.Set(
         (WINDOW_WIDTH - 15.0f) / static_cast<float>(PIXELS_PER_METER),
@@ -126,7 +146,15 @@ b2Body* GameWorld::createRightRaquet() {
         halfWidth / static_cast<float>(PIXELS_PER_METER),
         halfHeight / static_cast<float>(PIXELS_PER_METER)
     );
-    body->CreateFixture(&shape, 0.0f);
+
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &shape;
+    fixtureDef.friction = 1.0f;
+    fixtureDef.density = 1.0f;
+    fixtureDef.filter.categoryBits = RAQUET;
+    fixtureDef.filter.maskBits = BALL;
+
+    body->CreateFixture(&fixtureDef);
 
     return body;
 }
@@ -149,10 +177,44 @@ b2Body* GameWorld::createGameArea() {
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &shape;
     fixtureDef.isSensor = true;
+    fixtureDef.filter.categoryBits = GAME_AREA;
+    fixtureDef.filter.maskBits = BALL;
 
     body->CreateFixture(&fixtureDef);
 
     return body;
+}
+
+b2Joint* GameWorld::createLeftRaquetJoint() {
+    float margin = 50.0f;
+    float limit = (WINDOW_HEIGHT / 2.0f) - margin;
+
+    b2PrismaticJointDef jointDef;
+    b2Vec2 axis(0.0f, 1.0f);
+
+    jointDef.Initialize(gameArea_, leftRaquet_, gameArea_->GetWorldCenter(), axis);
+    jointDef.collideConnected = false;
+    jointDef.lowerTranslation = -limit / static_cast<float>(PIXELS_PER_METER);
+    jointDef.upperTranslation = limit / static_cast<float>(PIXELS_PER_METER);
+    jointDef.enableLimit = true;
+
+    return world_->CreateJoint(&jointDef);
+}
+
+b2Joint* GameWorld::createRightRaquetJoint() {
+    float margin = 50.0f;
+    float limit = (WINDOW_HEIGHT / 2.0f) - margin;
+
+    b2PrismaticJointDef jointDef;
+    b2Vec2 axis(0.0f, 1.0f);
+
+    jointDef.Initialize(gameArea_, rightRaquet_, gameArea_->GetWorldCenter(), axis);
+    jointDef.collideConnected = false;
+    jointDef.lowerTranslation = -limit / static_cast<float>(PIXELS_PER_METER);
+    jointDef.upperTranslation = limit / static_cast<float>(PIXELS_PER_METER);
+    jointDef.enableLimit = true;
+
+    return world_->CreateJoint(&jointDef);
 }
 
 } /* namespace pong */
