@@ -50,6 +50,7 @@ class GameWorld: public b2ContactListener {
         void stop() { running_ = false; }
         void toggleRunning() { running_ = !running_; }
         void restart();
+
         void resetBall();
 
         virtual void EndContact(b2Contact* contact);
