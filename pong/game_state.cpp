@@ -29,6 +29,9 @@ void GameState::enter(Application* application) {
     application_ = application;
 
     setupGameWorld();
+#ifndef NDEBUG
+    setupDebugDraw();
+#endif /* ifndef NDEBUG */
     setupGamepads();
 }
 
@@ -59,13 +62,13 @@ void GameState::rightScored(GameWorld& gameWorld) {
 void GameState::setupGameWorld() {
     gameWorld_.create();
     gameWorld_.addScoreListener(this);
+}
 
-#ifndef NDEBUG
+void GameState::setupDebugDraw() {
     b2World* world = gameWorld_.world();
     debugDraw_.reset(new SFMLDebugDraw(application_->window(), pong::PIXELS_PER_METER));
     world->SetDebugDraw(debugDraw_.get());
     debugDraw_->SetFlags(b2Draw::e_shapeBit);
-#endif /* ifndef NDEBUG */
 }
 
 void GameState::setupGamepads() {

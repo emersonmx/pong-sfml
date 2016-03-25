@@ -46,6 +46,7 @@ class GameState: public DefaultState, GameWorld::ScoreListener {
 
     private:
         void setupGameWorld();
+        void setupDebugDraw();
         void setupGamepads();
 
         void handleGamepads();
@@ -56,9 +57,7 @@ class GameState: public DefaultState, GameWorld::ScoreListener {
         std::unique_ptr<Gamepad> firstPlayer_;
         std::unique_ptr<Gamepad> secondPlayer_;
 
-#ifndef NDEBUG
         std::unique_ptr<SFMLDebugDraw> debugDraw_;
-#endif /* ifndef NDEBUG */
 };
 
 } /* namespace pong */
