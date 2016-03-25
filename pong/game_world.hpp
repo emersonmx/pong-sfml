@@ -63,6 +63,7 @@ class GameWorld: public b2ContactListener {
 
         void limitBallSpeed();
         void limitBallRotation();
+        void handleResets();
 
         void fireScoreLeft();
         void fireScoreRight();

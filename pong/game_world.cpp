@@ -30,7 +30,10 @@ void GameWorld::update() {
 
     limitBallSpeed();
     limitBallRotation();
+    handleResets();
+}
 
+void GameWorld::handleResets() {
     if (hardReset_) {
         create();
         hardReset_ = false;
