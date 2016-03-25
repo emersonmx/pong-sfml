@@ -38,7 +38,7 @@ class Application {
     private:
         void handleEvents();
 
-        std::unique_ptr<State> currentState_ = make_unique<DefaultState>();
+        std::unique_ptr<State> currentState_{new DefaultState()};
 
         int errorCode_ = 0;
         bool running_ = true;

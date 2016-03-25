@@ -1,13 +1,6 @@
 #ifndef PONG_DEFS_HPP
 #define PONG_DEFS_HPP
 
-#include <memory>
-
-template<typename T, typename... Args>
-std::unique_ptr<T> make_unique(Args&&... args) {
-    return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
-}
-
 namespace pong {
 
 constexpr const wchar_t* WINDOW_TITLE = L"Pong";
