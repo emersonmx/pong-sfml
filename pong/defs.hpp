@@ -30,6 +30,7 @@ constexpr const float BALL_HALF_WIDTH = 5.0f;
 constexpr const float BALL_HALF_HEIGHT = 5.0f;
 constexpr const float BALL_MIN_SPEED = 2.0f;
 constexpr const float BALL_MAX_SPEED = 15.0f;
+constexpr const float BALL_VELOCITY_STEP = 0.001;
 constexpr const float BALL_MIN_ROTATION_SPEED = 0.1f;
 constexpr const float BALL_MAX_ROTATION_SPEED = 15.0f;
 

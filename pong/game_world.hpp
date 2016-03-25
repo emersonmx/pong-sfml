@@ -46,7 +46,7 @@ class GameWorld: public b2ContactListener {
         void create();
         void update();
 
-        void resetBall() { softReset_ = true; }
+        void resetBall();
         void restart() { hardReset_ = true; }
 
         virtual void EndContact(b2Contact* contact);
@@ -84,6 +84,8 @@ class GameWorld: public b2ContactListener {
 
         bool softReset_ = false;
         bool hardReset_ = false;
+
+        int stepCount_ = 0;
 };
 
 } /* namespace pong */

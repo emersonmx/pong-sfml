@@ -20,6 +20,8 @@ void GameWorld::create() {
     rightRaquetJoint_ = createRightRaquetJoint();
 
     world_->SetContactListener(this);
+
+    stepCount_ = 0;
 }
 
 void GameWorld::update() {
@@ -29,6 +31,13 @@ void GameWorld::update() {
     limitBallSpeed();
     limitBallRotation();
     handleResets();
+
+    stepCount_++;
+}
+
+void GameWorld::resetBall() {
+    softReset_ = true;
+    stepCount_ = 0;
 }
 
 void GameWorld::handleResets() {
@@ -45,11 +54,13 @@ void GameWorld::handleResets() {
 void GameWorld::limitBallSpeed() {
     b2Vec2 velocity = ball_->GetLinearVelocity();
     float speed = velocity.Length();
+    float minSpeen = BALL_MIN_SPEED + (stepCount_ * BALL_VELOCITY_STEP);
+    minSpeen = minSpeen > BALL_MAX_SPEED ? BALL_MAX_SPEED : minSpeen;
     if (speed > BALL_MAX_SPEED) {
         velocity *= BALL_MAX_SPEED / speed;
         ball_->SetLinearVelocity(velocity);
-    } else if (speed < BALL_MIN_SPEED) {
-        velocity *= BALL_MIN_SPEED / speed;
+    } else if (speed < minSpeen) {
+        velocity *= minSpeen / speed;
         ball_->SetLinearVelocity(velocity);
     }
 }
