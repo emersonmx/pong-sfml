@@ -61,6 +61,9 @@ class GameWorld: public b2ContactListener {
         virtual b2Joint* createLeftRaquetJoint();
         virtual b2Joint* createRightRaquetJoint();
 
+        void limitBallSpeed();
+        void limitBallRotation();
+
         void fireScoreLeft();
         void fireScoreRight();
 

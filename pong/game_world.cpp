@@ -1,5 +1,7 @@
 #include "pong/game_world.hpp"
 
+#include <iostream>
+
 #include "Random.hpp"
 
 namespace pong {
@@ -26,6 +28,9 @@ void GameWorld::update() {
     world_->Step(GAME_TIME_STEP, GAME_VELOCITY_ITERATIONS,
                  GAME_POSITION_ITERATIONS);
 
+    limitBallSpeed();
+    limitBallRotation();
+
     if (hardReset_) {
         create();
         hardReset_ = false;
@@ -34,6 +39,32 @@ void GameWorld::update() {
         ball_ = createBall();
         softReset_ = false;
     }
+}
+
+void GameWorld::limitBallSpeed() {
+    b2Vec2 velocity = ball_->GetLinearVelocity();
+    float speed = velocity.Length();
+    if (speed > BALL_MAX_SPEED) {
+        velocity *= BALL_MAX_SPEED / speed;
+        ball_->SetLinearVelocity(velocity);
+    } else if (speed < BALL_MIN_SPEED) {
+        velocity *= BALL_MIN_SPEED / speed;
+        ball_->SetLinearVelocity(velocity);
+    }
+    std::cout << "Velocity: " << velocity.Length() << std::endl;
+}
+
+void GameWorld::limitBallRotation() {
+    float rotation = ball_->GetAngularVelocity();
+    int direction = rotation > 0 ? 1 : -1;
+    if (abs(rotation) > BALL_MAX_ROTATION_SPEED) {
+        rotation = BALL_MAX_ROTATION_SPEED * direction;
+    } else if (-BALL_MIN_ROTATION_SPEED <= rotation &&
+            rotation <= BALL_MIN_ROTATION_SPEED) {
+        rotation = BALL_MIN_ROTATION_SPEED * direction;
+    }
+    ball_->SetAngularVelocity(rotation);
+    std::cout << "Rotation: " << rotation << std::endl;
 }
 
 void GameWorld::EndContact(b2Contact* contact) {

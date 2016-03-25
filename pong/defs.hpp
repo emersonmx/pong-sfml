@@ -29,9 +29,9 @@ constexpr const float WALL_HALF_HEIGHT = 5.0f;
 constexpr const float BALL_HALF_WIDTH = 5.0f;
 constexpr const float BALL_HALF_HEIGHT = 5.0f;
 constexpr const float BALL_MIN_SPEED = 2.0f;
-constexpr const float BALL_MAX_SPEED = 20.0f;
+constexpr const float BALL_MAX_SPEED = 15.0f;
 constexpr const float BALL_MIN_ROTATION_SPEED = 0.1f;
-constexpr const float BALL_MAX_ROTATION_SPEED = 10.0f;
+constexpr const float BALL_MAX_ROTATION_SPEED = 15.0f;
 
 constexpr const float RAQUET_HALF_WIDTH = 10.0f;
 constexpr const float RAQUET_HALF_HEIGHT = 40.0f;
