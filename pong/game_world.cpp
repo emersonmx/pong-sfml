@@ -22,22 +22,31 @@ void GameWorld::create() {
     world_->SetContactListener(this);
 
     stepCount_ = 0;
+    stop();
 }
 
 void GameWorld::update() {
-    world_->Step(GAME_TIME_STEP, GAME_VELOCITY_ITERATIONS,
-                 GAME_POSITION_ITERATIONS);
+    if (running_) {
+        world_->Step(GAME_TIME_STEP, GAME_VELOCITY_ITERATIONS,
+                    GAME_POSITION_ITERATIONS);
 
-    limitBallSpeed();
-    limitBallRotation();
-    handleResets();
+        limitBallSpeed();
+        limitBallRotation();
+        handleResets();
 
-    stepCount_++;
+        stepCount_++;
+    }
 }
 
 void GameWorld::resetBall() {
     softReset_ = true;
     stepCount_ = 0;
+    stop();
+}
+
+void GameWorld::restart() {
+    hardReset_ = true;
+    stop();
 }
 
 void GameWorld::handleResets() {
@@ -48,6 +57,7 @@ void GameWorld::handleResets() {
         world_->DestroyBody(ball_);
         ball_ = createBall();
         softReset_ = false;
+        stop();
     }
 }
 

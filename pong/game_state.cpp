@@ -58,6 +58,7 @@ void GameState::rightScored(GameWorld& gameWorld) {
 void GameState::setupGameWorld() {
     gameWorld_.create();
     gameWorld_.addScoreListener(this);
+    gameWorld_.start();
 }
 
 void GameState::setupDebugDraw() {

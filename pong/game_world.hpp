@@ -46,8 +46,11 @@ class GameWorld: public b2ContactListener {
         void create();
         void update();
 
+        void start() { running_ = true; }
+        void stop() { running_ = false; }
+        void toggleRunning() { running_ = !running_; }
+        void restart();
         void resetBall();
-        void restart() { hardReset_ = true; }
 
         virtual void EndContact(b2Contact* contact);
 
@@ -86,6 +89,8 @@ class GameWorld: public b2ContactListener {
         bool hardReset_ = false;
 
         int stepCount_ = 0;
+
+        bool running_ = false;
 };
 
 } /* namespace pong */
