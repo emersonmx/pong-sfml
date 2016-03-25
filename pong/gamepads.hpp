@@ -1,6 +1,8 @@
 #ifndef PONG_GAMEPADS_HPP
 #define PONG_GAMEPADS_HPP
 
+#include <array>
+
 #include <SFML/Window.hpp>
 
 namespace pong {
@@ -38,7 +40,7 @@ class KeyboardGamepad: public Gamepad {
             }
         };
 
-        sf::Keyboard::Key buttonMap_[Gamepad::BUTTON_SIZE];
+        std::array<sf::Keyboard::Key, Gamepad::BUTTON_SIZE> buttonMap_;
 };
 
 } /* namespace pong */
