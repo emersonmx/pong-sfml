@@ -1,7 +1,5 @@
 #include "pong/game_world.hpp"
 
-#include <iostream>
-
 #include "Random.hpp"
 
 namespace pong {
@@ -54,7 +52,6 @@ void GameWorld::limitBallSpeed() {
         velocity *= BALL_MIN_SPEED / speed;
         ball_->SetLinearVelocity(velocity);
     }
-    std::cout << "Velocity: " << velocity.Length() << std::endl;
 }
 
 void GameWorld::limitBallRotation() {
@@ -67,7 +64,6 @@ void GameWorld::limitBallRotation() {
         rotation = BALL_MIN_ROTATION_SPEED * direction;
     }
     ball_->SetAngularVelocity(rotation);
-    std::cout << "Rotation: " << rotation << std::endl;
 }
 
 void GameWorld::EndContact(b2Contact* contact) {
