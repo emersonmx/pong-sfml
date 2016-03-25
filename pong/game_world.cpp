@@ -65,8 +65,8 @@ void GameWorld::EndContact(b2Contact* contact) {
 }
 
 b2Body* GameWorld::createTopWall() {
-    float halfWidth = WINDOW_WIDTH / 2.0f;
-    float halfHeight = 5.0f;
+    float halfWidth = WALL_HALF_WIDTH;
+    float halfHeight = WALL_HALF_HEIGHT;
 
     b2BodyDef bodyDef;
     bodyDef.position.Set(
@@ -89,8 +89,8 @@ b2Body* GameWorld::createTopWall() {
 }
 
 b2Body* GameWorld::createBottomWall() {
-    float halfWidth = WINDOW_WIDTH / 2.0f;
-    float halfHeight = 5.0f;
+    float halfWidth = WALL_HALF_WIDTH;
+    float halfHeight = WALL_HALF_HEIGHT;
 
     b2BodyDef bodyDef;
     bodyDef.position.Set(
@@ -114,14 +114,14 @@ b2Body* GameWorld::createBottomWall() {
 
 b2Body* GameWorld::createBall() {
     Random random;
-    float halfWidth = 5.0f;
-    float halfHeight = 5.0f;
+    float halfWidth = BALL_HALF_WIDTH;
+    float halfHeight = BALL_HALF_HEIGHT;
 
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.position.Set(
-        (WINDOW_WIDTH / 2.0f) / static_cast<float>(PIXELS_PER_METER),
-        (WINDOW_HEIGHT / 2.0f) / static_cast<float>(PIXELS_PER_METER)
+        WINDOW_HALF_WIDHT / static_cast<float>(PIXELS_PER_METER),
+        WINDOW_HALF_HEIGHT / static_cast<float>(PIXELS_PER_METER)
     );
     bodyDef.linearVelocity.x = random.nextInt() % 2 == 0 ? -1 : 1;
     bodyDef.linearVelocity.y = random.nextFloat(-1, 1);
@@ -129,7 +129,7 @@ b2Body* GameWorld::createBall() {
     bodyDef.angularVelocity = random.nextFloat(
         BALL_MIN_ROTATION_SPEED,
         BALL_MAX_ROTATION_SPEED
-    );
+    ) * (random.nextInt() % 2 == 0 ? -1 : 1);
 
     b2Body* body = world_->CreateBody(&bodyDef);
     b2PolygonShape shape;
@@ -150,15 +150,16 @@ b2Body* GameWorld::createBall() {
 }
 
 b2Body* GameWorld::createLeftRaquet() {
-    float halfWidth = 10.0f;
-    float halfHeight = 40.0f;
+    float halfWidth = RAQUET_HALF_WIDTH;
+    float halfHeight = RAQUET_HALF_HEIGHT;
+    float margin = 15.0f;
 
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.fixedRotation = true;
     bodyDef.position.Set(
-        15.0f / static_cast<float>(PIXELS_PER_METER),
-        (WINDOW_HEIGHT / 2.0f) / static_cast<float>(PIXELS_PER_METER)
+        margin / static_cast<float>(PIXELS_PER_METER),
+        WINDOW_HALF_HEIGHT / static_cast<float>(PIXELS_PER_METER)
     );
     b2Body* body = world_->CreateBody(&bodyDef);
     b2PolygonShape shape;
@@ -179,15 +180,16 @@ b2Body* GameWorld::createLeftRaquet() {
 }
 
 b2Body* GameWorld::createRightRaquet() {
-    float halfWidth = 10.0f;
-    float halfHeight = 40.0f;
+    float halfWidth = RAQUET_HALF_WIDTH;
+    float halfHeight = RAQUET_HALF_HEIGHT;
+    float margin = 15.0f;
 
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.fixedRotation = true;
     bodyDef.position.Set(
-        (WINDOW_WIDTH - 15.0f) / static_cast<float>(PIXELS_PER_METER),
-        (WINDOW_HEIGHT / 2.0f) / static_cast<float>(PIXELS_PER_METER)
+        (WINDOW_WIDTH - margin) / static_cast<float>(PIXELS_PER_METER),
+        WINDOW_HALF_HEIGHT / static_cast<float>(PIXELS_PER_METER)
     );
     b2Body* body = world_->CreateBody(&bodyDef);
     b2PolygonShape shape;
@@ -209,13 +211,13 @@ b2Body* GameWorld::createRightRaquet() {
 }
 
 b2Body* GameWorld::createGameArea() {
-    float halfWidth = WINDOW_WIDTH / 2.0f;
-    float halfHeight = WINDOW_HEIGHT / 2.0f - 10.0f;
+    float halfWidth = WINDOW_HALF_WIDHT;
+    float halfHeight = WINDOW_HALF_HEIGHT - (2 * WALL_HALF_HEIGHT);
 
     b2BodyDef bodyDef;
     bodyDef.position.Set(
-        (WINDOW_WIDTH / 2.0f) / static_cast<float>(PIXELS_PER_METER),
-        (WINDOW_HEIGHT / 2.0f) / static_cast<float>(PIXELS_PER_METER)
+        WINDOW_HALF_WIDHT / static_cast<float>(PIXELS_PER_METER),
+        WINDOW_HALF_HEIGHT / static_cast<float>(PIXELS_PER_METER)
     );
     b2Body* body = world_->CreateBody(&bodyDef);
     b2PolygonShape shape;
