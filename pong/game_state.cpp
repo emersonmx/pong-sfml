@@ -43,7 +43,7 @@ void GameState::update() {
 
 void GameState::render(sf::RenderTarget& renderTarget) {
 #ifndef NDEBUG
-    gameWorld_.world()->DrawDebugData();
+    gameWorld_.drawDebugData();
 #endif /* ifndef NDEBUG  */
 }
 
@@ -62,9 +62,8 @@ void GameState::setupGameWorld() {
 }
 
 void GameState::setupDebugDraw() {
-    b2World* world = gameWorld_.world();
     debugDraw_.reset(new SFMLDebugDraw(application_->window(), pong::PIXELS_PER_METER));
-    world->SetDebugDraw(debugDraw_.get());
+    gameWorld_.setDebugDraw(debugDraw_.get());
     debugDraw_->SetFlags(b2Draw::e_shapeBit);
 }
 

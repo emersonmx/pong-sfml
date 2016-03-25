@@ -87,6 +87,14 @@ void GameWorld::limitBallRotation() {
     ball_->SetAngularVelocity(rotation);
 }
 
+void GameWorld::setDebugDraw(b2Draw* debugDraw) {
+    world_->SetDebugDraw(debugDraw);
+}
+
+void GameWorld::drawDebugData() {
+    world_->DrawDebugData();
+}
+
 void GameWorld::EndContact(b2Contact* contact) {
     b2Fixture* fixtureA = contact->GetFixtureA();
     b2Fixture* fixtureB = contact->GetFixtureB();

@@ -28,8 +28,6 @@ class GameWorld: public b2ContactListener {
                 virtual void rightScored(GameWorld& gameWorld) {}
         };
 
-        b2World* world() { return world_.get(); }
-
         b2Body* topWall() { return topWall_; }
         b2Body* bottomWall() { return bottomWall_; }
         b2Body* ball() { return ball_; }
@@ -52,6 +50,9 @@ class GameWorld: public b2ContactListener {
         void restart();
 
         void resetBall();
+
+        void setDebugDraw(b2Draw* debugDraw);
+        void drawDebugData();
 
         virtual void EndContact(b2Contact* contact);
 
