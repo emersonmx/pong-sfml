@@ -37,7 +37,7 @@ class GameWorld: public b2ContactListener {
         b2Joint* leftRaquetJoint() { return leftRaquetJoint_; }
         b2Joint* rightRaquetJoint() { return rightRaquetJoint_; }
 
-        void addScoreListener(ScoreListener* listener) {
+        void setScoreListener(ScoreListener* listener) {
             scoreListener_ = listener;
         }
 
