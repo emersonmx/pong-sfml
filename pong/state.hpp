@@ -11,13 +11,13 @@
 
 namespace pong {
 
-class Application;
+class Game;
 
 class State {
     public:
         virtual ~State() {}
 
-        virtual void enter(Application* application) = 0;
+        virtual void enter(Game* game) = 0;
         virtual void exit() = 0;
 
         virtual void update() = 0;
@@ -26,7 +26,7 @@ class State {
 
 class DefaultState: public State {
     public:
-        virtual void enter(Application* application) {}
+        virtual void enter(Game* game) {}
         virtual void exit() {}
 
         virtual void update() {}
@@ -35,7 +35,7 @@ class DefaultState: public State {
 
 class GameState: public DefaultState, public GameWorld::ScoreListener {
     public:
-        virtual void enter(Application* application);
+        virtual void enter(Game* game);
         virtual void exit();
 
         virtual void update();
@@ -51,7 +51,7 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
 
         void handleControllers();
 
-        Application* application_;
+        Game* game_;
         GameWorld gameWorld_;
 
         std::unique_ptr<Controller> firstPlayer_;

@@ -1,5 +1,5 @@
-#ifndef PONG_APPLICATION_HPP
-#define PONG_APPLICATION_HPP
+#ifndef PONG_GAME_HPP
+#define PONG_GAME_HPP
 
 #include <memory>
 
@@ -11,10 +11,10 @@
 
 namespace pong {
 
-class Application {
+class Game {
     public:
-        Application() {}
-        virtual ~Application() {}
+        Game() {}
+        virtual ~Game() {}
 
         sf::RenderWindow& window() { return window_; }
 
@@ -47,4 +47,4 @@ class Application {
 };
 
 } /* namespace pong */
-#endif /* PONG_APPLICATION_HPP */
+#endif /* PONG_GAME_HPP */

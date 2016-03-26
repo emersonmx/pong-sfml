@@ -2,7 +2,7 @@
 
 #include <Box2D/Box2D.h>
 
-#include "pong/application.hpp"
+#include "pong/game.hpp"
 #include "pong/defs.hpp"
 
 namespace pong {
@@ -23,8 +23,8 @@ void syncBodyToTransformable(b2Body* body, sf::Transformable& transformable) {
     transformable.setRotation(angle);
 }
 
-void GameState::enter(Application* application) {
-    application_ = application;
+void GameState::enter(Game* game) {
+    game_ = game;
 
     setupGameWorld();
 #ifndef NDEBUG
@@ -62,7 +62,7 @@ void GameState::setupGameWorld() {
 }
 
 void GameState::setupDebugDraw() {
-    debugDraw_.reset(new SFMLDebugDraw(application_->window(), pong::PIXELS_PER_METER));
+    debugDraw_.reset(new SFMLDebugDraw(game_->window(), pong::PIXELS_PER_METER));
     gameWorld_.setDebugDraw(debugDraw_.get());
     debugDraw_->SetFlags(b2Draw::e_shapeBit);
 }

@@ -52,7 +52,7 @@ include_directories(${PROJECT_SOURCE_DIR}
 
 add_executable(${PROJECT_NAME}
     pong/main.cpp
-    pong/application.cpp
+    pong/game.cpp
     pong/game_state.cpp
     pong/game_world.cpp
     pong/keyboard_controller.cpp

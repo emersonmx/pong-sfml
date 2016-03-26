@@ -1,4 +1,4 @@
-#include "pong/application.hpp"
+#include "pong/game.hpp"
 
 #include <iostream>
 
@@ -10,7 +10,7 @@ using namespace sf;
 
 namespace pong {
 
-void Application::changeState(State* state) {
+void Game::changeState(State* state) {
     if (state == nullptr) {
         cout << "Ignoring null state.\n";
         return;
@@ -21,16 +21,16 @@ void Application::changeState(State* state) {
     currentState_->enter(this);
 }
 
-void Application::exit() {
+void Game::exit() {
     exit(0);
 }
 
-void Application::exit(int errorCode) {
+void Game::exit(int errorCode) {
     errorCode_ = errorCode;
     running_ = false;
 }
 
-int Application::run() {
+int Game::run() {
     create();
 
     clock_.restart();
@@ -42,7 +42,7 @@ int Application::run() {
     return errorCode_;
 }
 
-void Application::create() {
+void Game::create() {
     window_.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
     sf::View view = window_.getDefaultView();
     view.setSize(WINDOW_WIDTH, -WINDOW_HEIGHT);
@@ -52,11 +52,11 @@ void Application::create() {
     changeState(gameState);
 }
 
-void Application::destroy() {
+void Game::destroy() {
     window_.close();
 }
 
-void Application::tick() {
+void Game::tick() {
     sf::Time time = clock_.restart();
 
     handleEvents();
@@ -72,7 +72,7 @@ void Application::tick() {
     window_.display();
 }
 
-void Application::handleEvents() {
+void Game::handleEvents() {
     while (window_.pollEvent(event_)) {
         if (event_.type == sf::Event::Closed) {
             exit();
