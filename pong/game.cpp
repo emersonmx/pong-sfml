@@ -100,11 +100,7 @@ void Game::handleEvents() {
         }
 #ifndef NDEBUG
         if (event_.type == sf::Event::KeyPressed) {
-            if (event_.key.code == sf::Keyboard::P) {
-                pushState(new GameState());
-            } else if (event_.key.code == sf::Keyboard::O) {
-                popState();
-            } else if (event_.key.code == sf::Keyboard::I) {
+            if (event_.key.code == sf::Keyboard::R) {
                 changeState(new GameState());
             }
         }
