@@ -6,7 +6,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "pong/game_world.hpp"
-#include "pong/gamepads.hpp"
+#include "pong/controller.hpp"
 #include "SFMLDebugDraw.h"
 
 namespace pong {
@@ -47,15 +47,15 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
     private:
         void setupGameWorld();
         void setupDebugDraw();
-        void setupGamepads();
+        void setupControllers();
 
-        void handleGamepads();
+        void handleControllers();
 
         Application* application_;
         GameWorld gameWorld_;
 
-        std::unique_ptr<Gamepad> firstPlayer_;
-        std::unique_ptr<Gamepad> secondPlayer_;
+        std::unique_ptr<Controller> firstPlayer_;
+        std::unique_ptr<Controller> secondPlayer_;
 
         std::unique_ptr<SFMLDebugDraw> debugDraw_;
 };

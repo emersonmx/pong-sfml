@@ -1,20 +1,20 @@
-#include "pong/gamepads.hpp"
+#include "pong/controller.hpp"
 
 namespace pong {
 
-KeyboardGamepad::KeyboardGamepad() {
+KeyboardController::KeyboardController() {
     clearButtons();
 }
 
-bool KeyboardGamepad::isButtonPressed(Button button) {
+bool KeyboardController::isButtonPressed(Button button) {
     return sf::Keyboard::isKeyPressed(buttonMap_[button]);
 }
 
-void KeyboardGamepad::setupButton(Button button, sf::Keyboard::Key key) {
+void KeyboardController::setupButton(Button button, sf::Keyboard::Key key) {
     buttonMap_[button] = key;
 }
 
-void KeyboardGamepad::clearButtons() {
+void KeyboardController::clearButtons() {
     for (int i = 0; i < BUTTON_SIZE; ++i) {
         buttonMap_[i] = sf::Keyboard::Unknown;
     }

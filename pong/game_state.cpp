@@ -30,14 +30,14 @@ void GameState::enter(Application* application) {
 #ifndef NDEBUG
     setupDebugDraw();
 #endif /* ifndef NDEBUG */
-    setupGamepads();
+    setupControllers();
 }
 
 void GameState::exit() {
 }
 
 void GameState::update() {
-    handleGamepads();
+    handleControllers();
     gameWorld_.update();
 }
 
@@ -67,33 +67,33 @@ void GameState::setupDebugDraw() {
     debugDraw_->SetFlags(b2Draw::e_shapeBit);
 }
 
-void GameState::setupGamepads() {
-    firstPlayer_.reset(new KeyboardGamepad());
-    firstPlayer_->setupButton(Gamepad::UP, sf::Keyboard::W);
-    firstPlayer_->setupButton(Gamepad::DOWN, sf::Keyboard::S);
-    firstPlayer_->setupButton(Gamepad::START, sf::Keyboard::Return);
+void GameState::setupControllers() {
+    firstPlayer_.reset(new KeyboardController());
+    firstPlayer_->setupButton(Controller::UP, sf::Keyboard::W);
+    firstPlayer_->setupButton(Controller::DOWN, sf::Keyboard::S);
+    firstPlayer_->setupButton(Controller::START, sf::Keyboard::Return);
 
-    secondPlayer_.reset(new KeyboardGamepad());
-    secondPlayer_->setupButton(Gamepad::UP, sf::Keyboard::Up);
-    secondPlayer_->setupButton(Gamepad::DOWN, sf::Keyboard::Down);
-    secondPlayer_->setupButton(Gamepad::START, sf::Keyboard::Return);
+    secondPlayer_.reset(new KeyboardController());
+    secondPlayer_->setupButton(Controller::UP, sf::Keyboard::Up);
+    secondPlayer_->setupButton(Controller::DOWN, sf::Keyboard::Down);
+    secondPlayer_->setupButton(Controller::START, sf::Keyboard::Return);
 }
 
-void GameState::handleGamepads() {
+void GameState::handleControllers() {
     b2Body* leftRaquet = gameWorld_.leftRaquet();
     b2Body* rightRaquet = gameWorld_.rightRaquet();
 
-    if (firstPlayer_->isButtonPressed(Gamepad::UP)) {
+    if (firstPlayer_->isButtonPressed(Controller::UP)) {
         leftRaquet->SetLinearVelocity(b2Vec2(0.0f, RAQUET_BASE_SPEED));
-    } else if (firstPlayer_->isButtonPressed(Gamepad::DOWN)) {
+    } else if (firstPlayer_->isButtonPressed(Controller::DOWN)) {
         leftRaquet->SetLinearVelocity(b2Vec2(0.0f, -RAQUET_BASE_SPEED));
     } else {
         leftRaquet->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
     }
 
-    if (secondPlayer_->isButtonPressed(Gamepad::UP)) {
+    if (secondPlayer_->isButtonPressed(Controller::UP)) {
         rightRaquet->SetLinearVelocity(b2Vec2(0.0f, RAQUET_BASE_SPEED));
-    } else if (secondPlayer_->isButtonPressed(Gamepad::DOWN)) {
+    } else if (secondPlayer_->isButtonPressed(Controller::DOWN)) {
         rightRaquet->SetLinearVelocity(b2Vec2(0.0f, -RAQUET_BASE_SPEED));
     } else {
         rightRaquet->SetLinearVelocity(b2Vec2(0.0f, 0.0f));

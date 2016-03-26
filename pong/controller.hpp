@@ -1,5 +1,5 @@
-#ifndef PONG_GAMEPADS_HPP
-#define PONG_GAMEPADS_HPP
+#ifndef PONG_CONTROLLER_HPP
+#define PONG_CONTROLLER_HPP
 
 #include <array>
 
@@ -7,7 +7,7 @@
 
 namespace pong {
 
-class Gamepad {
+class Controller {
     public:
         enum Button {
             NONE,
@@ -15,7 +15,7 @@ class Gamepad {
             BUTTON_SIZE
         };
 
-        virtual ~Gamepad() {}
+        virtual ~Controller() {}
 
         virtual bool isButtonPressed(Button button) = 0;
         virtual bool isConnected() { return true; }
@@ -23,9 +23,9 @@ class Gamepad {
         virtual void clearButtons() = 0;
 };
 
-class KeyboardGamepad: public Gamepad {
+class KeyboardController: public Controller {
     public:
-        KeyboardGamepad();
+        KeyboardController();
 
         virtual bool isButtonPressed(Button button);
 
@@ -40,8 +40,8 @@ class KeyboardGamepad: public Gamepad {
             }
         };
 
-        std::array<sf::Keyboard::Key, Gamepad::BUTTON_SIZE> buttonMap_;
+        std::array<sf::Keyboard::Key, Controller::BUTTON_SIZE> buttonMap_;
 };
 
 } /* namespace pong */
-#endif /* PONG_GAMEPADS_HPP */
+#endif /* PONG_CONTROLLER_HPP */
