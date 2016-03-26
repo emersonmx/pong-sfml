@@ -33,7 +33,7 @@ class DefaultState: public State {
         virtual void render(sf::RenderTarget& renderTarget) {}
 };
 
-class GameState: public DefaultState, GameWorld::ScoreListener {
+class GameState: public DefaultState, public GameWorld::ScoreListener {
     public:
         virtual void enter(Application* application);
         virtual void exit();
