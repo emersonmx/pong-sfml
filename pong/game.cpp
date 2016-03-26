@@ -10,15 +10,36 @@ using namespace sf;
 
 namespace pong {
 
-void Game::changeState(State* state) {
+void Game::pushState(State* state) {
     if (state == nullptr) {
         cout << "Ignoring null state.\n";
         return;
     }
 
-    currentState_->exit();
-    currentState_.reset(state);
-    currentState_->enter(this);
+    state->enter(this);
+    std::unique_ptr<State> newState{state};
+    states_.push(std::move(newState));
+}
+
+State* Game::currentState() {
+    return states_.top().get();
+}
+
+void Game::popState() {
+    State* state = currentState();
+    state->exit();
+    states_.pop();
+
+    if (states_.empty()) {
+        pushState(new DefaultState());
+    }
+}
+
+void Game::changeState(State* state) {
+    if (!states_.empty()) {
+        popState();
+    }
+    pushState(state);
 }
 
 void Game::exit() {
@@ -63,12 +84,12 @@ void Game::tick() {
 
     timeAccumulator_ += time.asSeconds();
     if (timeAccumulator_ >= GAME_TIME_STEP) {
-        currentState_->update();
+        currentState()->update();
         timeAccumulator_ -= GAME_TIME_STEP;
     }
 
     window_.clear();
-    currentState_->render(window_);
+    currentState()->render(window_);
     window_.display();
 }
 
@@ -79,7 +100,11 @@ void Game::handleEvents() {
         }
 #ifndef NDEBUG
         if (event_.type == sf::Event::KeyPressed) {
-            if (event_.key.code == sf::Keyboard::R) {
+            if (event_.key.code == sf::Keyboard::P) {
+                pushState(new GameState());
+            } else if (event_.key.code == sf::Keyboard::O) {
+                popState();
+            } else if (event_.key.code == sf::Keyboard::I) {
                 changeState(new GameState());
             }
         }

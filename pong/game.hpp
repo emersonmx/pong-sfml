@@ -2,6 +2,7 @@
 #define PONG_GAME_HPP
 
 #include <memory>
+#include <stack>
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -18,6 +19,9 @@ class Game {
 
         sf::RenderWindow& window() { return window_; }
 
+        State* currentState();
+        void pushState(State* state);
+        void popState();
         void changeState(State* state);
 
         void exit();
@@ -38,7 +42,8 @@ class Game {
     private:
         void handleEvents();
 
-        std::unique_ptr<State> currentState_{new DefaultState()};
+
+        std::stack< std::unique_ptr<State> > states_;
 
         int errorCode_ = 0;
         bool running_ = true;
