@@ -51,9 +51,12 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
         virtual void rightScored(GameWorld& gameWorld);
 
     private:
+        void create();
         void setupGameWorld();
         void setupDebugDraw();
         void setupInputHandlers();
+        void setupPlayerOneInputHandler();
+        void setupPlayerTwoInputHandler();
 
         GameWorld gameWorld_;
 

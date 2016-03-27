@@ -36,11 +36,11 @@ void DefaultState::handleInput(const sf::Event& event) {
 void GameState::enter(Game* game) {
     DefaultState::enter(game);
 
-    setupGameWorld();
-#ifndef NDEBUG
-    setupDebugDraw();
-#endif /* ifndef NDEBUG */
+    create();
+}
 
+void GameState::create() {
+    setupGameWorld();
     setupInputHandlers();
 }
 
@@ -48,6 +48,10 @@ void GameState::setupGameWorld() {
     gameWorld_.create();
     gameWorld_.setScoreListener(this);
     gameWorld_.start();
+
+#ifndef NDEBUG
+    setupDebugDraw();
+#endif /* ifndef NDEBUG */
 }
 
 void GameState::setupDebugDraw() {
@@ -57,15 +61,63 @@ void GameState::setupDebugDraw() {
 }
 
 void GameState::setupInputHandlers() {
+    setupPlayerOneInputHandler();
+    setupPlayerTwoInputHandler();
+}
+
+void GameState::setupPlayerOneInputHandler() {
+    b2Body* leftRaquet = gameWorld_.leftRaquet();
+    b2Vec2 upVelocity(0.0f, RAQUET_BASE_SPEED);
+    b2Vec2 downVelocity(0.0f, -RAQUET_BASE_SPEED);
+
+    RaquetInputHandler* leftHandler = new RaquetInputHandler(leftRaquet);
+    leftHandler->bindKey(sf::Keyboard::W, InputHandler::UP);
+    leftHandler->bindKey(sf::Keyboard::S, InputHandler::DOWN);
+
+    Command* command = new MoveRaquetCommand(leftRaquet, upVelocity);
+    leftHandler->bindCommand(InputHandler::UP, command);
+    command = new MoveRaquetCommand(leftRaquet, downVelocity);
+    leftHandler->bindCommand(InputHandler::DOWN, command);
+
+    inputHandlers_[PLAYER_1].reset(leftHandler);
+}
+
+void GameState::setupPlayerTwoInputHandler() {
+    b2Body* leftRaquet = gameWorld_.rightRaquet();
+    b2Vec2 upVelocity(0.0f, RAQUET_BASE_SPEED);
+    b2Vec2 downVelocity(0.0f, -RAQUET_BASE_SPEED);
+
+    RaquetInputHandler* rightHandler = new RaquetInputHandler(leftRaquet);
+    rightHandler->bindKey(sf::Keyboard::Up, InputHandler::UP);
+    rightHandler->bindKey(sf::Keyboard::Down, InputHandler::DOWN);
+
+    Command* command = new MoveRaquetCommand(leftRaquet, upVelocity);
+    rightHandler->bindCommand(InputHandler::UP, command);
+    command = new MoveRaquetCommand(leftRaquet, downVelocity);
+    rightHandler->bindCommand(InputHandler::DOWN, command);
+
+    inputHandlers_[PLAYER_2].reset(rightHandler);
 }
 
 void GameState::exit() {
 }
 
 void GameState::handleInput(const sf::Event& event) {
+    if (event.type == sf::Event::KeyReleased) {
+        if (event.key.code == sf::Keyboard::R) {
+            create();
+        }
+    } else {
+        DefaultState::handleInput(event);
+    }
 }
 
 void GameState::update() {
+    for (auto& handler : inputHandlers_) {
+        Command* command = handler->handleInput();
+        command->execute();
+    }
+
     gameWorld_.update();
 }
 
