@@ -36,12 +36,10 @@ class Game {
         virtual void tick();
 
         sf::RenderWindow window_;
-        sf::Event event_;
         sf::Clock clock_;
 
     private:
         void handleEvents();
-
 
         std::stack< std::unique_ptr<State> > states_;
 

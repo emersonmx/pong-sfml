@@ -94,13 +94,14 @@ void Game::tick() {
 }
 
 void Game::handleEvents() {
-    while (window_.pollEvent(event_)) {
-        if (event_.type == sf::Event::Closed) {
+    sf::Event event;
+    while (window_.pollEvent(event)) {
+        if (event.type == sf::Event::Closed) {
             exit();
         }
 #ifndef NDEBUG
-        if (event_.type == sf::Event::KeyPressed) {
-            if (event_.key.code == sf::Keyboard::R) {
+        if (event.type == sf::Event::KeyPressed) {
+            if (event.key.code == sf::Keyboard::R) {
                 changeState(new GameState());
             }
         }
