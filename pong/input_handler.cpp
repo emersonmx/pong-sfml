@@ -22,15 +22,15 @@ void KeyboardInputHandler::unbindAllKeys() {
     }
 }
 
-void KeyboardInputHandler::bindCommand(Button button, Command* command) {
+void DefaultInputHandler::bindCommand(Button button, Command* command) {
     commands_[button].reset(command);
 }
 
-void KeyboardInputHandler::unbindCommand(Button button) {
+void DefaultInputHandler::unbindCommand(Button button) {
     commands_[button].reset(new NullCommand());
 }
 
-void KeyboardInputHandler::unbindAllCommands() {
+void DefaultInputHandler::unbindAllCommands() {
     for (std::size_t i = 0; i < commands_.size(); i++) {
         commands_[i].reset(new NullCommand());
     }

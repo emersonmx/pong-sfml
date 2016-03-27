@@ -51,16 +51,9 @@ class InputHandler {
         virtual Command* handleInput() = 0;
 };
 
-class KeyboardInputHandler: public InputHandler {
+class DefaultInputHandler: public InputHandler {
     public:
-        KeyboardInputHandler();
-
-        sf::Keyboard::Key button(Button button) { return buttons_[button]; }
         Command* command(Button button) { return commands_[button].get(); }
-
-        void bindKey(sf::Keyboard::Key key, Button button);
-        void unbindKey(Button button);
-        void unbindAllKeys();
 
         void bindCommand(Button button, Command* command);
         void unbindCommand(Button button);
@@ -68,11 +61,23 @@ class KeyboardInputHandler: public InputHandler {
 
         virtual Command* handleInput() { return &nullCommand_; }
 
-
     private:
         NullCommand nullCommand_;
 
         std::array< std::unique_ptr<Command>, BUTTON_SIZE > commands_;
+};
+
+class KeyboardInputHandler: public DefaultInputHandler {
+    public:
+        KeyboardInputHandler();
+
+        sf::Keyboard::Key button(Button button) { return buttons_[button]; }
+
+        void bindKey(sf::Keyboard::Key key, Button button);
+        void unbindKey(Button button);
+        void unbindAllKeys();
+
+    private:
         std::array<sf::Keyboard::Key, BUTTON_SIZE> buttons_;
 };
 
