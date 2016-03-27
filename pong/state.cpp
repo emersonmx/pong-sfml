@@ -106,6 +106,8 @@ void GameState::handleInput(const sf::Event& event) {
     if (event.type == sf::Event::KeyReleased) {
         if (event.key.code == sf::Keyboard::R) {
             create();
+        } else if (event.key.code == sf::Keyboard::P) {
+            gameWorld_.toggleRunning();
         }
     } else {
         DefaultState::handleInput(event);
