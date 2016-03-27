@@ -53,6 +53,8 @@ class InputHandler {
 
 class DefaultInputHandler: public InputHandler {
     public:
+        DefaultInputHandler() { unbindAllCommands(); }
+
         Command* command(Button button) { return commands_[button].get(); }
 
         void bindCommand(Button button, Command* command);
@@ -69,7 +71,7 @@ class DefaultInputHandler: public InputHandler {
 
 class KeyboardInputHandler: public DefaultInputHandler {
     public:
-        KeyboardInputHandler();
+        KeyboardInputHandler() { unbindAllKeys(); }
 
         sf::Keyboard::Key button(Button button) { return buttons_[button]; }
 
@@ -83,11 +85,29 @@ class KeyboardInputHandler: public DefaultInputHandler {
 
 class RaquetInputHandler: public KeyboardInputHandler {
     public:
-        RaquetInputHandler(b2Body* raquet);
+        RaquetInputHandler(b2Body* raquet) : stopCommand_(raquet) {
+            unbindAllKeys();
+        }
 
         virtual Command* handleInput();
 
     private:
+        StopCommand stopCommand_;
+};
+
+class ComputerPlayerInputHandler: public DefaultInputHandler {
+    public:
+        ComputerPlayerInputHandler(b2Body* raquet, b2Body* ball,
+                                   float xMaxDistance_, float yMaxDistance);
+
+        virtual Command* handleInput();
+
+    private:
+        b2Body* raquet_;
+        b2Body* ball_;
+        float xMaxDistance_;
+        float yMaxDistance_;
+
         StopCommand stopCommand_;
 };
 

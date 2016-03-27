@@ -83,17 +83,20 @@ void GameState::setupPlayerOneInputHandler() {
 }
 
 void GameState::setupPlayerTwoInputHandler() {
-    b2Body* leftRaquet = gameWorld_.rightRaquet();
+    b2Body* rightRaquet = gameWorld_.rightRaquet();
+    b2Body* ball = gameWorld_.ball();
     b2Vec2 upVelocity(0.0f, RAQUET_BASE_SPEED);
     b2Vec2 downVelocity(0.0f, -RAQUET_BASE_SPEED);
 
-    RaquetInputHandler* rightHandler = new RaquetInputHandler(leftRaquet);
-    rightHandler->bindKey(sf::Keyboard::Up, InputHandler::UP);
-    rightHandler->bindKey(sf::Keyboard::Down, InputHandler::DOWN);
+    float xMaxDistance = (WINDOW_HALF_WIDHT - RAQUET_WIDTH) / PIXELS_PER_METER;
+    float yMaxDistance = (RAQUET_HALF_HEIGHT - 20.0f) / PIXELS_PER_METER;
+    ComputerPlayerInputHandler* rightHandler =
+        new ComputerPlayerInputHandler(rightRaquet, ball,
+                                       xMaxDistance, yMaxDistance);
 
-    Command* command = new MoveRaquetCommand(leftRaquet, upVelocity);
+    Command* command = new MoveRaquetCommand(rightRaquet, upVelocity);
     rightHandler->bindCommand(InputHandler::UP, command);
-    command = new MoveRaquetCommand(leftRaquet, downVelocity);
+    command = new MoveRaquetCommand(rightRaquet, downVelocity);
     rightHandler->bindCommand(InputHandler::DOWN, command);
 
     inputHandlers_[PLAYER_2].reset(rightHandler);
