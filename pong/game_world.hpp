@@ -47,7 +47,6 @@ class GameWorld: public b2ContactListener {
         void start() { running_ = true; }
         void stop() { running_ = false; }
         void toggleRunning() { running_ = !running_; }
-        void restart();
 
         void resetBall();
 

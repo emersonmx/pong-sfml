@@ -44,11 +44,6 @@ void GameWorld::resetBall() {
     stop();
 }
 
-void GameWorld::restart() {
-    hardReset_ = true;
-    stop();
-}
-
 void GameWorld::handleResets() {
     if (hardReset_) {
         create();
