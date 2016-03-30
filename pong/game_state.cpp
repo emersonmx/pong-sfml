@@ -98,7 +98,7 @@ void GameState::exit() {
 void GameState::processEvent(const sf::Event& event) {
     if (event.type == sf::Event::KeyReleased) {
         if (event.key.code == sf::Keyboard::R) {
-            create();
+            game_->changeState(new GameState(game_));
         } else if (event.key.code == sf::Keyboard::P) {
             gameWorld_.toggleRunning();
         }
