@@ -39,7 +39,7 @@ class Game {
         sf::Clock clock_;
 
     private:
-        void handleEvents();
+        void processEvents();
 
         std::stack< std::unique_ptr<State> > states_;
 

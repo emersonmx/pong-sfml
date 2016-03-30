@@ -80,7 +80,7 @@ void Game::destroy() {
 void Game::tick() {
     sf::Time time = clock_.restart();
 
-    handleEvents();
+    processEvents();
 
     timeAccumulator_ += time.asSeconds();
     if (timeAccumulator_ >= GAME_TIME_STEP) {
@@ -93,7 +93,7 @@ void Game::tick() {
     window_.display();
 }
 
-void Game::handleEvents() {
+void Game::processEvents() {
     sf::Event event;
     while (window_.pollEvent(event)) {
         currentState()->handleInput(event);
