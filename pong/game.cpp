@@ -79,8 +79,11 @@ void Game::destroy() {
 
 void Game::tick() {
     sf::Time time = clock_.restart();
+    sf::Event event;
 
-    processEvents();
+    while (window_.pollEvent(event)) {
+        currentState()->handleInput(event);
+    }
 
     timeAccumulator_ += time.asSeconds();
     if (timeAccumulator_ >= GAME_TIME_STEP) {
@@ -91,13 +94,6 @@ void Game::tick() {
     window_.clear();
     currentState()->render(window_);
     window_.display();
-}
-
-void Game::processEvents() {
-    sf::Event event;
-    while (window_.pollEvent(event)) {
-        currentState()->handleInput(event);
-    }
 }
 
 } /* namespace pong */

@@ -39,8 +39,6 @@ class Game {
         sf::Clock clock_;
 
     private:
-        void processEvents();
-
         std::stack< std::unique_ptr<State> > states_;
 
         int errorCode_ = 0;
