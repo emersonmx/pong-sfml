@@ -17,7 +17,7 @@ class State {
     public:
         virtual ~State() {}
 
-        virtual void enter(Game* game) = 0;
+        virtual void enter() = 0;
         virtual void exit() = 0;
 
         virtual void processEvent(const sf::Event& event) = 0;
@@ -27,7 +27,9 @@ class State {
 
 class DefaultState: public State {
     public:
-        virtual void enter(Game* game);
+        DefaultState(Game* game) : game_(game) {}
+
+        virtual void enter() {}
         virtual void exit() {}
 
         virtual void processEvent(const sf::Event& event);
@@ -40,7 +42,9 @@ class DefaultState: public State {
 
 class GameState: public DefaultState, public GameWorld::ScoreListener {
     public:
-        virtual void enter(Game* game);
+        using DefaultState::DefaultState;
+
+        virtual void enter();
         virtual void exit();
 
         virtual void processEvent(const sf::Event& event);

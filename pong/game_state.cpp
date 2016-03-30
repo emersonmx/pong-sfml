@@ -23,8 +23,8 @@ void syncBodyToTransformable(b2Body* body, sf::Transformable& transformable) {
     transformable.setRotation(angle);
 }
 
-void GameState::enter(Game* game) {
-    DefaultState::enter(game);
+void GameState::enter() {
+    DefaultState::enter();
 
     create();
 }

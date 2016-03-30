@@ -15,7 +15,7 @@ void Game::pushState(State* state) {
         return;
     }
 
-    state->enter(this);
+    state->enter();
     states_.emplace(state);
 }
 
@@ -29,7 +29,7 @@ void Game::popState() {
     states_.pop();
 
     if (states_.empty()) {
-        pushState(new DefaultState());
+        pushState(new DefaultState(this));
     }
 }
 
@@ -67,7 +67,7 @@ void Game::create() {
     view.setSize(WINDOW_WIDTH, -WINDOW_HEIGHT);
     window_.setView(view);
 
-    GameState* gameState = new GameState();
+    GameState* gameState = new GameState(this);
     changeState(gameState);
 }
 

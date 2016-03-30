@@ -7,10 +7,6 @@
 
 namespace pong {
 
-void DefaultState::enter(Game* game) {
-    game_ = game;
-}
-
 void DefaultState::processEvent(const sf::Event& event) {
     if (event.type == sf::Event::Closed) {
         game_->exit();
