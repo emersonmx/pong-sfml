@@ -20,7 +20,7 @@ class State {
         virtual void enter(Game* game) = 0;
         virtual void exit() = 0;
 
-        virtual void handleInput(const sf::Event& event) = 0;
+        virtual void processEvent(const sf::Event& event) = 0;
         virtual void update() = 0;
         virtual void render(sf::RenderTarget& renderTarget) = 0;
 };
@@ -30,7 +30,7 @@ class DefaultState: public State {
         virtual void enter(Game* game);
         virtual void exit() {}
 
-        virtual void handleInput(const sf::Event& event);
+        virtual void processEvent(const sf::Event& event);
         virtual void update() {}
         virtual void render(sf::RenderTarget& renderTarget) {}
 
@@ -43,7 +43,7 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
         virtual void enter(Game* game);
         virtual void exit();
 
-        virtual void handleInput(const sf::Event& event);
+        virtual void processEvent(const sf::Event& event);
         virtual void update();
         virtual void render(sf::RenderTarget& renderTarget);
 

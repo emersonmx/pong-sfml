@@ -80,7 +80,7 @@ void Game::tick() {
     sf::Event event;
 
     while (window_.pollEvent(event)) {
-        currentState()->handleInput(event);
+        currentState()->processEvent(event);
     }
 
     timeAccumulator_ += time.asSeconds();

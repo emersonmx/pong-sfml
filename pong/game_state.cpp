@@ -95,7 +95,7 @@ void GameState::setupPlayerTwoInputHandler() {
 void GameState::exit() {
 }
 
-void GameState::handleInput(const sf::Event& event) {
+void GameState::processEvent(const sf::Event& event) {
     if (event.type == sf::Event::KeyReleased) {
         if (event.key.code == sf::Keyboard::R) {
             create();
@@ -103,7 +103,7 @@ void GameState::handleInput(const sf::Event& event) {
             gameWorld_.toggleRunning();
         }
     } else {
-        DefaultState::handleInput(event);
+        DefaultState::processEvent(event);
     }
 }
 

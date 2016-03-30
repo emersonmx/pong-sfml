@@ -11,7 +11,7 @@ void DefaultState::enter(Game* game) {
     game_ = game;
 }
 
-void DefaultState::handleInput(const sf::Event& event) {
+void DefaultState::processEvent(const sf::Event& event) {
     if (event.type == sf::Event::Closed) {
         game_->exit();
     }
