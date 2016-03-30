@@ -1,5 +1,5 @@
-#ifndef PONG_GAME_HPP
-#define PONG_GAME_HPP
+#ifndef PONG_GAME_HPP_
+#define PONG_GAME_HPP_
 
 #include <memory>
 #include <stack>
@@ -48,4 +48,4 @@ class Game {
 };
 
 } /* namespace pong */
-#endif /* PONG_GAME_HPP */
+#endif /* PONG_GAME_HPP_ */

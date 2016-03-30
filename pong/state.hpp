@@ -1,5 +1,5 @@
-#ifndef PONG_STATE_HPP
-#define PONG_STATE_HPP
+#ifndef PONG_STATE_HPP_
+#define PONG_STATE_HPP_
 
 #include <memory>
 
@@ -70,4 +70,4 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
 };
 
 } /* namespace pong */
-#endif /* PONG_STATE_HPP */
+#endif /* PONG_STATE_HPP_ */

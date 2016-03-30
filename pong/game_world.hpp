@@ -1,5 +1,5 @@
-#ifndef PONG_GAME_WORLD_HPP
-#define PONG_GAME_WORLD_HPP
+#ifndef PONG_GAME_WORLD_HPP_
+#define PONG_GAME_WORLD_HPP_
 
 #include <memory>
 
@@ -95,4 +95,4 @@ class GameWorld: public b2ContactListener {
 };
 
 } /* namespace pong */
-#endif /* PONG_GAME_WORLD_HPP */
+#endif /* PONG_GAME_WORLD_HPP_ */

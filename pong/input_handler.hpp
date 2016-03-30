@@ -1,5 +1,5 @@
-#ifndef PONG_INPUT_HANDLER_HPP
-#define PONG_INPUT_HANDLER_HPP
+#ifndef PONG_INPUT_HANDLER_HPP_
+#define PONG_INPUT_HANDLER_HPP_
 
 #include <memory>
 #include <array>
@@ -112,4 +112,4 @@ class ComputerPlayerInputHandler: public DefaultInputHandler {
 };
 
 } /* namespace pong */
-#endif /* PONG_INPUT_HANDLER_HPP */
+#endif /* PONG_INPUT_HANDLER_HPP_ */

@@ -1,5 +1,5 @@
-#ifndef PONG_DEFS_HPP
-#define PONG_DEFS_HPP
+#ifndef PONG_DEFS_HPP_
+#define PONG_DEFS_HPP_
 
 namespace pong {
 
@@ -43,4 +43,4 @@ constexpr const float RAQUET_HALF_HEIGHT = RAQUET_HEIGHT / 2.0f;
 constexpr const float RAQUET_BASE_SPEED = 5.0f;
 
 } /* namespace pong */
-#endif /* PONG_DEFS_HPP */
+#endif /* PONG_DEFS_HPP_ */

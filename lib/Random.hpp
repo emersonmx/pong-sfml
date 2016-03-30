@@ -1,5 +1,5 @@
-#ifndef RANDOM_HPP
-#define RANDOM_HPP
+#ifndef RANDOM_HPP_
+#define RANDOM_HPP_
 
 #include <random>
 
@@ -31,4 +31,4 @@ class Random {
         std::random_device device;
 };
 
-#endif /* RANDOM_HPP */
+#endif /* RANDOM_HPP_ */

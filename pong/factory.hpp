@@ -1,5 +1,5 @@
-#ifndef PONG_FACTORY_HPP
-#define PONG_FACTORY_HPP
+#ifndef PONG_FACTORY_HPP_
+#define PONG_FACTORY_HPP_
 
 #include <SFML/Graphics.hpp>
 
@@ -47,4 +47,4 @@ class DefaultGameObjectFactory : public GameObjectFactory {
 };
 
 } /* namespace pong */
-#endif /* PONG_FACTORY_HPP */
+#endif /* PONG_FACTORY_HPP_ */
