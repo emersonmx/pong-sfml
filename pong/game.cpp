@@ -17,8 +17,7 @@ void Game::pushState(State* state) {
     }
 
     state->enter(this);
-    std::unique_ptr<State> newState{state};
-    states_.push(std::move(newState));
+    states_.emplace(state);
 }
 
 State* Game::currentState() {
