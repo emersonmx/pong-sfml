@@ -5,14 +5,13 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-using namespace std;
 using namespace sf;
 
 namespace pong {
 
 void Game::pushState(State* state) {
     if (state == nullptr) {
-        cout << "Ignoring null state.\n";
+        std::cout << "Ignoring null state." << std::endl;
         return;
     }
 
