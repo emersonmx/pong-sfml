@@ -91,8 +91,11 @@ void GameState::setupPlayerTwoInputHandler() {
 void GameState::createShapes() {
     midfield_ = shapeFactory_.makeMidfield();
     ball_ = shapeFactory_.makeBall();
+    syncBodyToTransformable(gameWorld_.ball(), ball_);
     leftRaquet_ = shapeFactory_.makeLeftRaquet();
+    syncBodyToTransformable(gameWorld_.leftRaquet(), leftRaquet_);
     rightRaquet_ = shapeFactory_.makeRightRaquet();
+    syncBodyToTransformable(gameWorld_.rightRaquet(), rightRaquet_);
     topWall_ = shapeFactory_.makeTopWall();
     syncBodyToTransformable(gameWorld_.topWall(), topWall_);
     bottomWall_ = shapeFactory_.makeBottomWall();
