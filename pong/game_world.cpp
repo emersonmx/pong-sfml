@@ -22,7 +22,6 @@ void GameWorld::create() {
     world_->SetContactListener(this);
 
     stepCount_ = 0;
-    stop();
 }
 
 void GameWorld::update() {
@@ -41,7 +40,6 @@ void GameWorld::update() {
 void GameWorld::resetBall() {
     softReset_ = true;
     stepCount_ = 0;
-    stop();
 }
 
 void GameWorld::handleResets() {
@@ -52,7 +50,6 @@ void GameWorld::handleResets() {
         world_->DestroyBody(ball_);
         ball_ = createBall();
         softReset_ = false;
-        stop();
     }
 }
 
