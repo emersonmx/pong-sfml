@@ -7,6 +7,7 @@
 
 #include "pong/game_world.hpp"
 #include "pong/input_handler.hpp"
+#include "pong/factories.hpp"
 #include "SFMLDebugDraw.h"
 
 namespace pong {
@@ -56,13 +57,27 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
 
     private:
         void create();
+
         void setupGameWorld();
         void setupDebugDraw();
+
         void setupInputHandlers();
         void setupPlayerOneInputHandler();
         void setupPlayerTwoInputHandler();
 
+        void createShapes();
+        void updateShapes();
+        void renderShapes(sf::RenderTarget& renderTarget);
+
         GameWorld gameWorld_;
+
+        GameShapeFactory shapeFactory_;
+        sf::RectangleShape midfield_;
+        sf::RectangleShape ball_;
+        sf::RectangleShape leftRaquet_;
+        sf::RectangleShape rightRaquet_;
+        sf::RectangleShape topWall_;
+        sf::RectangleShape bottomWall_;
 
         std::array< std::unique_ptr<InputHandler>, PLAYER_COUNT > inputHandlers_;
 

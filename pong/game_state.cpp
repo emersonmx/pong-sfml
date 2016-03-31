@@ -1,5 +1,7 @@
 #include "pong/state.hpp"
 
+#include <cmath>
+
 #include <Box2D/Box2D.h>
 
 #include "pong/game.hpp"
@@ -7,20 +9,12 @@
 
 namespace pong {
 
-sf::RectangleShape createRectangleShape(float width, float height) {
-    sf::RectangleShape shape;
-    shape.setOrigin(width / 2, height / 2);
-    shape.setSize(sf::Vector2f(width, height));
-    shape.setFillColor(sf::Color::White);
-    return shape;
-}
-
 void syncBodyToTransformable(b2Body* body, sf::Transformable& transformable) {
     b2Vec2 position = body->GetPosition();
     float angle = body->GetAngle();
     transformable.setPosition(position.x * PIXELS_PER_METER,
                               position.y * PIXELS_PER_METER);
-    transformable.setRotation(angle);
+    transformable.setRotation(angle * 180.0f / M_PI);
 }
 
 void GameState::enter() {
@@ -32,6 +26,7 @@ void GameState::enter() {
 void GameState::create() {
     setupGameWorld();
     setupInputHandlers();
+    createShapes();
 }
 
 void GameState::setupGameWorld() {
@@ -52,8 +47,7 @@ void GameState::setupDebugDraw() {
 
 void GameState::setupInputHandlers() {
     setupPlayerOneInputHandler();
-    setupPlayerTwoInputHandler();
-}
+    setupPlayerTwoInputHandler(); }
 
 void GameState::setupPlayerOneInputHandler() {
     b2Body* leftRaquet = gameWorld_.leftRaquet();
@@ -92,6 +86,32 @@ void GameState::setupPlayerTwoInputHandler() {
     inputHandlers_[PLAYER_2].reset(rightHandler);
 }
 
+void GameState::createShapes() {
+    midfield_ = shapeFactory_.makeMidfield();
+    ball_ = shapeFactory_.makeBall();
+    leftRaquet_ = shapeFactory_.makeLeftRaquet();
+    rightRaquet_ = shapeFactory_.makeRightRaquet();
+    topWall_ = shapeFactory_.makeTopWall();
+    syncBodyToTransformable(gameWorld_.topWall(), topWall_);
+    bottomWall_ = shapeFactory_.makeBottomWall();
+    syncBodyToTransformable(gameWorld_.bottomWall(), bottomWall_);
+}
+
+void GameState::updateShapes() {
+    syncBodyToTransformable(gameWorld_.ball(), ball_);
+    syncBodyToTransformable(gameWorld_.leftRaquet(), leftRaquet_);
+    syncBodyToTransformable(gameWorld_.rightRaquet(), rightRaquet_);
+}
+
+void GameState::renderShapes(sf::RenderTarget& renderTarget) {
+    renderTarget.draw(midfield_);
+    renderTarget.draw(ball_);
+    renderTarget.draw(leftRaquet_);
+    renderTarget.draw(rightRaquet_);
+    renderTarget.draw(topWall_);
+    renderTarget.draw(bottomWall_);
+}
+
 void GameState::exit() {
 }
 
@@ -114,9 +134,13 @@ void GameState::update() {
     }
 
     gameWorld_.update();
+
+    updateShapes();
 }
 
 void GameState::render(sf::RenderTarget& renderTarget) {
+    renderShapes(renderTarget);
+
 #ifndef NDEBUG
     gameWorld_.drawDebugData();
 #endif /* ifndef NDEBUG  */

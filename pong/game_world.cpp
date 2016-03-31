@@ -206,7 +206,7 @@ b2Body* GameWorld::createBall() {
 b2Body* GameWorld::createLeftRaquet() {
     float halfWidth = RAQUET_HALF_WIDTH;
     float halfHeight = RAQUET_HALF_HEIGHT;
-    float margin = 15.0f;
+    float margin = RAQUET_MARGIN;
 
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
@@ -236,7 +236,7 @@ b2Body* GameWorld::createLeftRaquet() {
 b2Body* GameWorld::createRightRaquet() {
     float halfWidth = RAQUET_HALF_WIDTH;
     float halfHeight = RAQUET_HALF_HEIGHT;
-    float margin = 15.0f;
+    float margin = RAQUET_MARGIN;
 
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;

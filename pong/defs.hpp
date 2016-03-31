@@ -36,6 +36,7 @@ constexpr const float BALL_VELOCITY_STEP = 0.001;
 constexpr const float BALL_MIN_ROTATION_SPEED = 0.1f;
 constexpr const float BALL_MAX_ROTATION_SPEED = 15.0f;
 
+constexpr const float RAQUET_MARGIN = 15.0f;
 constexpr const float RAQUET_WIDTH = 20.0f;
 constexpr const float RAQUET_HALF_WIDTH = RAQUET_WIDTH / 2.0f;
 constexpr const float RAQUET_HEIGHT = 80.0f;

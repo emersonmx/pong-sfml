@@ -13,7 +13,7 @@ echo "Configuring..."
 cmake -DCMAKE_BUILD_TYPE=Debug ..
 
 echo "Building..."
-make -j
+make
 popd > /dev/null
 
 echo "Running..."
