@@ -1,6 +1,7 @@
 #include "pong/state.hpp"
 
 #include <cmath>
+#include <iostream>
 
 #include <Box2D/Box2D.h>
 
@@ -27,6 +28,7 @@ void GameState::create() {
     setupGameWorld();
     setupInputHandlers();
     createShapes();
+    resetScores();
 }
 
 void GameState::setupGameWorld() {
@@ -112,6 +114,11 @@ void GameState::renderShapes(sf::RenderTarget& renderTarget) {
     renderTarget.draw(bottomWall_);
 }
 
+void GameState::resetScores() {
+    leftRaquetScore_ = 0;
+    rightRaquetScore_ = 0;
+}
+
 void GameState::exit() {
 }
 
@@ -136,6 +143,14 @@ void GameState::update() {
     gameWorld_.update();
 
     updateShapes();
+
+    if (leftRaquetScore_ >= MATCH_POINT) {
+        game_->changeState(new GameState(game_));
+        std::cout << "Left win!" << std::endl;
+    } else if (rightRaquetScore_ >= MATCH_POINT) {
+        game_->changeState(new GameState(game_));
+        std::cout << "Right win!" << std::endl;
+    }
 }
 
 void GameState::render(sf::RenderTarget& renderTarget) {
@@ -148,10 +163,14 @@ void GameState::render(sf::RenderTarget& renderTarget) {
 
 void GameState::leftScored(GameWorld& gameWorld) {
     gameWorld.resetBall();
+    gameWorld.start();
+    leftRaquetScore_++;
 }
 
 void GameState::rightScored(GameWorld& gameWorld) {
     gameWorld.resetBall();
+    gameWorld.start();
+    rightRaquetScore_++;
 }
 
 } /* namespace pong */

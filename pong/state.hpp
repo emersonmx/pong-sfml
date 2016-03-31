@@ -69,6 +69,8 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
         void updateShapes();
         void renderShapes(sf::RenderTarget& renderTarget);
 
+        void resetScores();
+
         GameWorld gameWorld_;
 
         GameShapeFactory shapeFactory_;
@@ -80,6 +82,9 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
         sf::RectangleShape bottomWall_;
 
         std::array< std::unique_ptr<InputHandler>, PLAYER_COUNT > inputHandlers_;
+
+        int leftRaquetScore_ = 0;
+        int rightRaquetScore_ = 0;
 
         std::unique_ptr<SFMLDebugDraw> debugDraw_;
 };
