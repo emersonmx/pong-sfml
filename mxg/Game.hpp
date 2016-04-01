@@ -16,6 +16,7 @@ class Game {
         Screen* currentScreen();
         void pushScreen(Screen* screen);
         void popScreen();
+        void clearScreens();
         void changeScreen(Screen* screen);
 
         void exit();
