@@ -4,7 +4,7 @@
 #include <memory>
 
 #include "pong/input_handler/InputHandler.hpp"
-#include "pong/input_handler/NullCommand.hpp"
+#include "pong/input_handler/command/NullCommand.hpp"
 
 namespace pong {
 

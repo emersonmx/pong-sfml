@@ -2,7 +2,7 @@
 #define PONG_INPUT_HANDLER_RAQUETINPUTHANDLER_HPP_
 
 #include "pong/input_handler/KeyboardInputHandler.hpp"
-#include "pong/input_handler/StopCommand.hpp"
+#include "pong/input_handler/command/StopCommand.hpp"
 
 namespace pong {
 

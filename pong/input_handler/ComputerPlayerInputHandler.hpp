@@ -4,7 +4,7 @@
 #include <Box2D/Box2D.h>
 
 #include "pong/input_handler/DefaultInputHandler.hpp"
-#include "pong/input_handler/StopCommand.hpp"
+#include "pong/input_handler/command/StopCommand.hpp"
 
 namespace pong {
 

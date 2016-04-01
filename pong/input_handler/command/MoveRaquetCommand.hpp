@@ -3,7 +3,7 @@
 
 #include "Box2D/Box2D.h"
 
-#include "pong/input_handler/Command.hpp"
+#include "pong/input_handler/command/Command.hpp"
 
 namespace pong {
 
