@@ -50,7 +50,7 @@ include_directories(${PROJECT_SOURCE_DIR}
 )
 
 add_executable(${PROJECT_NAME}
-    pong/main.cpp
+    pong/Main.cpp
     pong/Pong.cpp
     pong/screen/DefaultScreen.cpp
     pong/screen/GameScreen.cpp
