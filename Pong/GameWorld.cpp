@@ -1,8 +1,8 @@
-#include "pong/GameWorld.hpp"
+#include "Pong/GameWorld.hpp"
 
-#include "pong/Defs.hpp"
+#include "Pong/Defs.hpp"
 
-#include "mxg/Random.hpp"
+#include "MXG/Random.hpp"
 
 namespace pong {
 

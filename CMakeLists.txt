@@ -7,7 +7,7 @@ set(pong_VERSION_MINOR 5)
 set(pong_VERSION_REVISION 0)
 
 configure_file(
-    "${PROJECT_SOURCE_DIR}/pong/Config.hpp.in"
+    "${PROJECT_SOURCE_DIR}/Pong/Config.hpp.in"
     "${PROJECT_BINARY_DIR}/Config.hpp"
 )
 
@@ -50,18 +50,18 @@ include_directories(${PROJECT_SOURCE_DIR}
 )
 
 add_executable(${PROJECT_NAME}
-    pong/Main.cpp
-    pong/Pong.cpp
-    pong/screen/DefaultScreen.cpp
-    pong/screen/GameScreen.cpp
-    pong/GameWorld.cpp
-    pong/input_handler/DefaultInputHandler.cpp
-    pong/input_handler/RaquetInputHandler.cpp
-    pong/input_handler/KeyboardInputHandler.cpp
-    pong/input_handler/ComputerPlayerInputHandler.cpp
-    pong/factory/GameShapeFactory.cpp
-    mxg/SFMLDebugDraw.cpp
-    mxg/Game.cpp
+    Pong/Main.cpp
+    Pong/Pong.cpp
+    Pong/Screen/DefaultScreen.cpp
+    Pong/Screen/GameScreen.cpp
+    Pong/GameWorld.cpp
+    Pong/InputHandler/DefaultInputHandler.cpp
+    Pong/InputHandler/RaquetInputHandler.cpp
+    Pong/InputHandler/KeyboardInputHandler.cpp
+    Pong/InputHandler/ComputerPlayerInputHandler.cpp
+    Pong/Factory/GameShapeFactory.cpp
+    MXG/SFMLDebugDraw.cpp
+    MXG/Game.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}

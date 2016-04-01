@@ -3,8 +3,8 @@
 
 #include <Box2D/Box2D.h>
 
-#include "pong/input_handler/DefaultInputHandler.hpp"
-#include "pong/input_handler/command/StopCommand.hpp"
+#include "Pong/InputHandler/DefaultInputHandler.hpp"
+#include "Pong/InputHandler/Command/StopCommand.hpp"
 
 namespace pong {
 

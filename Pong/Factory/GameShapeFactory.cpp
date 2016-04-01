@@ -1,6 +1,6 @@
-#include "pong/factory/GameShapeFactory.hpp"
+#include "Pong/Factory/GameShapeFactory.hpp"
 
-#include "pong/Defs.hpp"
+#include "Pong/Defs.hpp"
 
 using namespace sf;
 

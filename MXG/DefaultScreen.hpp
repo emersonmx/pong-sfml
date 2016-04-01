@@ -1,7 +1,7 @@
 #ifndef MXG_DEFAULTSCREEN_HPP_
 #define MXG_DEFAULTSCREEN_HPP_
 
-#include "mxg/Screen.hpp"
+#include "MXG/Screen.hpp"
 
 namespace mxg {
 

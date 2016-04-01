@@ -1,13 +1,13 @@
 #ifndef PONG_SCREEN_GAMESCREEN_HPP_
 #define PONG_SCREEN_GAMESCREEN_HPP_
 
-#include "pong/screen/DefaultScreen.hpp"
-#include "pong/GameWorld.hpp"
-#include "pong/factory/GameShapeFactory.hpp"
-#include "pong/input_handler/InputHandler.hpp"
-#include "pong/Defs.hpp"
+#include "Pong/Screen/DefaultScreen.hpp"
+#include "Pong/GameWorld.hpp"
+#include "Pong/Factory/GameShapeFactory.hpp"
+#include "Pong/InputHandler/InputHandler.hpp"
+#include "Pong/Defs.hpp"
 
-#include "mxg/SFMLDebugDraw.hpp"
+#include "MXG/SFMLDebugDraw.hpp"
 
 namespace pong {
 

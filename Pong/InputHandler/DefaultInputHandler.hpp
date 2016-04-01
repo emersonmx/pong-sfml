@@ -3,8 +3,8 @@
 
 #include <memory>
 
-#include "pong/input_handler/InputHandler.hpp"
-#include "pong/input_handler/command/NullCommand.hpp"
+#include "Pong/InputHandler/InputHandler.hpp"
+#include "Pong/InputHandler/Command/NullCommand.hpp"
 
 namespace pong {
 

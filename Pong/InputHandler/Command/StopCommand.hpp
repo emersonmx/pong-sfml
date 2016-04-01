@@ -1,7 +1,7 @@
 #ifndef PONG_INPUT_HANDLER_STOPCOMMAND_HPP_
 #define PONG_INPUT_HANDLER_STOPCOMMAND_HPP_
 
-#include "pong/input_handler/command/MoveRaquetCommand.hpp"
+#include "Pong/InputHandler/Command/MoveRaquetCommand.hpp"
 
 namespace pong {
 

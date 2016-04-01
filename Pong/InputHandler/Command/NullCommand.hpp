@@ -1,7 +1,7 @@
 #ifndef PONG_INPUT_HANDLER_NULLCOMMAND_HPP_
 #define PONG_INPUT_HANDLER_NULLCOMMAND_HPP_
 
-#include "pong/input_handler/command/Command.hpp"
+#include "Pong/InputHandler/Command/Command.hpp"
 
 namespace pong {
 

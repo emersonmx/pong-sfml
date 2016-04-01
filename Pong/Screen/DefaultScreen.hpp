@@ -1,7 +1,7 @@
 #ifndef PONG_SCREEN_DEFAULTSCREEN_HPP_
 #define PONG_SCREEN_DEFAULTSCREEN_HPP_
 
-#include "mxg/DefaultScreen.hpp"
+#include "MXG/DefaultScreen.hpp"
 
 namespace pong {
 

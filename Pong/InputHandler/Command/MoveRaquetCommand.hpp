@@ -1,9 +1,9 @@
 #ifndef PONG_INPUT_HANDLER_MOVERAQUETCOMMAND_HPP_
 #define PONG_INPUT_HANDLER_MOVERAQUETCOMMAND_HPP_
 
-#include "Box2D/Box2D.h"
+#include <Box2D/Box2D.h>
 
-#include "pong/input_handler/command/Command.hpp"
+#include "Pong/InputHandler/Command/Command.hpp"
 
 namespace pong {
 
