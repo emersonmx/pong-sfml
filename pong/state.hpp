@@ -8,7 +8,7 @@
 #include "pong/game_world.hpp"
 #include "pong/input_handler.hpp"
 #include "pong/factories.hpp"
-#include "mxg/SFMLDebugDraw.h"
+#include "mxg/sfml_debug_draw.hpp"
 
 namespace pong {
 

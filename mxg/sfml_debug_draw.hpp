@@ -14,8 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef MXG_SFMLDEBUGDRAW_H_
-#define MXG_SFMLDEBUGDRAW_H_
+#ifndef MXG_SFML_DEBUG_DRAW_HPP_
+#define MXG_SFML_DEBUG_DRAW_HPP_
 
 #include <Box2D/Box2D.h>
 #include <SFML/Window.hpp>
@@ -43,4 +43,4 @@ class SFMLDebugDraw : public b2Draw {
 };
 
 } /* namespace mx */
-#endif /* MXG_SFMLDEBUGDRAW_H_ */
+#endif /* MXG_SFML_DEBUG_DRAW_HPP_ */

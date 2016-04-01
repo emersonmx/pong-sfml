@@ -1,6 +1,6 @@
 #include "pong/game_world.hpp"
 
-#include "mxg/Random.hpp"
+#include "mxg/random.hpp"
 
 namespace pong {
 

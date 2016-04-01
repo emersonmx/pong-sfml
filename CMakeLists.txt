@@ -57,7 +57,7 @@ add_executable(${PROJECT_NAME}
     pong/game_world.cpp
     pong/input_handler.cpp
     pong/factories.cpp
-    mxg/SFMLDebugDraw.cpp
+    mxg/sfml_debug_draw.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}
