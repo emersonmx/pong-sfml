@@ -1,5 +1,5 @@
-#ifndef PONG_INPUT_HANDLER_NULLCOMMAND_HPP_
-#define PONG_INPUT_HANDLER_NULLCOMMAND_HPP_
+#ifndef PONG_INPUTHANDLER_COMMAND_NULLCOMMAND_HPP_
+#define PONG_INPUTHANDLER_COMMAND_NULLCOMMAND_HPP_
 
 #include "Pong/InputHandler/Command/Command.hpp"
 
@@ -11,4 +11,4 @@ class NullCommand: public Command {
 };
 
 } /* namespace pong */
-#endif /* PONG_INPUT_HANDLER_NULLCOMMAND_HPP_ */
+#endif /* PONG_INPUTHANDLER_COMMAND_NULLCOMMAND_HPP_ */

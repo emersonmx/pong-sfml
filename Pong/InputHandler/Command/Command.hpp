@@ -1,5 +1,5 @@
-#ifndef PONG_INPUT_HANDLER_COMMAND_HPP_
-#define PONG_INPUT_HANDLER_COMMAND_HPP_
+#ifndef PONG_INPUTHANDLER_COMMAND_COMMAND_HPP_
+#define PONG_INPUTHANDLER_COMMAND_COMMAND_HPP_
 
 namespace pong {
 
@@ -11,4 +11,4 @@ class Command {
 };
 
 } /* namespace pong */
-#endif /* PONG_INPUT_HANDLER_COMMAND_HPP_ */
+#endif /* PONG_INPUTHANDLER_COMMAND_COMMAND_HPP_ */

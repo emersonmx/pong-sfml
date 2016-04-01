@@ -1,5 +1,5 @@
-#ifndef PONG_INPUT_HANDLER_STOPCOMMAND_HPP_
-#define PONG_INPUT_HANDLER_STOPCOMMAND_HPP_
+#ifndef PONG_INPUTHANDLER_COMMAND_STOPCOMMAND_HPP_
+#define PONG_INPUTHANDLER_COMMAND_STOPCOMMAND_HPP_
 
 #include "Pong/InputHandler/Command/MoveRaquetCommand.hpp"
 
@@ -12,4 +12,4 @@ class StopCommand: public MoveRaquetCommand {
 };
 
 } /* namespace pong */
-#endif /* PONG_INPUT_HANDLER_STOPCOMMAND_HPP_ */
+#endif /* PONG_INPUTHANDLER_COMMAND_STOPCOMMAND_HPP_ */

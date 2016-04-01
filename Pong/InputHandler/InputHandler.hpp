@@ -1,5 +1,5 @@
-#ifndef PONG_INPUT_HANDLER_INPUTHANDLER_HPP_
-#define PONG_INPUT_HANDLER_INPUTHANDLER_HPP_
+#ifndef PONG_INPUTHANDLER_INPUTHANDLER_HPP_
+#define PONG_INPUTHANDLER_INPUTHANDLER_HPP_
 
 #include "Pong/InputHandler/Command/Command.hpp"
 
@@ -18,4 +18,4 @@ class InputHandler {
 };
 
 } /* namespace pong */
-#endif /* PONG_INPUT_HANDLER_INPUTHANDLER_HPP_ */
+#endif /* PONG_INPUTHANDLER_INPUTHANDLER_HPP_ */
