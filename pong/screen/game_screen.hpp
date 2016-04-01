@@ -4,7 +4,7 @@
 #include "pong/screen/default_screen.hpp"
 #include "pong/game_world.hpp"
 #include "pong/factories.hpp"
-#include "pong/input_handler.hpp"
+#include "pong/input_handler/input_handler.hpp"
 #include "pong/defs.hpp"
 
 #include "mxg/sfml_debug_draw.hpp"
