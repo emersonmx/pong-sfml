@@ -1,5 +1,5 @@
-#ifndef PONG_STATE_HPP_
-#define PONG_STATE_HPP_
+#ifndef PONG_SCREEN_HPP_
+#define PONG_SCREEN_HPP_
 
 #include <memory>
 
@@ -16,9 +16,9 @@ namespace pong {
 
 class Pong;
 
-class DefaultState: public mxg::DefaultScreen {
+class DefaultScreen: public mxg::DefaultScreen {
     public:
-        DefaultState(Pong* game) : game_(game) {}
+        DefaultScreen(Pong* game) : game_(game) {}
 
         virtual void processEvent(const sf::Event& event);
 
@@ -26,9 +26,9 @@ class DefaultState: public mxg::DefaultScreen {
         Pong* game_;
 };
 
-class GameState: public DefaultState, public GameWorld::ScoreListener {
+class GameScreen: public DefaultScreen, public GameWorld::ScoreListener {
     public:
-        using DefaultState::DefaultState;
+        using DefaultScreen::DefaultScreen;
 
         virtual void enter();
         virtual void exit();
@@ -75,4 +75,4 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
 };
 
 } /* namespace pong */
-#endif /* PONG_STATE_HPP_ */
+#endif /* PONG_SCREEN_HPP_ */

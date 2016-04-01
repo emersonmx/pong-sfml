@@ -1,4 +1,4 @@
-#include "pong/game.hpp"
+#include "pong/pong.hpp"
 
 #include <iostream>
 
@@ -15,8 +15,8 @@ void Pong::create() {
     view.setSize(WINDOW_WIDTH, -WINDOW_HEIGHT);
     window_.setView(view);
 
-    GameState* gameState = new GameState(this);
-    changeScreen(gameState);
+    GameScreen* gameScreen = new GameScreen(this);
+    changeScreen(gameScreen);
 }
 
 void Pong::destroy() {

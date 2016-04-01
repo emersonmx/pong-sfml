@@ -1,5 +1,5 @@
-#ifndef PONG_GAME_HPP_
-#define PONG_GAME_HPP_
+#ifndef PONG_PONG_HPP_
+#define PONG_PONG_HPP_
 
 #include <memory>
 #include <stack>
@@ -8,7 +8,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "pong/defs.hpp"
-#include "pong/state.hpp"
+#include "pong/screen.hpp"
 
 #include "mxg/game.hpp"
 
@@ -36,4 +36,4 @@ class Pong: public mxg::Game {
 };
 
 } /* namespace pong */
-#endif /* PONG_GAME_HPP_ */
+#endif /* PONG_PONG_HPP_ */
