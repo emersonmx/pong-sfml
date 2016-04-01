@@ -1,14 +1,7 @@
 #ifndef PONG_PONG_HPP_
 #define PONG_PONG_HPP_
 
-#include <memory>
-#include <stack>
-
-#include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-
-#include "pong/defs.hpp"
-#include "pong/screen.hpp"
 
 #include "mxg/game.hpp"
 

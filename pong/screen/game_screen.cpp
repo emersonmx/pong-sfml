@@ -1,12 +1,8 @@
-#include "pong/screen.hpp"
+#include "pong/screen/game_screen.hpp"
 
-#include <cmath>
 #include <iostream>
 
-#include <Box2D/Box2D.h>
-
 #include "pong/pong.hpp"
-#include "pong/defs.hpp"
 
 namespace pong {
 

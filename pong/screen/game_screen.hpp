@@ -1,30 +1,15 @@
-#ifndef PONG_SCREEN_HPP_
-#define PONG_SCREEN_HPP_
+#ifndef PONG_SCREEN_GAME_SCREEN_HPP_
+#define PONG_SCREEN_GAME_SCREEN_HPP_
 
-#include <memory>
-
-#include <SFML/Graphics.hpp>
-
+#include "pong/screen/default_screen.hpp"
 #include "pong/game_world.hpp"
-#include "pong/input_handler.hpp"
 #include "pong/factories.hpp"
+#include "pong/input_handler.hpp"
+#include "pong/defs.hpp"
 
 #include "mxg/sfml_debug_draw.hpp"
-#include "mxg/default_screen.hpp"
 
 namespace pong {
-
-class Pong;
-
-class DefaultScreen: public mxg::DefaultScreen {
-    public:
-        DefaultScreen(Pong* game) : game_(game) {}
-
-        virtual void processEvent(const sf::Event& event);
-
-    protected:
-        Pong* game_;
-};
 
 class GameScreen: public DefaultScreen, public GameWorld::ScoreListener {
     public:
@@ -75,4 +60,4 @@ class GameScreen: public DefaultScreen, public GameWorld::ScoreListener {
 };
 
 } /* namespace pong */
-#endif /* PONG_SCREEN_HPP_ */
+#endif /* PONG_SCREEN_GAME_SCREEN_HPP_ */

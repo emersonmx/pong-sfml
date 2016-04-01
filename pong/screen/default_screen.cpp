@@ -1,9 +1,6 @@
-#include "pong/screen.hpp"
-
-#include <Box2D/Box2D.h>
+#include "pong/screen/default_screen.hpp"
 
 #include "pong/pong.hpp"
-#include "pong/defs.hpp"
 
 namespace pong {
 

@@ -5,8 +5,6 @@
 
 #include <Box2D/Box2D.h>
 
-#include "pong/defs.hpp"
-
 namespace pong {
 
 class GameWorld: public b2ContactListener {

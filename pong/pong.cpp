@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
+#include "pong/defs.hpp"
+#include "pong/screen/game_screen.hpp"
 
 using namespace sf;
 
