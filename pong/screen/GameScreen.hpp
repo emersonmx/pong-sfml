@@ -3,7 +3,7 @@
 
 #include "pong/screen/DefaultScreen.hpp"
 #include "pong/GameWorld.hpp"
-#include "pong/Factories.hpp"
+#include "pong/factory/GameShapeFactory.hpp"
 #include "pong/input_handler/InputHandler.hpp"
 #include "pong/Defs.hpp"
 

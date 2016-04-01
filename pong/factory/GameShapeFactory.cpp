@@ -1,4 +1,4 @@
-#include "pong/Factories.hpp"
+#include "pong/factory/GameShapeFactory.hpp"
 
 #include "pong/Defs.hpp"
 
@@ -48,4 +48,4 @@ RectangleShape GameShapeFactory::makeBottomWall() {
     return makeWall();
 }
 
-} /* GameObjectFactory::namespace pong */
+} /* namespace pong */

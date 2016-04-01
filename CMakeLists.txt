@@ -59,7 +59,7 @@ add_executable(${PROJECT_NAME}
     pong/input_handler/RaquetInputHandler.cpp
     pong/input_handler/KeyboardInputHandler.cpp
     pong/input_handler/ComputerPlayerInputHandler.cpp
-    pong/Factories.cpp
+    pong/factory/GameShapeFactory.cpp
     mxg/SFMLDebugDraw.cpp
     mxg/Game.cpp
 )

@@ -1,5 +1,5 @@
-#ifndef PONG_FACTORIES_HPP_
-#define PONG_FACTORIES_HPP_
+#ifndef PONG_FACTORY_GAMESHAPEFACTORY_HPP_
+#define PONG_FACTORY_GAMESHAPEFACTORY_HPP_
 
 #include <SFML/Graphics.hpp>
 
@@ -26,4 +26,4 @@ class GameShapeFactory {
 };
 
 } /* namespace pong */
-#endif /* PONG_FACTORIES_HPP_ */
+#endif /* PONG_FACTORY_GAMESHAPEFACTORY_HPP_ */
