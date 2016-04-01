@@ -4,7 +4,7 @@
 #include <memory>
 #include <stack>
 
-#include "mxg/screen.hpp"
+#include "mxg/default_screen.hpp"
 
 namespace mxg {
 

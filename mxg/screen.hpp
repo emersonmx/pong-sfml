@@ -17,15 +17,5 @@ class Screen {
         virtual void render(sf::RenderTarget& renderTarget) = 0;
 };
 
-class DefaultScreen: public Screen {
-    public:
-        virtual void enter() {}
-        virtual void exit() {}
-
-        virtual void processEvent(const sf::Event& event) {}
-        virtual void update() {}
-        virtual void render(sf::RenderTarget& renderTarget) {}
-};
-
 } /* namespace mxg */
 #endif /* MXG_SCREEN_HPP_ */

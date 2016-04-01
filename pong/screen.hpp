@@ -10,7 +10,7 @@
 #include "pong/factories.hpp"
 
 #include "mxg/sfml_debug_draw.hpp"
-#include "mxg/screen.hpp"
+#include "mxg/default_screen.hpp"
 
 namespace pong {
 
