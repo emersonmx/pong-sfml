@@ -29,12 +29,11 @@ void Game::popScreen() {
 }
 
 void Game::clearScreens() {
-
-    while (screens_.size() > 1) {
-        popScreen();
+    while (!screens_.empty()) {
+        screens_.pop();
     }
 
-    popScreen();
+    pushScreen(new DefaultScreen());
 }
 
 void Game::changeScreen(Screen* screen) {
