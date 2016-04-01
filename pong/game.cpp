@@ -9,88 +9,36 @@ using namespace sf;
 
 namespace pong {
 
-void Game::pushState(State* state) {
-    if (state == nullptr) {
-        std::cout << "Ignoring null state." << std::endl;
-        return;
-    }
-
-    state->enter();
-    states_.emplace(state);
-}
-
-State* Game::currentState() {
-    return states_.top().get();
-}
-
-void Game::popState() {
-    State* state = currentState();
-    state->exit();
-    states_.pop();
-
-    if (states_.empty()) {
-        pushState(new DefaultState(this));
-    }
-}
-
-void Game::changeState(State* state) {
-    if (!states_.empty()) {
-        popState();
-    }
-    pushState(state);
-}
-
-void Game::exit() {
-    exit(0);
-}
-
-void Game::exit(int errorCode) {
-    errorCode_ = errorCode;
-    running_ = false;
-}
-
-int Game::run() {
-    create();
-
-    clock_.restart();
-    while (running_) {
-        tick();
-    }
-
-    destroy();
-    return errorCode_;
-}
-
-void Game::create() {
+void Pong::create() {
     window_.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
     sf::View view = window_.getDefaultView();
     view.setSize(WINDOW_WIDTH, -WINDOW_HEIGHT);
     window_.setView(view);
 
     GameState* gameState = new GameState(this);
-    changeState(gameState);
+    changeScreen(gameState);
 }
 
-void Game::destroy() {
+void Pong::destroy() {
     window_.close();
 }
 
-void Game::tick() {
+void Pong::tick() {
     sf::Time time = clock_.restart();
     sf::Event event;
 
     while (window_.pollEvent(event)) {
-        currentState()->processEvent(event);
+        currentScreen()->processEvent(event);
     }
 
     timeAccumulator_ += time.asSeconds();
     if (timeAccumulator_ >= GAME_TIME_STEP) {
-        currentState()->update();
+        currentScreen()->update();
         timeAccumulator_ -= GAME_TIME_STEP;
     }
 
     window_.clear();
-    currentState()->render(window_);
+    currentScreen()->render(window_);
     window_.display();
 }
 

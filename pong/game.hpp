@@ -10,23 +10,16 @@
 #include "pong/defs.hpp"
 #include "pong/state.hpp"
 
+#include "mxg/game.hpp"
+
 namespace pong {
 
-class Game {
+class Pong: public mxg::Game {
     public:
-        Game() {}
-        virtual ~Game() {}
+        Pong() {}
+        virtual ~Pong() {}
 
         sf::RenderWindow& window() { return window_; }
-
-        State* currentState();
-        void pushState(State* state);
-        void popState();
-        void changeState(State* state);
-
-        void exit();
-        void exit(int errorCode);
-        int run();
 
     protected:
 
@@ -39,11 +32,6 @@ class Game {
         sf::Clock clock_;
 
     private:
-        std::stack< std::unique_ptr<State> > states_;
-
-        int errorCode_ = 0;
-        bool running_ = true;
-
         float timeAccumulator_ = 0.0f;
 };
 

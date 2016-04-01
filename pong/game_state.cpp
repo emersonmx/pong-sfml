@@ -19,8 +19,6 @@ void syncBodyToTransformable(b2Body* body, sf::Transformable& transformable) {
 }
 
 void GameState::enter() {
-    DefaultState::enter();
-
     create();
 }
 
@@ -128,7 +126,7 @@ void GameState::exit() {
 void GameState::processEvent(const sf::Event& event) {
     if (event.type == sf::Event::KeyReleased) {
         if (event.key.code == sf::Keyboard::R) {
-            game_->changeState(new GameState(game_));
+            game_->changeScreen(new GameState(game_));
         } else if (event.key.code == sf::Keyboard::P) {
             gameWorld_.toggleRunning();
         }
@@ -148,10 +146,10 @@ void GameState::update() {
     updateShapes();
 
     if (leftRaquetScore_ >= MATCH_POINT) {
-        game_->changeState(new GameState(game_));
+        game_->changeScreen(new GameState(game_));
         std::cout << "Left win!" << std::endl;
     } else if (rightRaquetScore_ >= MATCH_POINT) {
-        game_->changeState(new GameState(game_));
+        game_->changeScreen(new GameState(game_));
         std::cout << "Right win!" << std::endl;
     }
 }

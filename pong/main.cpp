@@ -1,6 +1,6 @@
 #include "pong/game.hpp"
 
 int main() {
-    pong::Game game;
+    pong::Pong game;
     return game.run();
 }

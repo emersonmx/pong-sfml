@@ -8,37 +8,22 @@
 #include "pong/game_world.hpp"
 #include "pong/input_handler.hpp"
 #include "pong/factories.hpp"
+
 #include "mxg/sfml_debug_draw.hpp"
+#include "mxg/screen.hpp"
 
 namespace pong {
 
-class Game;
+class Pong;
 
-class State {
+class DefaultState: public mxg::DefaultScreen {
     public:
-        virtual ~State() {}
-
-        virtual void enter() = 0;
-        virtual void exit() = 0;
-
-        virtual void processEvent(const sf::Event& event) = 0;
-        virtual void update() = 0;
-        virtual void render(sf::RenderTarget& renderTarget) = 0;
-};
-
-class DefaultState: public State {
-    public:
-        DefaultState(Game* game) : game_(game) {}
-
-        virtual void enter() {}
-        virtual void exit() {}
+        DefaultState(Pong* game) : game_(game) {}
 
         virtual void processEvent(const sf::Event& event);
-        virtual void update() {}
-        virtual void render(sf::RenderTarget& renderTarget) {}
 
     protected:
-        Game* game_;
+        Pong* game_;
 };
 
 class GameState: public DefaultState, public GameWorld::ScoreListener {
