@@ -45,7 +45,6 @@ endif()
 
 # Executable settings
 include_directories(${PROJECT_SOURCE_DIR}
-    ${PROJECT_SOURCE_DIR}/lib
     ${PROJECT_BINARY_DIR}
     ${EXTRA_INCLUDES}
 )
@@ -58,7 +57,7 @@ add_executable(${PROJECT_NAME}
     pong/game_world.cpp
     pong/input_handler.cpp
     pong/factories.cpp
-    lib/SFMLDebugDraw.cpp
+    mxg/SFMLDebugDraw.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}

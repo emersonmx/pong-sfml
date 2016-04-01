@@ -8,7 +8,7 @@
 #include "pong/game_world.hpp"
 #include "pong/input_handler.hpp"
 #include "pong/factories.hpp"
-#include "SFMLDebugDraw.h"
+#include "mxg/SFMLDebugDraw.h"
 
 namespace pong {
 
@@ -86,7 +86,7 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
         int leftRaquetScore_ = 0;
         int rightRaquetScore_ = 0;
 
-        std::unique_ptr<SFMLDebugDraw> debugDraw_;
+        std::unique_ptr<mxg::SFMLDebugDraw> debugDraw_;
 };
 
 } /* namespace pong */

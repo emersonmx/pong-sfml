@@ -1,9 +1,11 @@
-#ifndef RANDOM_HPP_
-#define RANDOM_HPP_
+#ifndef MXG_RANDOM_HPP_
+#define MXG_RANDOM_HPP_
 
 #include <random>
 
 #include <SFML/Graphics.hpp>
+
+namespace mxg {
 
 class Random {
     public:
@@ -31,4 +33,5 @@ class Random {
         std::random_device device;
 };
 
-#endif /* RANDOM_HPP_ */
+} /* namespace mxg */
+#endif /* MXG_RANDOM_HPP_ */

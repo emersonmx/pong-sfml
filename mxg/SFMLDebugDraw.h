@@ -14,12 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef SFMLDEBUGDRAW_H
-#define SFMLDEBUGDRAW_H
+#ifndef MXG_SFMLDEBUGDRAW_H_
+#define MXG_SFMLDEBUGDRAW_H_
 
 #include <Box2D/Box2D.h>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+
+namespace mxg {
 
 class SFMLDebugDraw : public b2Draw {
     private:
@@ -39,4 +41,6 @@ class SFMLDebugDraw : public b2Draw {
         void DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color);
         void DrawTransform(const b2Transform& xf);
 };
-#endif /* SFMLDEBUGDRAW_H */
+
+} /* namespace mx */
+#endif /* MXG_SFMLDEBUGDRAW_H_ */

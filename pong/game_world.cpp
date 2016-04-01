@@ -1,6 +1,6 @@
 #include "pong/game_world.hpp"
 
-#include "Random.hpp"
+#include "mxg/Random.hpp"
 
 namespace pong {
 
@@ -164,7 +164,7 @@ b2Body* GameWorld::createBottomWall() {
 }
 
 b2Body* GameWorld::createBall() {
-    Random random;
+    mxg::Random random;
     float halfWidth = BALL_HALF_WIDTH;
     float halfHeight = BALL_HALF_HEIGHT;
 

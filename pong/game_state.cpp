@@ -42,7 +42,7 @@ void GameState::setupGameWorld() {
 }
 
 void GameState::setupDebugDraw() {
-    debugDraw_.reset(new SFMLDebugDraw(game_->window(), pong::PIXELS_PER_METER));
+    debugDraw_.reset(new mxg::SFMLDebugDraw(game_->window(), pong::PIXELS_PER_METER));
     gameWorld_.setDebugDraw(debugDraw_.get());
     debugDraw_->SetFlags(b2Draw::e_shapeBit);
 }

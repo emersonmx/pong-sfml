@@ -14,9 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "SFMLDebugDraw.h"
+#include "mxg/SFMLDebugDraw.h"
 
 #include <cmath>
+
+namespace mxg {
 
 SFMLDebugDraw::SFMLDebugDraw(sf::RenderWindow &window, float scale)
     : window_(&window), scale_(scale) {}
@@ -121,3 +123,5 @@ void SFMLDebugDraw::DrawTransform(const b2Transform& xf) {
 	window_->draw(redLine, 2, sf::Lines);
 	window_->draw(greenLine, 2, sf::Lines);
 }
+
+} /* namespace mxg */
