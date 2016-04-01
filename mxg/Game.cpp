@@ -1,4 +1,4 @@
-#include "mxg/game.hpp"
+#include "mxg/Game.hpp"
 
 #include <iostream>
 

@@ -1,9 +1,9 @@
-#ifndef PONG_INPUT_HANDLER_MOVE_RAQUET_COMMAND_HPP_
-#define PONG_INPUT_HANDLER_MOVE_RAQUET_COMMAND_HPP_
+#ifndef PONG_INPUT_HANDLER_MOVERAQUETCOMMAND_HPP_
+#define PONG_INPUT_HANDLER_MOVERAQUETCOMMAND_HPP_
 
 #include "Box2D/Box2D.h"
 
-#include "pong/input_handler/command.hpp"
+#include "pong/input_handler/Command.hpp"
 
 namespace pong {
 
@@ -20,4 +20,4 @@ class MoveRaquetCommand: public Command {
 };
 
 } /* namespace pong */
-#endif /* PONG_INPUT_HANDLER_MOVE_RAQUET_COMMAND_HPP_ */
+#endif /* PONG_INPUT_HANDLER_MOVERAQUETCOMMAND_HPP_ */

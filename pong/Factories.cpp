@@ -1,6 +1,6 @@
-#include "pong/factories.hpp"
+#include "pong/Factories.hpp"
 
-#include "pong/defs.hpp"
+#include "pong/Defs.hpp"
 
 using namespace sf;
 

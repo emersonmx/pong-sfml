@@ -1,10 +1,10 @@
-#ifndef PONG_INPUT_HANDLER_DEFAULT_INPUT_HANDLER_HPP_
-#define PONG_INPUT_HANDLER_DEFAULT_INPUT_HANDLER_HPP_
+#ifndef PONG_INPUT_HANDLER_DEFAULTINPUTHANDLER_HPP_
+#define PONG_INPUT_HANDLER_DEFAULTINPUTHANDLER_HPP_
 
 #include <memory>
 
-#include "pong/input_handler/input_handler.hpp"
-#include "pong/input_handler/null_command.hpp"
+#include "pong/input_handler/InputHandler.hpp"
+#include "pong/input_handler/NullCommand.hpp"
 
 namespace pong {
 
@@ -27,4 +27,4 @@ class DefaultInputHandler: public InputHandler {
 };
 
 } /* namespace pong */
-#endif /* PONG_INPUT_HANDLER_DEFAULT_INPUT_HANDLER_HPP_ */
+#endif /* PONG_INPUT_HANDLER_DEFAULTINPUTHANDLER_HPP_ */

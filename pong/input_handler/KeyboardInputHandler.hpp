@@ -1,9 +1,9 @@
-#ifndef PONG_INPUT_HANDLER_KEYBOARD_INPUT_HANDLER_HPP_
-#define PONG_INPUT_HANDLER_KEYBOARD_INPUT_HANDLER_HPP_
+#ifndef PONG_INPUT_HANDLER_KEYBOARDINPUTHANDLER_HPP_
+#define PONG_INPUT_HANDLER_KEYBOARDINPUTHANDLER_HPP_
 
 #include <SFML/Window.hpp>
 
-#include "pong/input_handler/default_input_handler.hpp"
+#include "pong/input_handler/DefaultInputHandler.hpp"
 
 namespace pong {
 
@@ -22,4 +22,4 @@ class KeyboardInputHandler: public DefaultInputHandler {
 };
 
 } /* namespace pong */
-#endif /* PONG_INPUT_HANDLER_KEYBOARD_INPUT_HANDLER_HPP_ */
+#endif /* PONG_INPUT_HANDLER_KEYBOARDINPUTHANDLER_HPP_ */

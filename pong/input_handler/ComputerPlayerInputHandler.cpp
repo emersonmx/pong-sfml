@@ -1,6 +1,6 @@
-#include "pong/input_handler/computer_player_input_handler.hpp"
+#include "pong/input_handler/ComputerPlayerInputHandler.hpp"
 
-#include "pong/defs.hpp"
+#include "pong/Defs.hpp"
 
 namespace pong {
 

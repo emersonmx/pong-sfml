@@ -1,7 +1,7 @@
-#ifndef MXG_DEFAULT_SCREEN_HPP_
-#define MXG_DEFAULT_SCREEN_HPP_
+#ifndef MXG_DEFAULTSCREEN_HPP_
+#define MXG_DEFAULTSCREEN_HPP_
 
-#include "mxg/screen.hpp"
+#include "mxg/Screen.hpp"
 
 namespace mxg {
 
@@ -16,4 +16,4 @@ class DefaultScreen: public Screen {
 };
 
 } /* namespace mxg */
-#endif /* MXG_DEFAULT_SCREEN_HPP_ */
+#endif /* MXG_DEFAULTSCREEN_HPP_ */

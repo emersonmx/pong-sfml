@@ -1,9 +1,9 @@
-#include "pong/pong.hpp"
+#include "pong/Pong.hpp"
 
 #include <iostream>
 
-#include "pong/defs.hpp"
-#include "pong/screen/game_screen.hpp"
+#include "pong/Defs.hpp"
+#include "pong/screen/GameScreen.hpp"
 
 using namespace sf;
 

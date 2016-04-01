@@ -1,4 +1,4 @@
-#include "pong/input_handler/raquet_input_handler.hpp"
+#include "pong/input_handler/RaquetInputHandler.hpp"
 
 namespace pong {
 

@@ -1,4 +1,4 @@
-#include "pong/input_handler/keyboard_input_handler.hpp"
+#include "pong/input_handler/KeyboardInputHandler.hpp"
 
 namespace pong {
 

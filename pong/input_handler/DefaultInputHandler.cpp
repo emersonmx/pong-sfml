@@ -1,4 +1,4 @@
-#include "pong/input_handler/default_input_handler.hpp"
+#include "pong/input_handler/DefaultInputHandler.hpp"
 
 namespace pong {
 

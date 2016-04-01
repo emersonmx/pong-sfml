@@ -1,8 +1,8 @@
-#ifndef PONG_INPUT_HANDLER_RAQUET_INPUT_HANDLER_HPP_
-#define PONG_INPUT_HANDLER_RAQUET_INPUT_HANDLER_HPP_
+#ifndef PONG_INPUT_HANDLER_RAQUETINPUTHANDLER_HPP_
+#define PONG_INPUT_HANDLER_RAQUETINPUTHANDLER_HPP_
 
-#include "pong/input_handler/keyboard_input_handler.hpp"
-#include "pong/input_handler/stop_command.hpp"
+#include "pong/input_handler/KeyboardInputHandler.hpp"
+#include "pong/input_handler/StopCommand.hpp"
 
 namespace pong {
 
@@ -19,4 +19,4 @@ class RaquetInputHandler: public KeyboardInputHandler {
 };
 
 } /* namespace pong */
-#endif /* PONG_INPUT_HANDLER_RAQUET_INPUT_HANDLER_HPP_ */
+#endif /* PONG_INPUT_HANDLER_RAQUETINPUTHANDLER_HPP_ */

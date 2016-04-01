@@ -1,4 +1,4 @@
-#include "pong/pong.hpp"
+#include "pong/Pong.hpp"
 
 int main() {
     pong::Pong pong;

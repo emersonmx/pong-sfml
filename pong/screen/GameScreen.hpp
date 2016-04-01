@@ -1,13 +1,13 @@
-#ifndef PONG_SCREEN_GAME_SCREEN_HPP_
-#define PONG_SCREEN_GAME_SCREEN_HPP_
+#ifndef PONG_SCREEN_GAMESCREEN_HPP_
+#define PONG_SCREEN_GAMESCREEN_HPP_
 
-#include "pong/screen/default_screen.hpp"
-#include "pong/game_world.hpp"
-#include "pong/factories.hpp"
-#include "pong/input_handler/input_handler.hpp"
-#include "pong/defs.hpp"
+#include "pong/screen/DefaultScreen.hpp"
+#include "pong/GameWorld.hpp"
+#include "pong/Factories.hpp"
+#include "pong/input_handler/InputHandler.hpp"
+#include "pong/Defs.hpp"
 
-#include "mxg/sfml_debug_draw.hpp"
+#include "mxg/SFMLDebugDraw.hpp"
 
 namespace pong {
 
@@ -60,4 +60,4 @@ class GameScreen: public DefaultScreen, public GameWorld::ScoreListener {
 };
 
 } /* namespace pong */
-#endif /* PONG_SCREEN_GAME_SCREEN_HPP_ */
+#endif /* PONG_SCREEN_GAMESCREEN_HPP_ */

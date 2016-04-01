@@ -1,10 +1,10 @@
-#ifndef PONG_INPUT_HANDLER_COMPUTER_PLAYER_INPUT_HANDLER_HPP_
-#define PONG_INPUT_HANDLER_COMPUTER_PLAYER_INPUT_HANDLER_HPP_
+#ifndef PONG_INPUT_HANDLER_COMPUTERPLAYERINPUTHANDLER_HPP_
+#define PONG_INPUT_HANDLER_COMPUTERPLAYERINPUTHANDLER_HPP_
 
 #include <Box2D/Box2D.h>
 
-#include "pong/input_handler/default_input_handler.hpp"
-#include "pong/input_handler/stop_command.hpp"
+#include "pong/input_handler/DefaultInputHandler.hpp"
+#include "pong/input_handler/StopCommand.hpp"
 
 namespace pong {
 
@@ -25,4 +25,4 @@ class ComputerPlayerInputHandler: public DefaultInputHandler {
 };
 
 } /* namespace pong */
-#endif /* PONG_INPUT_HANDLER_COMPUTER_PLAYER_INPUT_HANDLER_HPP_ */
+#endif /* PONG_INPUT_HANDLER_COMPUTERPLAYERINPUTHANDLER_HPP_ */

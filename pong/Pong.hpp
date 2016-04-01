@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "mxg/game.hpp"
+#include "mxg/Game.hpp"
 
 namespace pong {
 

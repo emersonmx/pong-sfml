@@ -1,7 +1,7 @@
-#ifndef PONG_SCREEN_DEFAULT_SCREEN_HPP_
-#define PONG_SCREEN_DEFAULT_SCREEN_HPP_
+#ifndef PONG_SCREEN_DEFAULTSCREEN_HPP_
+#define PONG_SCREEN_DEFAULTSCREEN_HPP_
 
-#include "mxg/default_screen.hpp"
+#include "mxg/DefaultScreen.hpp"
 
 namespace pong {
 
@@ -18,4 +18,4 @@ class DefaultScreen: public mxg::DefaultScreen {
 };
 
 } /* namespace pong */
-#endif /* PONG_SCREEN_DEFAULT_SCREEN_HPP_ */
+#endif /* PONG_SCREEN_DEFAULTSCREEN_HPP_ */

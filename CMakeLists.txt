@@ -51,17 +51,17 @@ include_directories(${PROJECT_SOURCE_DIR}
 
 add_executable(${PROJECT_NAME}
     pong/main.cpp
-    pong/pong.cpp
-    pong/screen/default_screen.cpp
-    pong/screen/game_screen.cpp
-    pong/game_world.cpp
-    pong/input_handler/default_input_handler.cpp
-    pong/input_handler/raquet_input_handler.cpp
-    pong/input_handler/keyboard_input_handler.cpp
-    pong/input_handler/computer_player_input_handler.cpp
-    pong/factories.cpp
-    mxg/sfml_debug_draw.cpp
-    mxg/game.cpp
+    pong/Pong.cpp
+    pong/screen/DefaultScreen.cpp
+    pong/screen/GameScreen.cpp
+    pong/GameWorld.cpp
+    pong/input_handler/DefaultInputHandler.cpp
+    pong/input_handler/RaquetInputHandler.cpp
+    pong/input_handler/KeyboardInputHandler.cpp
+    pong/input_handler/ComputerPlayerInputHandler.cpp
+    pong/Factories.cpp
+    mxg/SFMLDebugDraw.cpp
+    mxg/Game.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}

@@ -1,6 +1,6 @@
-#include "pong/screen/default_screen.hpp"
+#include "pong/screen/DefaultScreen.hpp"
 
-#include "pong/pong.hpp"
+#include "pong/Pong.hpp"
 
 namespace pong {
 

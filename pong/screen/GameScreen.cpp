@@ -1,10 +1,10 @@
-#include "pong/screen/game_screen.hpp"
+#include "pong/screen/GameScreen.hpp"
 
 #include <iostream>
 
-#include "pong/pong.hpp"
-#include "pong/input_handler/raquet_input_handler.hpp"
-#include "pong/input_handler/computer_player_input_handler.hpp"
+#include "pong/Pong.hpp"
+#include "pong/input_handler/RaquetInputHandler.hpp"
+#include "pong/input_handler/ComputerPlayerInputHandler.hpp"
 
 namespace pong {
 
