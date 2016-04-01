@@ -7,8 +7,8 @@ set(pong_VERSION_MINOR 5)
 set(pong_VERSION_REVISION 0)
 
 configure_file(
-    "${PROJECT_SOURCE_DIR}/pong/config.hpp.in"
-    "${PROJECT_BINARY_DIR}/config.hpp"
+    "${PROJECT_SOURCE_DIR}/pong/Config.hpp.in"
+    "${PROJECT_BINARY_DIR}/Config.hpp"
 )
 
 # Compiler settings
