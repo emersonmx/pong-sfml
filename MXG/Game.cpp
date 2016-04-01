@@ -4,43 +4,43 @@
 
 namespace mxg {
 
-void Game::pushScreen(Screen* screen) {
-    if (screen == nullptr) {
-        std::cout << "Ignoring null screen." << std::endl;
+void Game::pushState(State* state) {
+    if (state == nullptr) {
+        std::cout << "Ignoring null state." << std::endl;
         return;
     }
 
-    screen->enter();
-    screens_.emplace(screen);
+    state->enter();
+    states_.emplace(state);
 }
 
-Screen* Game::currentScreen() {
-    return screens_.top().get();
+State* Game::currentState() {
+    return states_.top().get();
 }
 
-void Game::popScreen() {
-    Screen* screen = currentScreen();
-    screen->exit();
-    screens_.pop();
+void Game::popState() {
+    State* state = currentState();
+    state->exit();
+    states_.pop();
 
-    if (screens_.empty()) {
-        pushScreen(new DefaultScreen());
+    if (states_.empty()) {
+        pushState(new DefaultState());
     }
 }
 
-void Game::clearScreens() {
-    while (!screens_.empty()) {
-        screens_.pop();
+void Game::clearStates() {
+    while (!states_.empty()) {
+        states_.pop();
     }
 
-    pushScreen(new DefaultScreen());
+    pushState(new DefaultState());
 }
 
-void Game::changeScreen(Screen* screen) {
-    if (!screens_.empty()) {
-        popScreen();
+void Game::changeState(State* state) {
+    if (!states_.empty()) {
+        popState();
     }
-    pushScreen(screen);
+    pushState(state);
 }
 
 void Game::exit() {

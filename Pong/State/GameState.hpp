@@ -1,7 +1,7 @@
-#ifndef PONG_SCREEN_GAMESCREEN_HPP_
-#define PONG_SCREEN_GAMESCREEN_HPP_
+#ifndef PONG_STATE_GAMESTATE_HPP_
+#define PONG_STATE_GAMESTATE_HPP_
 
-#include "Pong/Screen/DefaultScreen.hpp"
+#include "Pong/State/DefaultState.hpp"
 #include "Pong/GameWorld.hpp"
 #include "Pong/Factory/GameShapeFactory.hpp"
 #include "Pong/InputHandler/InputHandler.hpp"
@@ -11,9 +11,9 @@
 
 namespace pong {
 
-class GameScreen: public DefaultScreen, public GameWorld::ScoreListener {
+class GameState: public DefaultState, public GameWorld::ScoreListener {
     public:
-        using DefaultScreen::DefaultScreen;
+        using DefaultState::DefaultState;
 
         virtual void enter();
         virtual void exit();
@@ -60,4 +60,4 @@ class GameScreen: public DefaultScreen, public GameWorld::ScoreListener {
 };
 
 } /* namespace pong */
-#endif /* PONG_SCREEN_GAMESCREEN_HPP_ */
+#endif /* PONG_STATE_GAMESTATE_HPP_ */

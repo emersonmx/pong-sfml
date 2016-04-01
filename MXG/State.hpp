@@ -1,13 +1,13 @@
-#ifndef MXG_SCREEN_HPP_
-#define MXG_SCREEN_HPP_
+#ifndef MXG_STATE_HPP_
+#define MXG_STATE_HPP_
 
 #include <SFML/Graphics.hpp>
 
 namespace mxg {
 
-class Screen {
+class State {
     public:
-        virtual ~Screen() {}
+        virtual ~State() {}
 
         virtual void enter() = 0;
         virtual void exit() = 0;
@@ -18,4 +18,4 @@ class Screen {
 };
 
 } /* namespace mxg */
-#endif /* MXG_SCREEN_HPP_ */
+#endif /* MXG_STATE_HPP_ */

@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include "Pong/Defs.hpp"
-#include "Pong/Screen/GameScreen.hpp"
+#include "Pong/State/GameState.hpp"
 
 using namespace sf;
 
@@ -15,8 +15,8 @@ void Pong::create() {
     view.setSize(WINDOW_WIDTH, -WINDOW_HEIGHT);
     window_.setView(view);
 
-    GameScreen* gameScreen = new GameScreen(this);
-    changeScreen(gameScreen);
+    GameState* gameState = new GameState(this);
+    changeState(gameState);
 }
 
 void Pong::destroy() {
@@ -28,17 +28,17 @@ void Pong::tick() {
     sf::Event event;
 
     while (window_.pollEvent(event)) {
-        currentScreen()->processEvent(event);
+        currentState()->processEvent(event);
     }
 
     timeAccumulator_ += time.asSeconds();
     if (timeAccumulator_ >= GAME_TIME_STEP) {
-        currentScreen()->update();
+        currentState()->update();
         timeAccumulator_ -= GAME_TIME_STEP;
     }
 
     window_.clear();
-    currentScreen()->render(window_);
+    currentState()->render(window_);
     window_.display();
 }
 

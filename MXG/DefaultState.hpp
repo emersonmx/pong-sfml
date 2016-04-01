@@ -1,11 +1,11 @@
-#ifndef MXG_DEFAULTSCREEN_HPP_
-#define MXG_DEFAULTSCREEN_HPP_
+#ifndef MXG_DEFAULTSTATE_HPP_
+#define MXG_DEFAULTSTATE_HPP_
 
-#include "MXG/Screen.hpp"
+#include "MXG/State.hpp"
 
 namespace mxg {
 
-class DefaultScreen: public Screen {
+class DefaultState: public State {
     public:
         virtual void enter() {}
         virtual void exit() {}
@@ -16,4 +16,4 @@ class DefaultScreen: public Screen {
 };
 
 } /* namespace mxg */
-#endif /* MXG_DEFAULTSCREEN_HPP_ */
+#endif /* MXG_DEFAULTSTATE_HPP_ */

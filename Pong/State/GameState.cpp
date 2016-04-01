@@ -1,4 +1,4 @@
-#include "Pong/Screen/GameScreen.hpp"
+#include "Pong/State/GameState.hpp"
 
 #include <iostream>
 
@@ -16,18 +16,18 @@ void syncBodyToTransformable(b2Body* body, sf::Transformable& transformable) {
     transformable.setRotation(angle * 180.0f / M_PI);
 }
 
-void GameScreen::enter() {
+void GameState::enter() {
     create();
 }
 
-void GameScreen::create() {
+void GameState::create() {
     setupGameWorld();
     setupInputHandlers();
     createShapes();
     resetScores();
 }
 
-void GameScreen::setupGameWorld() {
+void GameState::setupGameWorld() {
     gameWorld_.create();
     gameWorld_.setScoreListener(this);
     gameWorld_.start();
@@ -37,17 +37,17 @@ void GameScreen::setupGameWorld() {
 #endif /* ifndef NDEBUG */
 }
 
-void GameScreen::setupDebugDraw() {
+void GameState::setupDebugDraw() {
     debugDraw_.reset(new mxg::SFMLDebugDraw(game_->window(), pong::PIXELS_PER_METER));
     gameWorld_.setDebugDraw(debugDraw_.get());
     debugDraw_->SetFlags(b2Draw::e_shapeBit);
 }
 
-void GameScreen::setupInputHandlers() {
+void GameState::setupInputHandlers() {
     setupPlayerOneInputHandler();
     setupPlayerTwoInputHandler(); }
 
-void GameScreen::setupPlayerOneInputHandler() {
+void GameState::setupPlayerOneInputHandler() {
     b2Body* leftRaquet = gameWorld_.leftRaquet();
     b2Vec2 upVelocity(0.0f, RAQUET_BASE_SPEED);
     b2Vec2 downVelocity(0.0f, -RAQUET_BASE_SPEED);
@@ -64,7 +64,7 @@ void GameScreen::setupPlayerOneInputHandler() {
     inputHandlers_[PLAYER_1].reset(leftHandler);
 }
 
-void GameScreen::setupPlayerTwoInputHandler() {
+void GameState::setupPlayerTwoInputHandler() {
     b2Body* rightRaquet = gameWorld_.rightRaquet();
     b2Body* ball = gameWorld_.ball();
     b2Vec2 upVelocity(0.0f, RAQUET_BASE_SPEED);
@@ -84,7 +84,7 @@ void GameScreen::setupPlayerTwoInputHandler() {
     inputHandlers_[PLAYER_2].reset(rightHandler);
 }
 
-void GameScreen::createShapes() {
+void GameState::createShapes() {
     midfield_ = shapeFactory_.makeMidfield();
     ball_ = shapeFactory_.makeBall();
     syncBodyToTransformable(gameWorld_.ball(), ball_);
@@ -98,13 +98,13 @@ void GameScreen::createShapes() {
     syncBodyToTransformable(gameWorld_.bottomWall(), bottomWall_);
 }
 
-void GameScreen::updateShapes() {
+void GameState::updateShapes() {
     syncBodyToTransformable(gameWorld_.ball(), ball_);
     syncBodyToTransformable(gameWorld_.leftRaquet(), leftRaquet_);
     syncBodyToTransformable(gameWorld_.rightRaquet(), rightRaquet_);
 }
 
-void GameScreen::renderShapes(sf::RenderTarget& renderTarget) {
+void GameState::renderShapes(sf::RenderTarget& renderTarget) {
     renderTarget.draw(midfield_);
     renderTarget.draw(ball_);
     renderTarget.draw(leftRaquet_);
@@ -113,27 +113,27 @@ void GameScreen::renderShapes(sf::RenderTarget& renderTarget) {
     renderTarget.draw(bottomWall_);
 }
 
-void GameScreen::resetScores() {
+void GameState::resetScores() {
     leftRaquetScore_ = 0;
     rightRaquetScore_ = 0;
 }
 
-void GameScreen::exit() {
+void GameState::exit() {
 }
 
-void GameScreen::processEvent(const sf::Event& event) {
+void GameState::processEvent(const sf::Event& event) {
     if (event.type == sf::Event::KeyReleased) {
         if (event.key.code == sf::Keyboard::R) {
-            game_->changeScreen(new GameScreen(game_));
+            game_->changeState(new GameState(game_));
         } else if (event.key.code == sf::Keyboard::P) {
             gameWorld_.toggleRunning();
         }
     } else {
-        DefaultScreen::processEvent(event);
+        DefaultState::processEvent(event);
     }
 }
 
-void GameScreen::update() {
+void GameState::update() {
     for (auto& handler : inputHandlers_) {
         Command* command = handler->handleInput();
         command->execute();
@@ -144,15 +144,15 @@ void GameScreen::update() {
     updateShapes();
 
     if (leftRaquetScore_ >= MATCH_POINT) {
-        game_->changeScreen(new GameScreen(game_));
+        game_->changeState(new GameState(game_));
         std::cout << "Left win!" << std::endl;
     } else if (rightRaquetScore_ >= MATCH_POINT) {
-        game_->changeScreen(new GameScreen(game_));
+        game_->changeState(new GameState(game_));
         std::cout << "Right win!" << std::endl;
     }
 }
 
-void GameScreen::render(sf::RenderTarget& renderTarget) {
+void GameState::render(sf::RenderTarget& renderTarget) {
     renderShapes(renderTarget);
 
 #ifndef NDEBUG
@@ -160,13 +160,13 @@ void GameScreen::render(sf::RenderTarget& renderTarget) {
 #endif /* ifndef NDEBUG  */
 }
 
-void GameScreen::leftScored(GameWorld& gameWorld) {
+void GameState::leftScored(GameWorld& gameWorld) {
     gameWorld.resetBall();
     gameWorld.start();
     leftRaquetScore_++;
 }
 
-void GameScreen::rightScored(GameWorld& gameWorld) {
+void GameState::rightScored(GameWorld& gameWorld) {
     gameWorld.resetBall();
     gameWorld.start();
     rightRaquetScore_++;

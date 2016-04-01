@@ -4,7 +4,7 @@
 #include <memory>
 #include <stack>
 
-#include "MXG/DefaultScreen.hpp"
+#include "MXG/DefaultState.hpp"
 
 namespace mxg {
 
@@ -13,11 +13,11 @@ class Game {
         Game() {}
         virtual ~Game() {}
 
-        Screen* currentScreen();
-        void pushScreen(Screen* screen);
-        void popScreen();
-        void clearScreens();
-        void changeScreen(Screen* screen);
+        State* currentState();
+        void pushState(State* state);
+        void popState();
+        void clearStates();
+        void changeState(State* state);
 
         void exit();
         void exit(int errorCode);
@@ -31,7 +31,7 @@ class Game {
         virtual void tick() {}
 
     private:
-        std::stack< std::unique_ptr<Screen> > screens_;
+        std::stack< std::unique_ptr<State> > states_;
 
         int errorCode_ = 0;
         bool running_ = true;

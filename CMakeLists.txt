@@ -52,8 +52,8 @@ include_directories(${PROJECT_SOURCE_DIR}
 add_executable(${PROJECT_NAME}
     Pong/Main.cpp
     Pong/Pong.cpp
-    Pong/Screen/DefaultScreen.cpp
-    Pong/Screen/GameScreen.cpp
+    Pong/State/DefaultState.cpp
+    Pong/State/GameState.cpp
     Pong/GameWorld.cpp
     Pong/InputHandler/DefaultInputHandler.cpp
     Pong/InputHandler/RaquetInputHandler.cpp
