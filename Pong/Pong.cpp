@@ -16,6 +16,7 @@ void Pong::create() {
     window_.setView(view);
 
     GameState* gameState = new GameState(this);
+    clearStates();
     changeState(gameState);
 }
 
