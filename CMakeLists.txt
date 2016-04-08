@@ -62,6 +62,7 @@ add_executable(${PROJECT_NAME}
     Pong/Factory/GameShapeFactory.cpp
     MXG/SFMLDebugDraw.cpp
     MXG/Game.cpp
+    MXG/Application.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}

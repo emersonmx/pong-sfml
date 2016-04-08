@@ -41,24 +41,4 @@ void Game::changeState(State* state) {
     pushState(state);
 }
 
-void Game::exit() {
-    exit(0);
-}
-
-void Game::exit(int errorCode) {
-    errorCode_ = errorCode;
-    running_ = false;
-}
-
-int Game::run() {
-    create();
-
-    while (running_) {
-        tick();
-    }
-
-    destroy();
-    return errorCode_;
-}
-
 } /* namespace mxg */
