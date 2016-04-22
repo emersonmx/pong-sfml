@@ -51,8 +51,8 @@ void GameState::setupInputHandlers() {
 
 void GameState::setupPlayerOneInputHandler() {
     b2Body* leftRaquet = gameWorld_.leftRaquet();
-    b2Vec2 upVelocity(0.0f, RAQUET_BASE_SPEED);
-    b2Vec2 downVelocity(0.0f, -RAQUET_BASE_SPEED);
+    b2Vec2 upVelocity(0.0f, -RAQUET_BASE_SPEED);
+    b2Vec2 downVelocity(0.0f, RAQUET_BASE_SPEED);
 
     RaquetInputHandler* leftHandler = new RaquetInputHandler(leftRaquet);
     leftHandler->bindKey(sf::Keyboard::W, InputHandler::UP);
@@ -162,7 +162,7 @@ void GameState::render(sf::RenderTarget& renderTarget) {
     renderShapes(renderTarget);
 
 #ifndef NDEBUG
-    //gameWorld_.drawDebugData();
+    gameWorld_.drawDebugData();
 #endif /* ifndef NDEBUG  */
 }
 
