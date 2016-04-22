@@ -1,6 +1,8 @@
 #ifndef PONG_DEFS_HPP_
 #define PONG_DEFS_HPP_
 
+#include <string>
+
 namespace pong {
 
 constexpr const wchar_t* WINDOW_TITLE = L"Pong";
@@ -44,6 +46,8 @@ constexpr const float RAQUET_HALF_WIDTH = RAQUET_WIDTH / 2.0f;
 constexpr const float RAQUET_HEIGHT = 80.0f;
 constexpr const float RAQUET_HALF_HEIGHT = RAQUET_HEIGHT / 2.0f;
 constexpr const float RAQUET_BASE_SPEED = 5.0f;
+
+const std::string ASSETS_PATH = "assets/";
 
 } /* namespace pong */
 #endif /* PONG_DEFS_HPP_ */

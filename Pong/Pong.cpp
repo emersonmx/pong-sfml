@@ -15,6 +15,8 @@ void Pong::create() {
     view.setSize(WINDOW_WIDTH, -WINDOW_HEIGHT);
     window_.setView(view);
 
+    assets_.loadAssets();
+
     GameState* gameState = new GameState(this);
     clearStates();
     changeState(gameState);

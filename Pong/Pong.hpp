@@ -5,6 +5,8 @@
 
 #include "MXG/Game.hpp"
 
+#include "Pong/Assets.hpp"
+
 namespace pong {
 
 class Pong: public mxg::Game {
@@ -13,6 +15,7 @@ class Pong: public mxg::Game {
         virtual ~Pong() {}
 
         sf::RenderWindow& window() { return window_; }
+        Assets& assets() { return assets_; }
 
     protected:
 
@@ -23,6 +26,8 @@ class Pong: public mxg::Game {
 
         sf::RenderWindow window_;
         sf::Clock clock_;
+
+        Assets assets_;
 
     private:
         float timeAccumulator_ = 0.0f;

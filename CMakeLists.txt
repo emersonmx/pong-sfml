@@ -52,6 +52,7 @@ include_directories(${PROJECT_SOURCE_DIR}
 add_executable(${PROJECT_NAME}
     Pong/Main.cpp
     Pong/Pong.cpp
+    Pong/Assets.cpp
     Pong/State/DefaultState.cpp
     Pong/State/GameState.cpp
     Pong/GameWorld.cpp
