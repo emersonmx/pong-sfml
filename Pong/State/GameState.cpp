@@ -29,7 +29,7 @@ void GameState::create() {
 
 void GameState::setupGameWorld() {
     gameWorld_.create();
-    gameWorld_.setScoreListener(this);
+    gameWorld_.addScoreListener(this);
     gameWorld_.start();
 
 #ifndef NDEBUG

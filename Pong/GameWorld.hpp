@@ -1,6 +1,7 @@
 #ifndef PONG_GAMEWORLD_HPP_
 #define PONG_GAMEWORLD_HPP_
 
+#include <vector>
 #include <memory>
 
 #include <Box2D/Box2D.h>
@@ -35,9 +36,9 @@ class GameWorld: public b2ContactListener {
         b2Joint* leftRaquetJoint() { return leftRaquetJoint_; }
         b2Joint* rightRaquetJoint() { return rightRaquetJoint_; }
 
-        void setScoreListener(ScoreListener* listener) {
-            scoreListener_ = listener;
-        }
+        void addScoreListener(ScoreListener* listener);
+        void removeScoreListener(ScoreListener* listener);
+        void removeAllScoreListeners();
 
         void create();
         void update();
@@ -82,7 +83,7 @@ class GameWorld: public b2ContactListener {
         b2Joint* leftRaquetJoint_;
         b2Joint* rightRaquetJoint_;
 
-        ScoreListener* scoreListener_;
+        std::vector<ScoreListener*> scoreListeners_;
 
         bool softReset_ = false;
         bool hardReset_ = false;

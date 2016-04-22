@@ -6,6 +6,27 @@
 
 namespace pong {
 
+void GameWorld::addScoreListener(ScoreListener* listener) {
+    if (listener == nullptr) {
+        return;
+    }
+
+    scoreListeners_.push_back(listener);
+}
+
+void GameWorld::removeScoreListener(ScoreListener* listener) {
+    if (listener == nullptr) {
+        return;
+    }
+
+    auto it = std::remove(scoreListeners_.begin(), scoreListeners_.end(), listener);
+    scoreListeners_.erase(it);
+}
+
+void GameWorld::removeAllScoreListeners() {
+    scoreListeners_.clear();
+}
+
 void GameWorld::create() {
     b2Vec2 gravity(0, 0);
     world_.reset(new b2World(gravity));
@@ -322,14 +343,14 @@ b2Joint* GameWorld::createRightRaquetJoint() {
 }
 
 void GameWorld::fireScoreLeft() {
-    if (scoreListener_ != nullptr) {
-        scoreListener_->leftScored(*this);
+    for (auto listener : scoreListeners_) {
+        listener->leftScored(*this);
     }
 }
 
 void GameWorld::fireScoreRight() {
-    if (scoreListener_ != nullptr) {
-        scoreListener_->rightScored(*this);
+    for (auto listener : scoreListeners_) {
+        listener->rightScored(*this);
     }
 }
 
