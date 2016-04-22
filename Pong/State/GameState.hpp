@@ -6,6 +6,7 @@
 #include "Pong/Factory/GameShapeFactory.hpp"
 #include "Pong/InputHandler/InputHandler.hpp"
 #include "Pong/Defs.hpp"
+#include "Pong/UI/ScoreBoard.hpp"
 
 #include "MXG/SFMLDebugDraw.hpp"
 
@@ -36,12 +37,14 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
         void setupPlayerTwoInputHandler();
 
         void createShapes();
+        void createScoreBoard();
         void updateShapes();
         void renderShapes(sf::RenderTarget& renderTarget);
 
-        void resetScores();
+        void resetScores() { scoreBoard_.resetScores(); }
 
         GameWorld gameWorld_;
+        ScoreBoard scoreBoard_;
 
         GameShapeFactory shapeFactory_;
         sf::RectangleShape midfield_;
@@ -52,9 +55,6 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
         sf::RectangleShape bottomWall_;
 
         std::array< std::unique_ptr<InputHandler>, PLAYER_COUNT > inputHandlers_;
-
-        int leftRaquetScore_ = 0;
-        int rightRaquetScore_ = 0;
 
         std::unique_ptr<mxg::SFMLDebugDraw> debugDraw_;
 };

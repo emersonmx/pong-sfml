@@ -48,6 +48,7 @@ constexpr const float RAQUET_HALF_HEIGHT = RAQUET_HEIGHT / 2.0f;
 constexpr const float RAQUET_BASE_SPEED = 5.0f;
 
 const std::string ASSETS_PATH = "assets/";
+constexpr const int DEFAULT_FONT_SIZE = 54;
 
 } /* namespace pong */
 #endif /* PONG_DEFS_HPP_ */

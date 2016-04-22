@@ -24,11 +24,13 @@ void GameState::create() {
     setupGameWorld();
     setupInputHandlers();
     createShapes();
+    createScoreBoard();
     resetScores();
 }
 
 void GameState::setupGameWorld() {
     gameWorld_.create();
+    gameWorld_.addScoreListener(&scoreBoard_);
     gameWorld_.addScoreListener(this);
     gameWorld_.start();
 
@@ -98,6 +100,14 @@ void GameState::createShapes() {
     syncBodyToTransformable(gameWorld_.bottomWall(), bottomWall_);
 }
 
+void GameState::createScoreBoard() {
+    sf::Vector2f position(WINDOW_HALF_WIDHT, WINDOW_HEIGHT - 70);
+
+    Assets& assets = game_->assets();
+    scoreBoard_.create(assets.defaultFont());
+    scoreBoard_.setPosition(position);
+}
+
 void GameState::updateShapes() {
     syncBodyToTransformable(gameWorld_.ball(), ball_);
     syncBodyToTransformable(gameWorld_.leftRaquet(), leftRaquet_);
@@ -111,11 +121,7 @@ void GameState::renderShapes(sf::RenderTarget& renderTarget) {
     renderTarget.draw(rightRaquet_);
     renderTarget.draw(topWall_);
     renderTarget.draw(bottomWall_);
-}
-
-void GameState::resetScores() {
-    leftRaquetScore_ = 0;
-    rightRaquetScore_ = 0;
+    //renderTarget.draw(scoreBoard_);
 }
 
 void GameState::exit() {
@@ -143,10 +149,10 @@ void GameState::update() {
 
     updateShapes();
 
-    if (leftRaquetScore_ >= MATCH_POINT) {
+    if (scoreBoard_.rightScore() >= MATCH_POINT) {
         game_->changeState(new GameState(game_));
         std::cout << "Left win!" << std::endl;
-    } else if (rightRaquetScore_ >= MATCH_POINT) {
+    } else if (scoreBoard_.leftScore() >= MATCH_POINT) {
         game_->changeState(new GameState(game_));
         std::cout << "Right win!" << std::endl;
     }
@@ -156,20 +162,18 @@ void GameState::render(sf::RenderTarget& renderTarget) {
     renderShapes(renderTarget);
 
 #ifndef NDEBUG
-    gameWorld_.drawDebugData();
+    //gameWorld_.drawDebugData();
 #endif /* ifndef NDEBUG  */
 }
 
 void GameState::leftScored(GameWorld& gameWorld) {
     gameWorld.resetBall();
     gameWorld.start();
-    leftRaquetScore_++;
 }
 
 void GameState::rightScored(GameWorld& gameWorld) {
     gameWorld.resetBall();
     gameWorld.start();
-    rightRaquetScore_++;
 }
 
 } /* namespace pong */
