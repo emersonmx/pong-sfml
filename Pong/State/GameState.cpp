@@ -23,9 +23,6 @@ void GameState::create() {
     createScoreBoard();
 }
 
-void GameState::enter() {
-}
-
 void GameState::setupGameWorld() {
     gameWorld_.create();
     gameWorld_.addScoreListener(&scoreBoard_);
@@ -120,6 +117,9 @@ void GameState::renderShapes(sf::RenderTarget& renderTarget) {
     renderTarget.draw(topWall_);
     renderTarget.draw(bottomWall_);
     renderTarget.draw(scoreBoard_);
+}
+
+void GameState::enter() {
 }
 
 void GameState::exit() {
