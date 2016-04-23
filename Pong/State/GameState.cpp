@@ -151,11 +151,15 @@ void GameState::update() {
     scoreBoard_.update();
 
     if (scoreBoard_.rightScore() >= MATCH_POINT) {
-        game_->changeState(new GameState(game_));
-        std::cout << "Left win!" << std::endl;
-    } else if (scoreBoard_.leftScore() >= MATCH_POINT) {
-        game_->changeState(new GameState(game_));
+        GameState* state = new GameState(game_);
+        state->create();
+        game_->changeState(state);
         std::cout << "Right win!" << std::endl;
+    } else if (scoreBoard_.leftScore() >= MATCH_POINT) {
+        GameState* state = new GameState(game_);
+        state->create();
+        game_->changeState(state);
+        std::cout << "Left win!" << std::endl;
     }
 }
 
