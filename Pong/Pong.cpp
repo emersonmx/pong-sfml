@@ -1,7 +1,5 @@
 #include "Pong/Pong.hpp"
 
-#include <iostream>
-
 #include "Pong/Defs.hpp"
 #include "Pong/State/GameState.hpp"
 

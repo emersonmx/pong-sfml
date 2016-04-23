@@ -101,7 +101,7 @@ void GameState::createShapes() {
 }
 
 void GameState::createScoreBoard() {
-    sf::Vector2f position(WINDOW_HALF_WIDHT, WINDOW_HEIGHT - 70);
+    sf::Vector2f position(WINDOW_HALF_WIDHT, 32);
 
     Assets& assets = game_->assets();
     scoreBoard_.create(assets.defaultFont());
@@ -121,7 +121,7 @@ void GameState::renderShapes(sf::RenderTarget& renderTarget) {
     renderTarget.draw(rightRaquet_);
     renderTarget.draw(topWall_);
     renderTarget.draw(bottomWall_);
-    //renderTarget.draw(scoreBoard_);
+    renderTarget.draw(scoreBoard_);
 }
 
 void GameState::exit() {
