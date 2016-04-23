@@ -25,7 +25,6 @@ void GameState::create() {
     setupInputHandlers();
     createShapes();
     createScoreBoard();
-    resetScores();
 }
 
 void GameState::setupGameWorld() {
@@ -148,6 +147,7 @@ void GameState::update() {
     gameWorld_.update();
 
     updateShapes();
+    scoreBoard_.update();
 
     if (scoreBoard_.rightScore() >= MATCH_POINT) {
         game_->changeState(new GameState(game_));

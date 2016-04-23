@@ -21,6 +21,7 @@ class ScoreBoard : public sf::Drawable, public GameWorld::ScoreListener {
         void show() { visibility_ = true; }
         void hide() { visibility_ = false; }
 
+        void update();
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates::Default) const;
 
         virtual void leftScored(GameWorld& gameWorld);
@@ -36,6 +37,7 @@ class ScoreBoard : public sf::Drawable, public GameWorld::ScoreListener {
         sf::Transformable transformable_;
         sf::Text leftScoreText_;
         sf::Text rightScoreText_;
+        sf::Clock clock_;
 
         int leftScore_ = 0;
         int rightScore_ = 0;

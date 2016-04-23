@@ -41,8 +41,6 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
         void updateShapes();
         void renderShapes(sf::RenderTarget& renderTarget);
 
-        void resetScores() { scoreBoard_.resetScores(); }
-
         GameWorld gameWorld_;
         ScoreBoard scoreBoard_;
 

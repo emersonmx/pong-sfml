@@ -12,6 +12,16 @@ void ScoreBoard::create(const sf::Font* font) {
     hide();
 }
 
+void ScoreBoard::update() {
+    if (visibility_) {
+        sf::Time elapsedTime = clock_.getElapsedTime();
+        if (elapsedTime.asSeconds() > 2.0f) {
+            hide();
+            clock_.restart();
+        }
+    }
+}
+
 void ScoreBoard::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     if (!visibility_) {
         return;
@@ -26,11 +36,15 @@ void ScoreBoard::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 void ScoreBoard::leftScored(GameWorld& gameWorld) {
     leftScore_++;
     updateLeftScoreText();
+    clock_.restart();
+    show();
 }
 
 void ScoreBoard::rightScored(GameWorld& gameWorld) {
     rightScore_++;
     updateRightScoreText();
+    clock_.restart();
+    show();
 }
 
 sf::Text ScoreBoard::createLeftScoreText(const sf::Font* font) {
