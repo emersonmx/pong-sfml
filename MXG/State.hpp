@@ -9,6 +9,9 @@ class State {
     public:
         virtual ~State() {}
 
+        virtual void create() = 0;
+        virtual void destroy() = 0;
+
         virtual void enter() = 0;
         virtual void exit() = 0;
 

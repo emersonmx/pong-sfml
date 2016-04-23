@@ -16,7 +16,7 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
     public:
         using DefaultState::DefaultState;
 
-        void create();
+        virtual void create();
 
         virtual void enter();
         virtual void exit();

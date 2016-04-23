@@ -7,6 +7,9 @@ namespace mxg {
 
 class DefaultState: public State {
     public:
+        virtual void create() {}
+        virtual void destroy() {}
+
         virtual void enter() {}
         virtual void exit() {}
 
