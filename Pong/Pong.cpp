@@ -13,6 +13,7 @@ void Pong::create() {
     assets_.loadAssets();
 
     GameState* gameState = new GameState(this);
+    gameState->create();
     clearStates();
     changeState(gameState);
 }

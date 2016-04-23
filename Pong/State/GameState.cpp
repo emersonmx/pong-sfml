@@ -16,15 +16,14 @@ void syncBodyToTransformable(b2Body* body, sf::Transformable& transformable) {
     transformable.setRotation(angle * 180.0f / M_PI);
 }
 
-void GameState::enter() {
-    create();
-}
-
 void GameState::create() {
     setupGameWorld();
     setupInputHandlers();
     createShapes();
     createScoreBoard();
+}
+
+void GameState::enter() {
 }
 
 void GameState::setupGameWorld() {
@@ -129,7 +128,9 @@ void GameState::exit() {
 void GameState::processEvent(const sf::Event& event) {
     if (event.type == sf::Event::KeyReleased) {
         if (event.key.code == sf::Keyboard::R) {
-            game_->changeState(new GameState(game_));
+            GameState* state = new GameState(game_);
+            state->create();
+            game_->changeState(state);
         } else if (event.key.code == sf::Keyboard::P) {
             gameWorld_.toggleRunning();
         }
