@@ -18,7 +18,6 @@ class Pong: public mxg::Game {
         Assets& assets() { return assets_; }
 
     protected:
-
         virtual void create();
         virtual void destroy();
 
