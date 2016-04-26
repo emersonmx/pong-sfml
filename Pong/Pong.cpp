@@ -14,7 +14,6 @@ void Pong::create() {
 
     GameState* gameState = new GameState(this);
     gameState->create();
-    clearStates();
     changeState(gameState);
 }
 

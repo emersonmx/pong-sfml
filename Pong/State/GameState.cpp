@@ -119,12 +119,6 @@ void GameState::renderShapes(sf::RenderTarget& renderTarget) {
     renderTarget.draw(scoreBoard_);
 }
 
-void GameState::enter() {
-}
-
-void GameState::exit() {
-}
-
 void GameState::processEvent(const sf::Event& event) {
     if (event.type == sf::Event::KeyReleased) {
         if (event.key.code == sf::Keyboard::R) {

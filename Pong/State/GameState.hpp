@@ -18,9 +18,6 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
 
         virtual void create();
 
-        virtual void enter();
-        virtual void exit();
-
         virtual void processEvent(const sf::Event& event);
         virtual void update();
         virtual void render(sf::RenderTarget& renderTarget);
