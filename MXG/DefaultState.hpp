@@ -15,7 +15,7 @@ class DefaultState: public State {
 
         virtual void processEvents() {}
         virtual void update() {}
-        virtual void render(sf::RenderTarget& renderTarget) {}
+        virtual void render() {}
 };
 
 } /* namespace mxg */

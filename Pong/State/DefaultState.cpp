@@ -18,4 +18,9 @@ void DefaultState::processEvent(const sf::Event& event) {
     }
 }
 
+void DefaultState::render() {
+    render(game_->window());
+}
+
+
 } /* namespace pong */

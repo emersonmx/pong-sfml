@@ -17,7 +17,7 @@ class State {
 
         virtual void processEvents() = 0;
         virtual void update() = 0;
-        virtual void render(sf::RenderTarget& renderTarget) = 0;
+        virtual void render() = 0;
 };
 
 } /* namespace mxg */

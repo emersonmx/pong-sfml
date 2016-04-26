@@ -12,9 +12,11 @@ class DefaultState: public mxg::DefaultState {
         DefaultState(Pong* game) : game_(game) {}
 
         virtual void processEvents();
+        virtual void render();
 
     protected:
         virtual void processEvent(const sf::Event& event);
+        virtual void render(sf::RenderTarget& renderTarget) {}
 
         Pong* game_;
 };

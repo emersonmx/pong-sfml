@@ -33,7 +33,7 @@ void Pong::tick() {
     }
 
     window_.clear();
-    currentState()->render(window_);
+    currentState()->render();
     window_.display();
 }
 
