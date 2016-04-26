@@ -11,9 +11,11 @@ class DefaultState: public mxg::DefaultState {
     public:
         DefaultState(Pong* game) : game_(game) {}
 
-        virtual void processEvent(const sf::Event& event);
+        virtual void processEvents();
 
     protected:
+        virtual void processEvent(const sf::Event& event);
+
         Pong* game_;
 };
 

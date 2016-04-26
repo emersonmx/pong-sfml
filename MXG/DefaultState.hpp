@@ -13,7 +13,7 @@ class DefaultState: public State {
         virtual void enter() {}
         virtual void exit() {}
 
-        virtual void processEvent(const sf::Event& event) {}
+        virtual void processEvents() {}
         virtual void update() {}
         virtual void render(sf::RenderTarget& renderTarget) {}
 };

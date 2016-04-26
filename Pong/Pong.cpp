@@ -23,11 +23,8 @@ void Pong::destroy() {
 
 void Pong::tick() {
     sf::Time time = clock_.restart();
-    sf::Event event;
 
-    while (window_.pollEvent(event)) {
-        currentState()->processEvent(event);
-    }
+    currentState()->processEvents();
 
     timeAccumulator_ += time.asSeconds();
     if (timeAccumulator_ >= GAME_TIME_STEP) {

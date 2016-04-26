@@ -4,6 +4,14 @@
 
 namespace pong {
 
+void DefaultState::processEvents() {
+    sf::Event event;
+    sf::Window& window = game_->window();
+    while (window.pollEvent(event)) {
+        processEvent(event);
+    }
+}
+
 void DefaultState::processEvent(const sf::Event& event) {
     if (event.type == sf::Event::Closed) {
         game_->exit();

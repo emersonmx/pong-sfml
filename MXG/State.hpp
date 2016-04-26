@@ -15,7 +15,7 @@ class State {
         virtual void enter() = 0;
         virtual void exit() = 0;
 
-        virtual void processEvent(const sf::Event& event) = 0;
+        virtual void processEvents() = 0;
         virtual void update() = 0;
         virtual void render(sf::RenderTarget& renderTarget) = 0;
 };
