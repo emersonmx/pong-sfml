@@ -8,7 +8,8 @@ using namespace sf;
 namespace pong {
 
 void Pong::create() {
-    window_.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE);
+    int flags = sf::Style::Titlebar | sf::Style::Close;
+    window_.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE, flags);
 
     assets_.loadAssets();
 
