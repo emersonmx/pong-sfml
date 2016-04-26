@@ -7,9 +7,9 @@ class Application {
     public:
         virtual ~Application() {}
 
+        int run();
         void exit();
         void exit(int errorCode);
-        int run();
 
     protected:
         virtual void create() {}

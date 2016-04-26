@@ -12,16 +12,6 @@ SFMLDebugDraw::SFMLDebugDraw(sf::RenderWindow &window, float scale)
     states_.transform = transform;
 }
 
-sf::Color SFMLDebugDraw::glColorToSfColor(const b2Color& color, sf::Uint8 alpha) {
-    return sf::Color(static_cast<sf::Uint8>(color.r * 255),
-                     static_cast<sf::Uint8>(color.g * 255),
-                     static_cast<sf::Uint8>(color.b * 255), alpha);
-}
-
-sf::Vector2f SFMLDebugDraw::b2VecToSfVector(const b2Vec2& vector) {
-    return sf::Vector2f(vector.x, vector.y);
-}
-
 void SFMLDebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color) {
 	sf::ConvexShape polygon(vertexCount);
 	sf::Vector2f center;
@@ -102,6 +92,16 @@ void SFMLDebugDraw::DrawTransform(const b2Transform& xf) {
 
 	window_->draw(redLine, states_);
 	window_->draw(greenLine, states_);
+}
+
+sf::Color SFMLDebugDraw::glColorToSfColor(const b2Color& color, sf::Uint8 alpha) {
+    return sf::Color(static_cast<sf::Uint8>(color.r * 255),
+                     static_cast<sf::Uint8>(color.g * 255),
+                     static_cast<sf::Uint8>(color.b * 255), alpha);
+}
+
+sf::Vector2f SFMLDebugDraw::b2VecToSfVector(const b2Vec2& vector) {
+    return sf::Vector2f(vector.x, vector.y);
 }
 
 } /* namespace mxg */

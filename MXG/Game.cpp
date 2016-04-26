@@ -8,6 +8,10 @@ Game::Game() {
     pushState(new DefaultState());
 }
 
+State* Game::currentState() {
+    return states_.top().get();
+}
+
 void Game::pushState(State* state) {
     if (state == nullptr) {
         std::cout << "Ignoring null state." << std::endl;
@@ -16,10 +20,6 @@ void Game::pushState(State* state) {
 
     state->enter();
     states_.emplace(state);
-}
-
-State* Game::currentState() {
-    return states_.top().get();
 }
 
 void Game::popState() {

@@ -2,15 +2,6 @@
 
 namespace mxg {
 
-void Application::exit() {
-    exit(0);
-}
-
-void Application::exit(int errorCode) {
-    errorCode_ = errorCode;
-    running_ = false;
-}
-
 int Application::run() {
     create();
 
@@ -20,6 +11,15 @@ int Application::run() {
 
     destroy();
     return errorCode_;
+}
+
+void Application::exit() {
+    exit(0);
+}
+
+void Application::exit(int errorCode) {
+    errorCode_ = errorCode;
+    running_ = false;
 }
 
 } /* namespace mxg */
