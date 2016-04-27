@@ -17,13 +17,14 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
         using DefaultState::DefaultState;
 
         virtual void create();
-
-        virtual void processEvent(const sf::Event& event);
         virtual void update();
-        virtual void render(sf::RenderTarget& renderTarget);
 
         virtual void leftScored(GameWorld& gameWorld);
         virtual void rightScored(GameWorld& gameWorld);
+
+    protected:
+        virtual void processEvent(const sf::Event& event);
+        virtual void render(sf::RenderTarget& renderTarget);
 
     private:
         void setupGameWorld();
@@ -37,6 +38,8 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
         void createScoreBoard();
         void updateShapes();
         void renderShapes(sf::RenderTarget& renderTarget);
+
+        void syncBodyToTransformable(b2Body* body, sf::Transformable& transformable);
 
         GameWorld gameWorld_;
         ScoreBoard scoreBoard_;

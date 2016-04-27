@@ -8,19 +8,67 @@
 
 namespace pong {
 
-void syncBodyToTransformable(b2Body* body, sf::Transformable& transformable) {
-    b2Vec2 position = body->GetPosition();
-    float angle = body->GetAngle();
-    transformable.setPosition(position.x * PIXELS_PER_METER,
-                              position.y * PIXELS_PER_METER);
-    transformable.setRotation(angle * 180.0f / M_PI);
-}
-
 void GameState::create() {
     setupGameWorld();
     setupInputHandlers();
     createShapes();
     createScoreBoard();
+}
+
+void GameState::update() {
+    for (auto& handler : inputHandlers_) {
+        Command* command = handler->handleInput();
+        command->execute();
+    }
+
+    gameWorld_.update();
+
+    updateShapes();
+    scoreBoard_.update();
+
+    if (scoreBoard_.rightScore() >= MATCH_POINT) {
+        GameState* state = new GameState(game_);
+        state->create();
+        game_->changeState(state);
+        std::cout << "Right win!" << std::endl;
+    } else if (scoreBoard_.leftScore() >= MATCH_POINT) {
+        GameState* state = new GameState(game_);
+        state->create();
+        game_->changeState(state);
+        std::cout << "Left win!" << std::endl;
+    }
+}
+
+void GameState::leftScored(GameWorld& gameWorld) {
+    gameWorld.resetBall();
+    gameWorld.start();
+}
+
+void GameState::rightScored(GameWorld& gameWorld) {
+    gameWorld.resetBall();
+    gameWorld.start();
+}
+
+void GameState::processEvent(const sf::Event& event) {
+    if (event.type == sf::Event::KeyReleased) {
+        if (event.key.code == sf::Keyboard::R) {
+            GameState* state = new GameState(game_);
+            state->create();
+            game_->changeState(state);
+        } else if (event.key.code == sf::Keyboard::P) {
+            gameWorld_.toggleRunning();
+        }
+    } else {
+        DefaultState::processEvent(event);
+    }
+}
+
+void GameState::render(sf::RenderTarget& renderTarget) {
+    renderShapes(renderTarget);
+
+#ifndef NDEBUG
+    gameWorld_.drawDebugData();
+#endif /* ifndef NDEBUG  */
 }
 
 void GameState::setupGameWorld() {
@@ -119,60 +167,12 @@ void GameState::renderShapes(sf::RenderTarget& renderTarget) {
     renderTarget.draw(scoreBoard_);
 }
 
-void GameState::processEvent(const sf::Event& event) {
-    if (event.type == sf::Event::KeyReleased) {
-        if (event.key.code == sf::Keyboard::R) {
-            GameState* state = new GameState(game_);
-            state->create();
-            game_->changeState(state);
-        } else if (event.key.code == sf::Keyboard::P) {
-            gameWorld_.toggleRunning();
-        }
-    } else {
-        DefaultState::processEvent(event);
-    }
-}
-
-void GameState::update() {
-    for (auto& handler : inputHandlers_) {
-        Command* command = handler->handleInput();
-        command->execute();
-    }
-
-    gameWorld_.update();
-
-    updateShapes();
-    scoreBoard_.update();
-
-    if (scoreBoard_.rightScore() >= MATCH_POINT) {
-        GameState* state = new GameState(game_);
-        state->create();
-        game_->changeState(state);
-        std::cout << "Right win!" << std::endl;
-    } else if (scoreBoard_.leftScore() >= MATCH_POINT) {
-        GameState* state = new GameState(game_);
-        state->create();
-        game_->changeState(state);
-        std::cout << "Left win!" << std::endl;
-    }
-}
-
-void GameState::render(sf::RenderTarget& renderTarget) {
-    renderShapes(renderTarget);
-
-#ifndef NDEBUG
-    gameWorld_.drawDebugData();
-#endif /* ifndef NDEBUG  */
-}
-
-void GameState::leftScored(GameWorld& gameWorld) {
-    gameWorld.resetBall();
-    gameWorld.start();
-}
-
-void GameState::rightScored(GameWorld& gameWorld) {
-    gameWorld.resetBall();
-    gameWorld.start();
+void GameState::syncBodyToTransformable(b2Body* body, sf::Transformable& transformable) {
+    b2Vec2 position = body->GetPosition();
+    float angle = body->GetAngle();
+    transformable.setPosition(position.x * PIXELS_PER_METER,
+                              position.y * PIXELS_PER_METER);
+    transformable.setRotation(angle * 180.0f / M_PI);
 }
 
 } /* namespace pong */

@@ -12,15 +12,14 @@ void DefaultState::processEvents() {
     }
 }
 
+void DefaultState::render() {
+    render(game_->window());
+}
+
 void DefaultState::processEvent(const sf::Event& event) {
     if (event.type == sf::Event::Closed) {
         game_->exit();
     }
 }
-
-void DefaultState::render() {
-    render(game_->window());
-}
-
 
 } /* namespace pong */

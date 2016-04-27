@@ -65,43 +65,6 @@ void GameWorld::resetBall() {
     stepCount_ = 0;
 }
 
-void GameWorld::handleResets() {
-    if (hardReset_) {
-        create();
-        hardReset_ = false;
-    } else if (softReset_) {
-        world_->DestroyBody(ball_);
-        ball_ = createBall();
-        softReset_ = false;
-    }
-}
-
-void GameWorld::limitBallSpeed() {
-    b2Vec2 velocity = ball_->GetLinearVelocity();
-    float speed = velocity.Length();
-    float minSpeen = BALL_MIN_SPEED + (stepCount_ * BALL_VELOCITY_STEP);
-    minSpeen = minSpeen > BALL_MAX_SPEED ? BALL_MAX_SPEED : minSpeen;
-    if (speed > BALL_MAX_SPEED) {
-        velocity *= BALL_MAX_SPEED / speed;
-        ball_->SetLinearVelocity(velocity);
-    } else if (speed < minSpeen) {
-        velocity *= minSpeen / speed;
-        ball_->SetLinearVelocity(velocity);
-    }
-}
-
-void GameWorld::limitBallRotation() {
-    float rotation = ball_->GetAngularVelocity();
-    int direction = rotation > 0 ? 1 : -1;
-    if (abs(rotation) > BALL_MAX_ROTATION_SPEED) {
-        rotation = BALL_MAX_ROTATION_SPEED * direction;
-    } else if (-BALL_MIN_ROTATION_SPEED <= rotation &&
-            rotation <= BALL_MIN_ROTATION_SPEED) {
-        rotation = BALL_MIN_ROTATION_SPEED * direction;
-    }
-    ball_->SetAngularVelocity(rotation);
-}
-
 void GameWorld::setDebugDraw(b2Draw* debugDraw) {
     world_->SetDebugDraw(debugDraw);
 }
@@ -340,6 +303,43 @@ b2Joint* GameWorld::createRightRaquetJoint() {
     jointDef.enableLimit = true;
 
     return world_->CreateJoint(&jointDef);
+}
+
+void GameWorld::limitBallSpeed() {
+    b2Vec2 velocity = ball_->GetLinearVelocity();
+    float speed = velocity.Length();
+    float minSpeen = BALL_MIN_SPEED + (stepCount_ * BALL_VELOCITY_STEP);
+    minSpeen = minSpeen > BALL_MAX_SPEED ? BALL_MAX_SPEED : minSpeen;
+    if (speed > BALL_MAX_SPEED) {
+        velocity *= BALL_MAX_SPEED / speed;
+        ball_->SetLinearVelocity(velocity);
+    } else if (speed < minSpeen) {
+        velocity *= minSpeen / speed;
+        ball_->SetLinearVelocity(velocity);
+    }
+}
+
+void GameWorld::limitBallRotation() {
+    float rotation = ball_->GetAngularVelocity();
+    int direction = rotation > 0 ? 1 : -1;
+    if (abs(rotation) > BALL_MAX_ROTATION_SPEED) {
+        rotation = BALL_MAX_ROTATION_SPEED * direction;
+    } else if (-BALL_MIN_ROTATION_SPEED <= rotation &&
+            rotation <= BALL_MIN_ROTATION_SPEED) {
+        rotation = BALL_MIN_ROTATION_SPEED * direction;
+    }
+    ball_->SetAngularVelocity(rotation);
+}
+
+void GameWorld::handleResets() {
+    if (hardReset_) {
+        create();
+        hardReset_ = false;
+    } else if (softReset_) {
+        world_->DestroyBody(ball_);
+        ball_ = createBall();
+        softReset_ = false;
+    }
 }
 
 void GameWorld::fireScoreLeft() {
