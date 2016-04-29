@@ -11,6 +11,7 @@ namespace pong {
 void Pong::create() {
     int flags = sf::Style::Titlebar | sf::Style::Close;
     window_.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE, flags);
+    window_.setVerticalSyncEnabled(true);
 
     assets_.loadAssets();
 
