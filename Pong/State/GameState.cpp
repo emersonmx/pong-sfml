@@ -107,8 +107,8 @@ void GameState::setupPlayerOneInputHandler() {
     b2Vec2 downVelocity(0.0f, RAQUET_BASE_SPEED);
 
     RaquetInputHandler* leftHandler = new RaquetInputHandler(leftRaquet);
-    leftHandler->bindKey(sf::Keyboard::W, InputHandler::UP);
-    leftHandler->bindKey(sf::Keyboard::S, InputHandler::DOWN);
+    leftHandler->bindKey(sf::Keyboard::Up, InputHandler::UP);
+    leftHandler->bindKey(sf::Keyboard::Down, InputHandler::DOWN);
 
     Command* command = new MoveRaquetCommand(leftRaquet, upVelocity);
     leftHandler->bindCommand(InputHandler::UP, command);
