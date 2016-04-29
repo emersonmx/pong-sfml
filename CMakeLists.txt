@@ -62,6 +62,7 @@ add_executable(${PROJECT_NAME}
     Pong/InputHandler/ComputerPlayerInputHandler.cpp
     Pong/Factory/GameShapeFactory.cpp
     Pong/UI/ScoreBoard.cpp
+    Pong/UI/Shade.cpp
     MXG/SFMLDebugDraw.cpp
     MXG/Game.cpp
     MXG/Application.cpp

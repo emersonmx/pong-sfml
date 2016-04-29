@@ -7,13 +7,13 @@
 
 namespace pong {
 
-class ScoreBoard : public sf::Drawable, public GameWorld::ScoreListener {
+class ScoreBoard
+        : public sf::Transformable, public sf::Drawable,
+          public GameWorld::ScoreListener {
+
     public:
         int leftScore() { return leftScore_; }
         int rightScore() { return rightScore_; }
-
-        const sf::Vector2f& getPosition() const { return transformable_.getPosition(); }
-        void setPosition(const sf::Vector2f& position) { transformable_.setPosition(position); }
 
         void create(const sf::Font* font);
         void resetScores() { leftScore_ = rightScore_ = 0; }
@@ -22,7 +22,6 @@ class ScoreBoard : public sf::Drawable, public GameWorld::ScoreListener {
         void hide() { visibility_ = false; }
 
         void update();
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates::Default) const;
 
         virtual void leftScored(GameWorld& gameWorld);
         virtual void rightScored(GameWorld& gameWorld);
@@ -34,6 +33,8 @@ class ScoreBoard : public sf::Drawable, public GameWorld::ScoreListener {
         virtual void updateRightScoreText();
 
     private:
+        virtual void draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates::Default) const;
+
         sf::Transformable transformable_;
         sf::Text leftScoreText_;
         sf::Text rightScoreText_;

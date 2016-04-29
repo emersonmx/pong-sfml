@@ -22,17 +22,6 @@ void ScoreBoard::update() {
     }
 }
 
-void ScoreBoard::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    if (!visibility_) {
-        return;
-    }
-
-    states.transform *= transformable_.getTransform();
-
-    target.draw(leftScoreText_, states);
-    target.draw(rightScoreText_, states);
-}
-
 void ScoreBoard::leftScored(GameWorld& gameWorld) {
     leftScore_++;
     updateLeftScoreText();
@@ -77,6 +66,15 @@ void ScoreBoard::updateRightScoreText() {
     position.y -= bounds.top;
     rightScoreText_.setOrigin(sf::Vector2f(bounds.left, 0.0f));
     rightScoreText_.setPosition(position);
+}
+
+void ScoreBoard::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    if (visibility_) {
+        states.transform *= getTransform();
+
+        target.draw(leftScoreText_, states);
+        target.draw(rightScoreText_, states);
+    }
 }
 
 } /* namespace pong */

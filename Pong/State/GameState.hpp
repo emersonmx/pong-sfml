@@ -7,6 +7,7 @@
 #include "Pong/InputHandler/InputHandler.hpp"
 #include "Pong/Defs.hpp"
 #include "Pong/UI/ScoreBoard.hpp"
+#include "Pong/UI/Shade.hpp"
 
 #include "MXG/SFMLDebugDraw.hpp"
 
@@ -18,6 +19,8 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
 
         virtual void create();
         virtual void update();
+
+        virtual void enter();
 
         virtual void leftScored(GameWorld& gameWorld);
         virtual void rightScored(GameWorld& gameWorld);
@@ -36,6 +39,7 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
 
         void createShapes();
         void createScoreBoard();
+        void setupShade();
         void updateShapes();
         void renderShapes(sf::RenderTarget& renderTarget);
 
@@ -51,6 +55,7 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
         sf::RectangleShape rightRaquet_;
         sf::RectangleShape topWall_;
         sf::RectangleShape bottomWall_;
+        Shade shade_;
 
         std::array< std::unique_ptr<InputHandler>, PLAYER_COUNT > inputHandlers_;
 

@@ -13,6 +13,7 @@ void GameState::create() {
     setupInputHandlers();
     createShapes();
     createScoreBoard();
+    setupShade();
 }
 
 void GameState::update() {
@@ -37,6 +38,10 @@ void GameState::update() {
         game_->changeState(state);
         std::cout << "Left win!" << std::endl;
     }
+}
+
+void GameState::enter() {
+    shade_.hide();
 }
 
 void GameState::leftScored(GameWorld& gameWorld) {
@@ -151,6 +156,11 @@ void GameState::createScoreBoard() {
     scoreBoard_.setPosition(position);
 }
 
+void GameState::setupShade() {
+    shade_.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
+    shade_.setFillColor(sf::Color(0, 0, 0, 128));
+}
+
 void GameState::updateShapes() {
     syncBodyToTransformable(gameWorld_.ball(), ball_);
     syncBodyToTransformable(gameWorld_.leftRaquet(), leftRaquet_);
@@ -165,6 +175,7 @@ void GameState::renderShapes(sf::RenderTarget& renderTarget) {
     renderTarget.draw(topWall_);
     renderTarget.draw(bottomWall_);
     renderTarget.draw(scoreBoard_);
+    renderTarget.draw(shade_);
 }
 
 void GameState::syncBodyToTransformable(b2Body* body, sf::Transformable& transformable) {
