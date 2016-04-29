@@ -20,7 +20,7 @@ RectangleShape GameShapeFactory::makeBall() {
 
 RectangleShape GameShapeFactory::makeMidfield() {
     sf::RectangleShape shape = makeRectangle(Vector2f(2, WINDOW_HEIGHT));
-    shape.setPosition(WINDOW_HALF_WIDHT, WINDOW_HALF_HEIGHT);
+    shape.setPosition(WINDOW_HALF_WIDTH, WINDOW_HALF_HEIGHT);
     return shape;
 }
 

@@ -157,7 +157,7 @@ b2Body* GameWorld::createBall() {
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.position.Set(
-        WINDOW_HALF_WIDHT / static_cast<float>(PIXELS_PER_METER),
+        WINDOW_HALF_WIDTH / static_cast<float>(PIXELS_PER_METER),
         WINDOW_HALF_HEIGHT / static_cast<float>(PIXELS_PER_METER)
     );
     bodyDef.linearVelocity.x = random.nextInt() % 2 == 0 ? -1 : 1;
@@ -248,12 +248,12 @@ b2Body* GameWorld::createRightRaquet() {
 }
 
 b2Body* GameWorld::createGameArea() {
-    float halfWidth = WINDOW_HALF_WIDHT;
+    float halfWidth = WINDOW_HALF_WIDTH;
     float halfHeight = WINDOW_HALF_HEIGHT - (2 * WALL_HALF_HEIGHT);
 
     b2BodyDef bodyDef;
     bodyDef.position.Set(
-        WINDOW_HALF_WIDHT / static_cast<float>(PIXELS_PER_METER),
+        WINDOW_HALF_WIDTH / static_cast<float>(PIXELS_PER_METER),
         WINDOW_HALF_HEIGHT / static_cast<float>(PIXELS_PER_METER)
     );
     b2Body* body = world_->CreateBody(&bodyDef);

@@ -55,6 +55,7 @@ add_executable(${PROJECT_NAME}
     Pong/Assets.cpp
     Pong/State/DefaultState.cpp
     Pong/State/GameState.cpp
+    Pong/State/GameReadyState.cpp
     Pong/GameWorld.cpp
     Pong/InputHandler/DefaultInputHandler.cpp
     Pong/InputHandler/RaquetInputHandler.cpp

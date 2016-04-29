@@ -44,6 +44,10 @@ void GameState::enter() {
     shade_.hide();
 }
 
+void GameState::exit() {
+    shade_.show();
+}
+
 void GameState::leftScored(GameWorld& gameWorld) {
     gameWorld.resetBall();
     gameWorld.start();
@@ -55,6 +59,8 @@ void GameState::rightScored(GameWorld& gameWorld) {
 }
 
 void GameState::processEvent(const sf::Event& event) {
+    DefaultState::processEvent(event);
+
     if (event.type == sf::Event::KeyReleased) {
         if (event.key.code == sf::Keyboard::R) {
             GameState* state = new GameState(game_);
@@ -63,8 +69,6 @@ void GameState::processEvent(const sf::Event& event) {
         } else if (event.key.code == sf::Keyboard::P) {
             gameWorld_.toggleRunning();
         }
-    } else {
-        DefaultState::processEvent(event);
     }
 }
 
@@ -120,7 +124,7 @@ void GameState::setupPlayerTwoInputHandler() {
     b2Vec2 upVelocity(0.0f, RAQUET_BASE_SPEED);
     b2Vec2 downVelocity(0.0f, -RAQUET_BASE_SPEED);
 
-    float xMaxDistance = (WINDOW_HALF_WIDHT - RAQUET_WIDTH) / PIXELS_PER_METER;
+    float xMaxDistance = (WINDOW_HALF_WIDTH - RAQUET_WIDTH) / PIXELS_PER_METER;
     float yMaxDistance = (RAQUET_HALF_HEIGHT - 20.0f) / PIXELS_PER_METER;
     ComputerPlayerInputHandler* rightHandler =
         new ComputerPlayerInputHandler(rightRaquet, ball,
@@ -149,7 +153,7 @@ void GameState::createShapes() {
 }
 
 void GameState::createScoreBoard() {
-    sf::Vector2f position(WINDOW_HALF_WIDHT, 32);
+    sf::Vector2f position(WINDOW_HALF_WIDTH, 32);
 
     Assets& assets = game_->assets();
     scoreBoard_.create(assets.defaultFont());
@@ -159,6 +163,7 @@ void GameState::createScoreBoard() {
 void GameState::setupShade() {
     shade_.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
     shade_.setFillColor(sf::Color(0, 0, 0, 128));
+    shade_.show();
 }
 
 void GameState::updateShapes() {

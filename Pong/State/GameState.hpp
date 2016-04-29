@@ -19,8 +19,10 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
 
         virtual void create();
         virtual void update();
+        using DefaultState::render;
 
         virtual void enter();
+        virtual void exit();
 
         virtual void leftScored(GameWorld& gameWorld);
         virtual void rightScored(GameWorld& gameWorld);

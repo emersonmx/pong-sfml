@@ -2,6 +2,7 @@
 
 #include "Pong/Defs.hpp"
 #include "Pong/State/GameState.hpp"
+#include "Pong/State/GameReadyState.hpp"
 
 using namespace sf;
 
@@ -15,7 +16,9 @@ void Pong::create() {
 
     GameState* gameState = new GameState(this);
     gameState->create();
-    changeState(gameState);
+    GameReadyState* gameReadyState = new GameReadyState(this, gameState);
+    gameReadyState->create();
+    changeState(gameReadyState);
 }
 
 void Pong::destroy() {
