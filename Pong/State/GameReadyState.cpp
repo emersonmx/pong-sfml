@@ -25,11 +25,11 @@ void GameReadyState::processEvent(const sf::Event& event) {
 void GameReadyState::render(sf::RenderTarget& renderTarget) {
     gameState_->render();
     renderTarget.draw(message_);
-    if (showLeftReady_) {
-        renderTarget.draw(leftReady_);
+    if (leftReady_) {
+        renderTarget.draw(leftReadyText_);
     }
-    if (showRightReady_) {
-        renderTarget.draw(rightReady_);
+    if (rightReady_) {
+        renderTarget.draw(rightReadyText_);
     }
 }
 
@@ -46,15 +46,15 @@ void GameReadyState::setupMessage() {
 }
 
 void GameReadyState::setupLeftReady() {
-    leftReady_.setString("READY!");
-    leftReady_.setPosition(WINDOW_HALF_WIDTH / 2.0f, WINDOW_HALF_HEIGHT);
-    applyDefaultStyle(leftReady_);
+    leftReadyText_.setString("READY!");
+    leftReadyText_.setPosition(WINDOW_HALF_WIDTH / 2.0f, WINDOW_HALF_HEIGHT);
+    applyDefaultStyle(leftReadyText_);
 }
 
 void GameReadyState::setupRightReady() {
-    rightReady_.setString("READY!");
-    rightReady_.setPosition(WINDOW_HALF_WIDTH * 1.5f, WINDOW_HALF_HEIGHT);
-    applyDefaultStyle(rightReady_);
+    rightReadyText_.setString("READY!");
+    rightReadyText_.setPosition(WINDOW_HALF_WIDTH * 1.5f, WINDOW_HALF_HEIGHT);
+    applyDefaultStyle(rightReadyText_);
 }
 
 void GameReadyState::applyDefaultStyle(sf::Text& text) {

@@ -27,10 +27,10 @@ class GameReadyState : public DefaultState {
         GameState* gameState_;
 
         sf::Text message_;
-        sf::Text leftReady_;
-        sf::Text rightReady_;
-        bool showLeftReady_ = false;
-        bool showRightReady_ = false;
+        sf::Text leftReadyText_;
+        sf::Text rightReadyText_;
+        bool leftReady_ = false;
+        bool rightReady_ = false;
 };
 
 } /* namespace pong */
