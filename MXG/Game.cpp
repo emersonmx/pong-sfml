@@ -21,7 +21,7 @@ void Game::pushState(State* state) {
 }
 
 void Game::popState() {
-    if (!isStatesEmpty()) {
+    if (!statesIsEmpty()) {
         currentState()->exit();
         states_.pop();
         currentState()->enter();
@@ -29,7 +29,7 @@ void Game::popState() {
 }
 
 void Game::clearStates() {
-    while (!isStatesEmpty()) {
+    while (!statesIsEmpty()) {
         popState();
     }
 }
@@ -41,7 +41,7 @@ void Game::changeState(State* state) {
     pushState(state);
 }
 
-bool Game::isStatesEmpty() {
+bool Game::statesIsEmpty() {
     return states_.size() <= 1;
 }
 
