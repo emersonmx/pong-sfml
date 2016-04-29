@@ -18,10 +18,12 @@ void Pong::create() {
     gameState->create();
     GameReadyState* gameReadyState = new GameReadyState(this, gameState);
     gameReadyState->create();
-    changeState(gameReadyState);
+    pushState(gameState);
+    pushState(gameReadyState);
 }
 
 void Pong::destroy() {
+    clearStates();
     window_.close();
 }
 

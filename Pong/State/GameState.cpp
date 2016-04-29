@@ -163,7 +163,6 @@ void GameState::createScoreBoard() {
 void GameState::setupShade() {
     shade_.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
     shade_.setFillColor(sf::Color(0, 0, 0, 128));
-    shade_.show();
 }
 
 void GameState::updateShapes() {

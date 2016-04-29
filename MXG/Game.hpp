@@ -20,6 +20,9 @@ class Game : public Application {
         void changeState(State* state);
 
     private:
+        bool isStatesEmpty();
+        void throwExceptionIfNull(State* state);
+
         std::stack< std::unique_ptr<State> > states_;
 };
 

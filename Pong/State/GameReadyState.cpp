@@ -17,7 +17,7 @@ void GameReadyState::processEvent(const sf::Event& event) {
 
     if (event.type == sf::Event::KeyReleased) {
         if (event.key.code == sf::Keyboard::Space) {
-            game_->changeState(gameState_);
+            game_->popState();
         }
     }
 }

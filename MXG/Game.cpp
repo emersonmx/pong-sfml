@@ -1,11 +1,11 @@
 #include "MXG/Game.hpp"
 
-#include <iostream>
+#include <stdexcept>
 
 namespace mxg {
 
 Game::Game() {
-    pushState(new DefaultState());
+    states_.emplace(new DefaultState());
 }
 
 State* Game::currentState() {
@@ -13,32 +13,42 @@ State* Game::currentState() {
 }
 
 void Game::pushState(State* state) {
-    if (state == nullptr) {
-        std::cout << "Ignoring null state." << std::endl;
-        return;
-    }
+    throwExceptionIfNull(state);
 
+    currentState()->exit();
     state->enter();
     states_.emplace(state);
 }
 
 void Game::popState() {
-    if (states_.size() > 1) {
-        State* state = currentState();
-        state->exit();
+    if (!isStatesEmpty()) {
+        currentState()->exit();
         states_.pop();
+        currentState()->enter();
     }
 }
 
 void Game::clearStates() {
-    while (states_.size() > 1) {
-        states_.pop();
+    while (!isStatesEmpty()) {
+        popState();
     }
 }
 
 void Game::changeState(State* state) {
+    throwExceptionIfNull(state);
+
     popState();
     pushState(state);
+}
+
+bool Game::isStatesEmpty() {
+    return states_.size() <= 1;
+}
+
+void Game::throwExceptionIfNull(State* state) {
+    if (state == nullptr) {
+        throw std::invalid_argument("state can be null.");
+    }
 }
 
 } /* namespace mxg */
