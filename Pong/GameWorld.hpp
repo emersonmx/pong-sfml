@@ -48,6 +48,7 @@ class GameWorld: public b2ContactListener {
         void toggleRunning() { running_ = !running_; }
 
         void resetBall();
+        void playBall();
 
         void setDebugDraw(b2Draw* debugDraw);
         void drawDebugData();
@@ -64,14 +65,18 @@ class GameWorld: public b2ContactListener {
         virtual b2Joint* createLeftRaquetJoint();
         virtual b2Joint* createRightRaquetJoint();
 
+        void postUpdate();
         void limitBallSpeed();
         void limitBallRotation();
-        void handleResets();
 
         void fireScoreLeft();
         void fireScoreRight();
 
     private:
+        enum class Scored {
+            NONE, LEFT, RIGHT
+        };
+
         std::unique_ptr<b2World> world_;
         b2Body* topWall_;
         b2Body* bottomWall_;
@@ -85,10 +90,8 @@ class GameWorld: public b2ContactListener {
 
         std::vector<ScoreListener*> scoreListeners_;
 
-        bool softReset_ = false;
-        bool hardReset_ = false;
-
         int stepCount_ = 0;
+        Scored scored_;
 
         bool running_ = false;
 };

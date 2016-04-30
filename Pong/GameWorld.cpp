@@ -51,18 +51,44 @@ void GameWorld::update() {
     if (running_) {
         world_->Step(GAME_TIME_STEP, GAME_VELOCITY_ITERATIONS,
                     GAME_POSITION_ITERATIONS);
+        world_->ClearForces();
 
-        limitBallSpeed();
-        limitBallRotation();
-        handleResets();
+        if (ball_->IsActive()) {
+            limitBallSpeed();
+            limitBallRotation();
+        }
+        postUpdate();
 
         stepCount_++;
     }
 }
 
 void GameWorld::resetBall() {
-    softReset_ = true;
+    b2Vec2 position;
+    position.Set(
+        WINDOW_HALF_WIDTH / static_cast<float>(PIXELS_PER_METER),
+        WINDOW_HALF_HEIGHT / static_cast<float>(PIXELS_PER_METER)
+    );
+
+    ball_->SetTransform(position, 0);
+    ball_->SetActive(false);
     stepCount_ = 0;
+}
+
+void GameWorld::playBall() {
+    mxg::Random random;
+
+    b2Vec2 velocity;
+    velocity.x = random.nextInt() % 2 == 0 ? -1 : 1;
+    velocity.y = random.nextFloat(-1, 1);
+    ball_->SetLinearVelocity(velocity);
+
+    float rotation = random.nextFloat(
+        BALL_MIN_ROTATION_SPEED,
+        BALL_MAX_ROTATION_SPEED
+    ) * (random.nextInt() % 2 == 0 ? -1 : 1);
+    ball_->SetAngularVelocity(rotation);
+    ball_->SetActive(true);
 }
 
 void GameWorld::setDebugDraw(b2Draw* debugDraw) {
@@ -95,9 +121,9 @@ void GameWorld::EndContact(b2Contact* contact) {
     b2Vec2 gameAreaPosition = gameArea->GetPosition();
 
     if (ballPosition.x < gameAreaPosition.x) {
-        fireScoreRight();
+        scored_ = Scored::RIGHT;
     } else if (ballPosition.x > gameAreaPosition.x) {
-        fireScoreLeft();
+        scored_ = Scored::LEFT;
     }
 }
 
@@ -150,7 +176,6 @@ b2Body* GameWorld::createBottomWall() {
 }
 
 b2Body* GameWorld::createBall() {
-    mxg::Random random;
     float halfWidth = BALL_HALF_WIDTH;
     float halfHeight = BALL_HALF_HEIGHT;
 
@@ -160,13 +185,7 @@ b2Body* GameWorld::createBall() {
         WINDOW_HALF_WIDTH / static_cast<float>(PIXELS_PER_METER),
         WINDOW_HALF_HEIGHT / static_cast<float>(PIXELS_PER_METER)
     );
-    bodyDef.linearVelocity.x = random.nextInt() % 2 == 0 ? -1 : 1;
-    bodyDef.linearVelocity.y = random.nextFloat(-1, 1);
-    bodyDef.linearVelocity *= BALL_MIN_SPEED;
-    bodyDef.angularVelocity = random.nextFloat(
-        BALL_MIN_ROTATION_SPEED,
-        BALL_MAX_ROTATION_SPEED
-    ) * (random.nextInt() % 2 == 0 ? -1 : 1);
+    bodyDef.active = false;
 
     b2Body* body = world_->CreateBody(&bodyDef);
     b2PolygonShape shape;
@@ -305,6 +324,16 @@ b2Joint* GameWorld::createRightRaquetJoint() {
     return world_->CreateJoint(&jointDef);
 }
 
+void GameWorld::postUpdate() {
+    if (scored_ == Scored::LEFT) {
+        fireScoreLeft();
+        scored_ = Scored::NONE;
+    } else if (scored_ == Scored::RIGHT) {
+        fireScoreRight();
+        scored_ = Scored::NONE;
+    }
+}
+
 void GameWorld::limitBallSpeed() {
     b2Vec2 velocity = ball_->GetLinearVelocity();
     float speed = velocity.Length();
@@ -329,17 +358,6 @@ void GameWorld::limitBallRotation() {
         rotation = BALL_MIN_ROTATION_SPEED * direction;
     }
     ball_->SetAngularVelocity(rotation);
-}
-
-void GameWorld::handleResets() {
-    if (hardReset_) {
-        create();
-        hardReset_ = false;
-    } else if (softReset_) {
-        world_->DestroyBody(ball_);
-        ball_ = createBall();
-        softReset_ = false;
-    }
 }
 
 void GameWorld::fireScoreLeft() {

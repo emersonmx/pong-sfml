@@ -19,6 +19,7 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
 
         virtual void create();
         virtual void update();
+
         using DefaultState::render;
 
         virtual void enter();
@@ -42,6 +43,10 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
         void createShapes();
         void createScoreBoard();
         void setupShade();
+
+        void restartBallDelay();
+        void updateBallDelay();
+
         void updateShapes();
         void renderShapes(sf::RenderTarget& renderTarget);
 
@@ -58,6 +63,9 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
         sf::RectangleShape topWall_;
         sf::RectangleShape bottomWall_;
         Shade shade_;
+
+        sf::Clock ballClock_;
+        bool ballDelay_ = true;
 
         std::array< std::unique_ptr<InputHandler>, PLAYER_COUNT > inputHandlers_;
 

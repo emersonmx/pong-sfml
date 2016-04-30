@@ -14,6 +14,7 @@ void GameState::create() {
     createShapes();
     createScoreBoard();
     setupShade();
+    restartBallDelay();
 }
 
 void GameState::update() {
@@ -26,6 +27,7 @@ void GameState::update() {
 
     updateShapes();
     scoreBoard_.update();
+    updateBallDelay();
 
     if (scoreBoard_.rightScore() >= MATCH_POINT) {
         GameState* state = new GameState(game_);
@@ -42,6 +44,7 @@ void GameState::update() {
 
 void GameState::enter() {
     shade_.hide();
+    restartBallDelay();
 }
 
 void GameState::exit() {
@@ -50,12 +53,12 @@ void GameState::exit() {
 
 void GameState::leftScored(GameWorld& gameWorld) {
     gameWorld.resetBall();
-    gameWorld.start();
+    restartBallDelay();
 }
 
 void GameState::rightScored(GameWorld& gameWorld) {
     gameWorld.resetBall();
-    gameWorld.start();
+    restartBallDelay();
 }
 
 void GameState::processEvent(const sf::Event& event) {
@@ -163,6 +166,21 @@ void GameState::createScoreBoard() {
 void GameState::setupShade() {
     shade_.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
     shade_.setFillColor(sf::Color(0, 0, 0, 128));
+}
+
+void GameState::restartBallDelay() {
+    ballDelay_ = true;
+    ballClock_.restart();
+}
+
+void GameState::updateBallDelay() {
+    if (ballDelay_) {
+        sf::Time delay = ballClock_.getElapsedTime();
+        if (delay.asSeconds() > 0.5f) {
+            gameWorld_.playBall();
+            ballDelay_ = false;
+        }
+    }
 }
 
 void GameState::updateShapes() {
