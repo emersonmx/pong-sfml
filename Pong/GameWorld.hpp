@@ -12,7 +12,7 @@ class GameWorld: public b2ContactListener {
     public:
         enum Filter {
             NONE = 0,
-            RAQUET = 1,
+            RACKET = 1,
             BALL = 2,
             WALL = 4,
             GAME_AREA = 8,
@@ -30,11 +30,11 @@ class GameWorld: public b2ContactListener {
         b2Body* topWall() { return topWall_; }
         b2Body* bottomWall() { return bottomWall_; }
         b2Body* ball() { return ball_; }
-        b2Body* leftRaquet() { return leftRaquet_; }
-        b2Body* rightRaquet() { return rightRaquet_; }
+        b2Body* leftRacket() { return leftRacket_; }
+        b2Body* rightRacket() { return rightRacket_; }
         b2Body* gameArea() { return gameArea_; }
-        b2Joint* leftRaquetJoint() { return leftRaquetJoint_; }
-        b2Joint* rightRaquetJoint() { return rightRaquetJoint_; }
+        b2Joint* leftRacketJoint() { return leftRacketJoint_; }
+        b2Joint* rightRacketJoint() { return rightRacketJoint_; }
 
         void addScoreListener(ScoreListener* listener);
         void removeScoreListener(ScoreListener* listener);
@@ -59,11 +59,11 @@ class GameWorld: public b2ContactListener {
         virtual b2Body* createTopWall();
         virtual b2Body* createBottomWall();
         virtual b2Body* createBall();
-        virtual b2Body* createLeftRaquet();
-        virtual b2Body* createRightRaquet();
+        virtual b2Body* createLeftRacket();
+        virtual b2Body* createRightRacket();
         virtual b2Body* createGameArea();
-        virtual b2Joint* createLeftRaquetJoint();
-        virtual b2Joint* createRightRaquetJoint();
+        virtual b2Joint* createLeftRacketJoint();
+        virtual b2Joint* createRightRacketJoint();
 
         void postUpdate();
         void limitBallSpeed();
@@ -81,12 +81,12 @@ class GameWorld: public b2ContactListener {
         b2Body* topWall_;
         b2Body* bottomWall_;
         b2Body* ball_;
-        b2Body* leftRaquet_;
-        b2Body* rightRaquet_;
+        b2Body* leftRacket_;
+        b2Body* rightRacket_;
         b2Body* gameArea_;
 
-        b2Joint* leftRaquetJoint_;
-        b2Joint* rightRaquetJoint_;
+        b2Joint* leftRacketJoint_;
+        b2Joint* rightRacketJoint_;
 
         std::vector<ScoreListener*> scoreListeners_;
 

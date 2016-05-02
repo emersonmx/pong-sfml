@@ -41,12 +41,12 @@ constexpr const float BALL_VELOCITY_STEP = 0.003;
 constexpr const float BALL_MIN_ROTATION_SPEED = 0.1f;
 constexpr const float BALL_MAX_ROTATION_SPEED = 10.0f;
 
-constexpr const float RAQUET_MARGIN = 15.0f;
-constexpr const float RAQUET_WIDTH = 20.0f;
-constexpr const float RAQUET_HALF_WIDTH = RAQUET_WIDTH / 2.0f;
-constexpr const float RAQUET_HEIGHT = 80.0f;
-constexpr const float RAQUET_HALF_HEIGHT = RAQUET_HEIGHT / 2.0f;
-constexpr const float RAQUET_BASE_SPEED = 5.0f;
+constexpr const float RACKET_MARGIN = 15.0f;
+constexpr const float RACKET_WIDTH = 20.0f;
+constexpr const float RACKET_HALF_WIDTH = RACKET_WIDTH / 2.0f;
+constexpr const float RACKET_HEIGHT = 80.0f;
+constexpr const float RACKET_HALF_HEIGHT = RACKET_HEIGHT / 2.0f;
+constexpr const float RACKET_BASE_SPEED = 5.0f;
 
 const std::string ASSETS_PATH = "assets/";
 constexpr const int DEFAULT_FONT_SIZE = 54;
