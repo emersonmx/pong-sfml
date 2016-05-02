@@ -6,7 +6,7 @@
 
 namespace pong {
 
-void PlayerRacket::handlerInput() {
+void PlayerRacket::handleInput() {
     b2Vec2 velocity(0.0f, 0.0f);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
         velocity.Set(0.0f, -RACKET_BASE_SPEED);

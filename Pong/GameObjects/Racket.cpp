@@ -17,7 +17,7 @@ void Racket::create() {
 void Racket::update() {
     Utils::syncBodyToTransformable(body_, shape_);
 
-    handlerInput();
+    handleInput();
 }
 
 void Racket::draw(sf::RenderTarget& target, sf::RenderStates states) const {

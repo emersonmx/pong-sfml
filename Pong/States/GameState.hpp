@@ -8,7 +8,7 @@
 #include "Pong/GameWorld.hpp"
 
 #include "Pong/GameObjects/Ball.hpp"
-#include "Pong/GameObjects/PlayerRacket.hpp"
+#include "Pong/GameObjects/Racket.hpp"
 
 #include "MXG/SFMLDebugDraw.hpp"
 
@@ -19,8 +19,6 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
         using DefaultState::DefaultState;
 
         virtual void create();
-        virtual void destroy();
-
         virtual void update();
 
         using DefaultState::render;

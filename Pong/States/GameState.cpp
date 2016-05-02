@@ -3,6 +3,8 @@
 #include <iostream>
 
 #include "Pong/Pong.hpp"
+#include "Pong/GameObjects/PlayerRacket.hpp"
+#include "Pong/GameObjects/ComputerRacket.hpp"
 
 namespace pong {
 
@@ -11,16 +13,12 @@ void GameState::create() {
     setupGameObjects();
 }
 
-void GameState::destroy() {
-    ball_->destroy();
-}
-
 void GameState::update() {
     gameWorld_.update();
 
     ball_->update();
     leftRacket_->update();
-    //rightRacket_->update();
+    rightRacket_->update();
 }
 
 void GameState::enter() {
@@ -61,8 +59,14 @@ void GameState::setupGameObjects() {
     leftRacket_.reset(new PlayerRacket(gameWorld_.leftRacket()));
     leftRacket_->create();
 
-    //rightRacket_.reset(new Racket(gameWorld_.rightRacket()));
-    //rightRacket_->create();
+    ComputerRacket* computerRacket = new ComputerRacket(
+        gameWorld_.rightRacket(),
+        gameWorld_.ball()
+    );
+    computerRacket->xMaxDistance = (WINDOW_HALF_WIDTH - RACKET_WIDTH) / PIXELS_PER_METER;
+    computerRacket->yMaxDistance = (RACKET_HALF_HEIGHT - 20.0f) / PIXELS_PER_METER;
+    rightRacket_.reset(computerRacket);
+    rightRacket_->create();
 }
 
 void GameState::processEvent(const sf::Event& event) {
@@ -72,7 +76,7 @@ void GameState::processEvent(const sf::Event& event) {
 void GameState::render(sf::RenderTarget& renderTarget) {
     renderTarget.draw(*ball_);
     renderTarget.draw(*leftRacket_);
-    //renderTarget.draw(*rightRacket_);
+    renderTarget.draw(*rightRacket_);
 
 #ifndef NDEBUG
     gameWorld_.drawDebugData();

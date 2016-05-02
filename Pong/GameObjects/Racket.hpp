@@ -17,7 +17,7 @@ class Racket : public GameObject {
         virtual void update();
 
     protected:
-        virtual void handlerInput() = 0;
+        virtual void handleInput() = 0;
 
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

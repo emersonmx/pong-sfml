@@ -10,7 +10,7 @@ class PlayerRacket : public Racket {
         using Racket::Racket;
 
     protected:
-        virtual void handlerInput();
+        virtual void handleInput();
 };
 
 } /* namespace pong */
