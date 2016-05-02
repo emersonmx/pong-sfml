@@ -3,6 +3,9 @@
 
 #include "Pong/States/DefaultState.hpp"
 #include "Pong/Defs.hpp"
+#include "Pong/GameWorld.hpp"
+
+#include "MXG/SFMLDebugDraw.hpp"
 
 namespace pong {
 
@@ -19,8 +22,14 @@ class GameState: public DefaultState {
         virtual void exit();
 
     protected:
+        void setupGameWorld();
+
         virtual void processEvent(const sf::Event& event);
         virtual void render(sf::RenderTarget& renderTarget);
+
+        GameWorld gameWorld_;
+
+        std::unique_ptr<mxg::SFMLDebugDraw> debugDraw_;
 };
 
 } /* namespace pong */

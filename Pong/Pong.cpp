@@ -14,7 +14,9 @@ void Pong::create() {
 
     assets_.loadAssets();
 
-    pushState(new GameState(this));
+    GameState* gameState = new GameState(this);
+    gameState->create();
+    pushState(gameState);
 }
 
 void Pong::destroy() {
