@@ -15,15 +15,27 @@ void GameState::update() {
 }
 
 void GameState::enter() {
+    gameWorld_.playBall();
 }
 
 void GameState::exit() {
 }
 
+void GameState::leftScored(GameWorld& gameWorld) {
+    gameWorld_.resetBall();
+    gameWorld_.playBall();
+    std::cout << "Left Scored!" << std::endl;
+}
+
+void GameState::rightScored(GameWorld& gameWorld) {
+    gameWorld_.resetBall();
+    gameWorld_.playBall();
+    std::cout << "Right Scored!" << std::endl;
+}
+
 void GameState::setupGameWorld() {
     gameWorld_.create();
-    //gameWorld_.addScoreListener(&scoreBoard_);
-    //gameWorld_.addScoreListener(this);
+    gameWorld_.addScoreListener(this);
     gameWorld_.start();
 
 #ifndef NDEBUG
