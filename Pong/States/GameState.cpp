@@ -3,6 +3,11 @@
 #include <iostream>
 
 #include "Pong/Pong.hpp"
+
+#include "Pong/GameObjects/Ball.hpp"
+#include "Pong/GameObjects/Racket.hpp"
+#include "Pong/GameObjects/Wall.hpp"
+#include "Pong/GameObjects/Midfield.hpp"
 #include "Pong/GameObjects/PlayerRacket.hpp"
 #include "Pong/GameObjects/ComputerRacket.hpp"
 
@@ -53,6 +58,9 @@ void GameState::setupGameWorld() {
 }
 
 void GameState::setupGameObjects() {
+    midfield_.reset(new Midfield());
+    midfield_->create();
+
     ball_.reset(new Ball(gameWorld_));
     ball_->create();
 
@@ -79,6 +87,7 @@ void GameState::processEvent(const sf::Event& event) {
 }
 
 void GameState::render(sf::RenderTarget& renderTarget) {
+    renderTarget.draw(*midfield_);
     renderTarget.draw(*ball_);
     renderTarget.draw(*leftRacket_);
     renderTarget.draw(*rightRacket_);
