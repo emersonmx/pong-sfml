@@ -8,10 +8,17 @@ namespace pong {
 
 void GameState::create() {
     setupGameWorld();
+    setupGameObjects();
+}
+
+void GameState::destroy() {
+    ball_->destroy();
 }
 
 void GameState::update() {
     gameWorld_.update();
+
+    ball_->update();
 }
 
 void GameState::enter() {
@@ -45,11 +52,19 @@ void GameState::setupGameWorld() {
 #endif /* ifndef NDEBUG */
 }
 
+void GameState::setupGameObjects() {
+    Ball* ball = new Ball(gameWorld_);
+    ball->create();
+    ball_.reset(ball);
+}
+
 void GameState::processEvent(const sf::Event& event) {
     DefaultState::processEvent(event);
 }
 
 void GameState::render(sf::RenderTarget& renderTarget) {
+    renderTarget.draw(*ball_);
+
 #ifndef NDEBUG
     gameWorld_.drawDebugData();
 #endif /* ifndef NDEBUG  */

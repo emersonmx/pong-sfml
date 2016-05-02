@@ -56,6 +56,10 @@ add_executable(${PROJECT_NAME}
     Pong/States/DefaultState.cpp
     Pong/States/GameState.cpp
 
+    Pong/GameObjects/Ball.cpp
+
+    Pong/Utils.cpp
+
     Pong/GameWorld.cpp
 
     MXG/SFMLDebugDraw.cpp

@@ -1,9 +1,13 @@
 #ifndef PONG_STATE_GAMESTATE_HPP_
 #define PONG_STATE_GAMESTATE_HPP_
 
+#include <memory>
+
 #include "Pong/States/DefaultState.hpp"
 #include "Pong/Defs.hpp"
 #include "Pong/GameWorld.hpp"
+
+#include "Pong/GameObjects/Ball.hpp"
 
 #include "MXG/SFMLDebugDraw.hpp"
 
@@ -14,6 +18,8 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
         using DefaultState::DefaultState;
 
         virtual void create();
+        virtual void destroy();
+
         virtual void update();
 
         using DefaultState::render;
@@ -26,11 +32,14 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
 
     protected:
         void setupGameWorld();
+        void setupGameObjects();
 
         virtual void processEvent(const sf::Event& event);
         virtual void render(sf::RenderTarget& renderTarget);
 
         GameWorld gameWorld_;
+
+        std::unique_ptr<Ball> ball_;
 
         std::unique_ptr<mxg::SFMLDebugDraw> debugDraw_;
 };
