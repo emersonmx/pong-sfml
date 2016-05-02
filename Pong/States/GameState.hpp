@@ -8,6 +8,7 @@
 #include "Pong/GameWorld.hpp"
 
 #include "Pong/GameObjects/Ball.hpp"
+#include "Pong/GameObjects/Racket.hpp"
 
 #include "MXG/SFMLDebugDraw.hpp"
 
@@ -40,6 +41,8 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
         GameWorld gameWorld_;
 
         std::unique_ptr<Ball> ball_;
+        std::unique_ptr<Racket> leftRacket_;
+        std::unique_ptr<Racket> rightRacket_;
 
         std::unique_ptr<mxg::SFMLDebugDraw> debugDraw_;
 };
