@@ -2,7 +2,6 @@
 
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
-#include <SFML/Window/Keyboard.hpp>
 
 #include "Pong/Defs.hpp"
 #include "Pong/Utils.hpp"
@@ -17,6 +16,8 @@ void Racket::create() {
 
 void Racket::update() {
     Utils::syncBodyToTransformable(body_, shape_);
+
+    handlerInput();
 }
 
 void Racket::draw(sf::RenderTarget& target, sf::RenderStates states) const {

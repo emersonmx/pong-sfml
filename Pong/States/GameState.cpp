@@ -20,7 +20,7 @@ void GameState::update() {
 
     ball_->update();
     leftRacket_->update();
-    rightRacket_->update();
+    //rightRacket_->update();
 }
 
 void GameState::enter() {
@@ -58,11 +58,11 @@ void GameState::setupGameObjects() {
     ball_.reset(new Ball(gameWorld_));
     ball_->create();
 
-    leftRacket_.reset(new Racket(gameWorld_.leftRacket()));
+    leftRacket_.reset(new PlayerRacket(gameWorld_.leftRacket()));
     leftRacket_->create();
 
-    rightRacket_.reset(new Racket(gameWorld_.rightRacket()));
-    rightRacket_->create();
+    //rightRacket_.reset(new Racket(gameWorld_.rightRacket()));
+    //rightRacket_->create();
 }
 
 void GameState::processEvent(const sf::Event& event) {
@@ -72,7 +72,7 @@ void GameState::processEvent(const sf::Event& event) {
 void GameState::render(sf::RenderTarget& renderTarget) {
     renderTarget.draw(*ball_);
     renderTarget.draw(*leftRacket_);
-    renderTarget.draw(*rightRacket_);
+    //renderTarget.draw(*rightRacket_);
 
 #ifndef NDEBUG
     gameWorld_.drawDebugData();

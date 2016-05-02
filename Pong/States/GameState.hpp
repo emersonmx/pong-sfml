@@ -8,7 +8,7 @@
 #include "Pong/GameWorld.hpp"
 
 #include "Pong/GameObjects/Ball.hpp"
-#include "Pong/GameObjects/Racket.hpp"
+#include "Pong/GameObjects/PlayerRacket.hpp"
 
 #include "MXG/SFMLDebugDraw.hpp"
 

@@ -17,9 +17,10 @@ class Racket : public GameObject {
         virtual void update();
 
     protected:
+        virtual void handlerInput() = 0;
+
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-    private:
         b2Body* body_;
         sf::RectangleShape shape_;
 };

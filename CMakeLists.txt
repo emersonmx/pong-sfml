@@ -58,6 +58,7 @@ add_executable(${PROJECT_NAME}
 
     Pong/GameObjects/Ball.cpp
     Pong/GameObjects/Racket.cpp
+    Pong/GameObjects/PlayerRacket.cpp
 
     Pong/Utils.cpp
 
