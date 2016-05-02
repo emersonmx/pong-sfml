@@ -67,6 +67,11 @@ void GameState::setupGameObjects() {
     computerRacket->yMaxDistance = (RACKET_HALF_HEIGHT - 20.0f) / PIXELS_PER_METER;
     rightRacket_.reset(computerRacket);
     rightRacket_->create();
+
+    topWall_.reset(new Wall(gameWorld_.topWall()));
+    topWall_->create();
+    bottomWall_.reset(new Wall(gameWorld_.bottomWall()));
+    bottomWall_->create();
 }
 
 void GameState::processEvent(const sf::Event& event) {
@@ -77,6 +82,8 @@ void GameState::render(sf::RenderTarget& renderTarget) {
     renderTarget.draw(*ball_);
     renderTarget.draw(*leftRacket_);
     renderTarget.draw(*rightRacket_);
+    renderTarget.draw(*topWall_);
+    renderTarget.draw(*bottomWall_);
 
 #ifndef NDEBUG
     gameWorld_.drawDebugData();

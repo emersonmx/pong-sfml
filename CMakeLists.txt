@@ -60,6 +60,7 @@ add_executable(${PROJECT_NAME}
     Pong/GameObjects/Racket.cpp
     Pong/GameObjects/PlayerRacket.cpp
     Pong/GameObjects/ComputerRacket.cpp
+    Pong/GameObjects/Wall.cpp
 
     Pong/Utils.cpp
 
