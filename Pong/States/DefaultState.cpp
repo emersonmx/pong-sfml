@@ -1,4 +1,4 @@
-#include "Pong/State/DefaultState.hpp"
+#include "Pong/States/DefaultState.hpp"
 
 #include "Pong/Pong.hpp"
 

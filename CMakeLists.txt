@@ -53,17 +53,9 @@ add_executable(${PROJECT_NAME}
     Pong/Main.cpp
     Pong/Pong.cpp
     Pong/Assets.cpp
-    Pong/State/DefaultState.cpp
-    Pong/State/GameState.cpp
-    Pong/State/GameReadyState.cpp
-    Pong/GameWorld.cpp
-    Pong/InputHandler/DefaultInputHandler.cpp
-    Pong/InputHandler/RaquetInputHandler.cpp
-    Pong/InputHandler/KeyboardInputHandler.cpp
-    Pong/InputHandler/ComputerPlayerInputHandler.cpp
-    Pong/Factory/GameShapeFactory.cpp
-    Pong/UI/ScoreBoard.cpp
-    Pong/UI/Shade.cpp
+    Pong/States/DefaultState.cpp
+    Pong/States/GameState.cpp
+
     MXG/SFMLDebugDraw.cpp
     MXG/Game.cpp
     MXG/Application.cpp
