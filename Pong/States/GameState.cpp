@@ -10,6 +10,7 @@
 #include "Pong/GameObjects/Midfield.hpp"
 #include "Pong/GameObjects/PlayerRacket.hpp"
 #include "Pong/GameObjects/ComputerRacket.hpp"
+#include "Pong/GameObjects/ScoreBoard.hpp"
 
 namespace pong {
 
@@ -24,6 +25,7 @@ void GameState::update() {
     ball_->update();
     leftRacket_->update();
     rightRacket_->update();
+    scoreBoard_->update();
 }
 
 void GameState::setupGameWorld() {
@@ -62,6 +64,11 @@ void GameState::setupGameObjects() {
     topWall_->create();
     bottomWall_.reset(new Wall(gameWorld_.bottomWall()));
     bottomWall_->create();
+
+    ScoreBoard* scoreBoard = new ScoreBoard(app_->assets().defaultFont());
+    gameWorld_.addScoreListener(scoreBoard);
+    scoreBoard_.reset(scoreBoard);
+    scoreBoard_->create();
 }
 
 void GameState::processEvent(const sf::Event& event) {
@@ -75,6 +82,7 @@ void GameState::render(sf::RenderTarget& renderTarget) {
     renderTarget.draw(*rightRacket_);
     renderTarget.draw(*topWall_);
     renderTarget.draw(*bottomWall_);
+    renderTarget.draw(*scoreBoard_);
 
 #ifndef NDEBUG
     gameWorld_.drawDebugData();

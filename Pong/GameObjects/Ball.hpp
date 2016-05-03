@@ -29,7 +29,6 @@ class Ball : public GameObject, public GameWorld::ScoreListener {
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
     private:
-
         GameWorld& gameWorld_;
 
         b2Body* body_;
