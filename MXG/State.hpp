@@ -1,8 +1,6 @@
 #ifndef MXG_STATE_HPP_
 #define MXG_STATE_HPP_
 
-#include <SFML/Graphics.hpp>
-
 namespace mxg {
 
 class State {

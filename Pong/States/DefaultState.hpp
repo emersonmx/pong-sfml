@@ -1,6 +1,9 @@
 #ifndef PONG_STATE_DEFAULTSTATE_HPP_
 #define PONG_STATE_DEFAULTSTATE_HPP_
 
+#include <SFML/Window/Event.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
+
 #include "MXG/DefaultState.hpp"
 
 namespace pong {

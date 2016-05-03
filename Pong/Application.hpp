@@ -1,9 +1,8 @@
 #ifndef PONG_APPLICATION_HPP_
 #define PONG_APPLICATION_HPP_
 
-
-
-#include <SFML/Graphics.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/System/Clock.hpp>
 
 #include "MXG/Game.hpp"
 
