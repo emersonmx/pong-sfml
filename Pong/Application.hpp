@@ -1,5 +1,7 @@
-#ifndef PONG_PONG_HPP_
-#define PONG_PONG_HPP_
+#ifndef PONG_APPLICATION_HPP_
+#define PONG_APPLICATION_HPP_
+
+
 
 #include <SFML/Graphics.hpp>
 
@@ -9,10 +11,10 @@
 
 namespace pong {
 
-class Pong: public mxg::Game {
+class Application: public mxg::Game {
     public:
-        Pong() {}
-        virtual ~Pong() {}
+        Application() {}
+        virtual ~Application() {}
 
         sf::RenderWindow& window() { return window_; }
         Assets& assets() { return assets_; }
@@ -33,4 +35,4 @@ class Pong: public mxg::Game {
 };
 
 } /* namespace pong */
-#endif /* PONG_PONG_HPP_ */
+#endif /* PONG_APPLICATION_HPP_ */

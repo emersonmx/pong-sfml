@@ -1,24 +1,24 @@
 #include "Pong/States/DefaultState.hpp"
 
-#include "Pong/Pong.hpp"
+#include "Pong/Application.hpp"
 
 namespace pong {
 
 void DefaultState::processEvents() {
     sf::Event event;
-    sf::Window& window = game_->window();
+    sf::Window& window = app_->window();
     while (window.pollEvent(event)) {
         processEvent(event);
     }
 }
 
 void DefaultState::render() {
-    render(game_->window());
+    render(app_->window());
 }
 
 void DefaultState::processEvent(const sf::Event& event) {
     if (event.type == sf::Event::Closed) {
-        game_->exit();
+        app_->exit();
     }
 }
 

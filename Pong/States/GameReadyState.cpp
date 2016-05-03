@@ -1,12 +1,12 @@
 #include "Pong/State/GameReadyState.hpp"
 
-#include "Pong/Pong.hpp"
+#include "Pong/Application.hpp"
 #include "Pong/State/GameState.hpp"
 
 namespace pong {
 
-GameReadyState::GameReadyState(Pong* pong, GameState* gameState)
-    : DefaultState::DefaultState(pong), gameState_(gameState) {}
+GameReadyState::GameReadyState(Application* game, GameState* gameState)
+    : DefaultState::DefaultState(game), gameState_(gameState) {}
 
 void GameReadyState::create() {
     setupTexts();
@@ -17,7 +17,7 @@ void GameReadyState::processEvent(const sf::Event& event) {
 
     if (event.type == sf::Event::KeyReleased) {
         if (event.key.code == sf::Keyboard::Space) {
-            game_->popState();
+            app_->popState();
         }
     }
 }
@@ -58,7 +58,7 @@ void GameReadyState::setupRightReady() {
 }
 
 void GameReadyState::applyDefaultStyle(sf::Text& text) {
-    sf::Font* font = game_->assets().defaultFont();
+    sf::Font* font = app_->assets().defaultFont();
     text.setFont(*font);
     text.setCharacterSize(24);
     sf::FloatRect bounds = text.getLocalBounds();

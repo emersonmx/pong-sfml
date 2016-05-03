@@ -1,6 +1,6 @@
-#include "Pong/Pong.hpp"
+#include "Pong/Application.hpp"
 
 int main() {
-    pong::Pong pong;
-    return pong.run();
+    pong::Application app;
+    return app.run();
 }

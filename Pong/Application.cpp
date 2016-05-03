@@ -1,4 +1,4 @@
-#include "Pong/Pong.hpp"
+#include "Pong/Application.hpp"
 
 #include "Pong/Defs.hpp"
 #include "Pong/States/GameState.hpp"
@@ -7,7 +7,7 @@ using namespace sf;
 
 namespace pong {
 
-void Pong::create() {
+void Application::create() {
     int flags = sf::Style::Titlebar | sf::Style::Close;
     window_.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE, flags);
     window_.setVerticalSyncEnabled(true);
@@ -19,12 +19,12 @@ void Pong::create() {
     pushState(gameState);
 }
 
-void Pong::destroy() {
+void Application::destroy() {
     clearStates();
     window_.close();
 }
 
-void Pong::tick() {
+void Application::tick() {
     sf::Time time = clock_.restart();
 
     currentState()->processEvents();

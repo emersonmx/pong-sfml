@@ -5,11 +5,11 @@
 
 namespace pong {
 
-class Pong;
+class Application;
 
 class DefaultState: public mxg::DefaultState {
     public:
-        DefaultState(Pong* game) : game_(game) {}
+        DefaultState(Application* app) : app_(app) {}
 
         virtual void processEvents();
         virtual void render();
@@ -18,7 +18,7 @@ class DefaultState: public mxg::DefaultState {
         virtual void processEvent(const sf::Event& event);
         virtual void render(sf::RenderTarget& renderTarget) {}
 
-        Pong* game_;
+        Application* app_;
 };
 
 } /* namespace pong */

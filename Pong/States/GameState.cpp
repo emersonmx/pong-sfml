@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "Pong/Pong.hpp"
+#include "Pong/Application.hpp"
 
 #include "Pong/GameObjects/Ball.hpp"
 #include "Pong/GameObjects/Racket.hpp"
@@ -51,7 +51,7 @@ void GameState::setupGameWorld() {
     gameWorld_.start();
 
 #ifndef NDEBUG
-    debugDraw_.reset(new mxg::SFMLDebugDraw(game_->window(), PIXELS_PER_METER));
+    debugDraw_.reset(new mxg::SFMLDebugDraw(app_->window(), PIXELS_PER_METER));
     gameWorld_.setDebugDraw(debugDraw_.get());
     debugDraw_->SetFlags(b2Draw::e_shapeBit);
 #endif /* ifndef NDEBUG */

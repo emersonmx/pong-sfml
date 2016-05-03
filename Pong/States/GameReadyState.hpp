@@ -9,7 +9,7 @@ class GameState;
 
 class GameReadyState : public DefaultState {
     public:
-        GameReadyState(Pong* pong, GameState* gameState);
+        GameReadyState(Application* app, GameState* gameState);
 
         virtual void create();
 
