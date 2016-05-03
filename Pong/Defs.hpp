@@ -11,12 +11,6 @@ constexpr const int WINDOW_HEIGHT = 480;
 constexpr const float WINDOW_HALF_WIDTH = WINDOW_WIDTH / 2.0f;
 constexpr const float WINDOW_HALF_HEIGHT = WINDOW_HEIGHT / 2.0f;
 
-enum class Player {
-    NONE,
-    PLAYER_1, PLAYER_2,
-    PLAYER_COUNT
-};
-
 constexpr const int PIXELS_PER_METER = 64;
 
 constexpr const int GAME_FRAMES_PER_SECOND = 60;
