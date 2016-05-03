@@ -26,28 +26,8 @@ void GameState::update() {
     rightRacket_->update();
 }
 
-void GameState::enter() {
-    gameWorld_.playBall();
-}
-
-void GameState::exit() {
-}
-
-void GameState::leftScored(GameWorld& gameWorld) {
-    gameWorld_.resetBall();
-    gameWorld_.playBall();
-    std::cout << "Left Scored!" << std::endl;
-}
-
-void GameState::rightScored(GameWorld& gameWorld) {
-    gameWorld_.resetBall();
-    gameWorld_.playBall();
-    std::cout << "Right Scored!" << std::endl;
-}
-
 void GameState::setupGameWorld() {
     gameWorld_.create();
-    gameWorld_.addScoreListener(this);
     gameWorld_.start();
 
 #ifndef NDEBUG
@@ -61,8 +41,10 @@ void GameState::setupGameObjects() {
     midfield_.reset(new Midfield());
     midfield_->create();
 
-    ball_.reset(new Ball(gameWorld_));
+    Ball* ball = new Ball(gameWorld_);
+    ball_.reset(ball);
     ball_->create();
+    gameWorld_.addScoreListener(ball);
 
     leftRacket_.reset(new PlayerRacket(gameWorld_.leftRacket()));
     leftRacket_->create();

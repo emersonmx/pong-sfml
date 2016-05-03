@@ -13,7 +13,7 @@
 
 namespace pong {
 
-class GameState: public DefaultState, public GameWorld::ScoreListener {
+class GameState: public DefaultState {
     public:
         using DefaultState::DefaultState;
 
@@ -21,12 +21,6 @@ class GameState: public DefaultState, public GameWorld::ScoreListener {
         virtual void update();
 
         using DefaultState::render;
-
-        virtual void enter();
-        virtual void exit();
-
-        virtual void leftScored(GameWorld& gameWorld);
-        virtual void rightScored(GameWorld& gameWorld);
 
     protected:
         void setupGameWorld();
