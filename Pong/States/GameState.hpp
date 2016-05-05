@@ -31,13 +31,7 @@ class GameState: public DefaultState {
 
         GameWorld gameWorld_;
 
-        std::unique_ptr<GameObject> ball_;
-        std::unique_ptr<GameObject> leftRacket_;
-        std::unique_ptr<GameObject> rightRacket_;
-        std::unique_ptr<GameObject> topWall_;
-        std::unique_ptr<GameObject> bottomWall_;
-        std::unique_ptr<GameObject> midfield_;
-        std::unique_ptr<GameObject> scoreBoard_;
+        std::vector< std::unique_ptr<GameObject> > gameObjects_;
 
         std::unique_ptr<mxg::SFMLDebugDraw> debugDraw_;
 };
