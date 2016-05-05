@@ -1,7 +1,10 @@
 #ifndef PONG_STATE_GAMEREADYSTATE_HPP_
 #define PONG_STATE_GAMEREADYSTATE_HPP_
 
-#include "Pong/State/DefaultState.hpp"
+#include <SFML/System/Clock.hpp>
+#include <SFML/Graphics/Text.hpp>
+
+#include "Pong/States/DefaultState.hpp"
 
 namespace pong {
 
@@ -13,24 +16,24 @@ class GameReadyState : public DefaultState {
 
         void create() override;
 
+        void update() override;
+
     protected:
         void processEvent(const sf::Event& event) override;
         void render(sf::RenderTarget& renderTarget) override;
 
     private:
-        void setupTexts();
-        void setupMessage();
-        void setupLeftReady();
-        void setupRightReady();
-        void applyDefaultStyle(sf::Text& text);
+        void setupWaitMessage();
+        void setupStartMessage();
 
         GameState* gameState_;
 
-        sf::Text message_;
-        sf::Text leftReadyText_;
-        sf::Text rightReadyText_;
-        bool leftReady_ = false;
-        bool rightReady_ = false;
+        sf::Text waitMessage_;
+        sf::Text startMessage_;
+
+        sf::Clock clock_;
+        bool ready_ = false;
+        bool startDelay_ = false;
 };
 
 } /* namespace pong */

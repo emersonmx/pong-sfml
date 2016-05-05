@@ -1,7 +1,7 @@
-#include "Pong/State/GameReadyState.hpp"
+#include "Pong/States/GameReadyState.hpp"
 
 #include "Pong/Application.hpp"
-#include "Pong/State/GameState.hpp"
+#include "Pong/States/GameState.hpp"
 
 namespace pong {
 
@@ -9,62 +9,70 @@ GameReadyState::GameReadyState(Application* game, GameState* gameState)
     : DefaultState::DefaultState(game), gameState_(gameState) {}
 
 void GameReadyState::create() {
-    setupTexts();
+    setupWaitMessage();
+    setupStartMessage();
 }
 
-void GameReadyState::processEvent(const sf::Event& event) {
-    DefaultState::processEvent(event);
-
-    if (event.type == sf::Event::KeyReleased) {
-        if (event.key.code == sf::Keyboard::Space) {
+void GameReadyState::update() {
+    if (ready_) {
+        sf::Time time = clock_.getElapsedTime();
+        if (startDelay_ && time.asSeconds() > 0.5f) {
             app_->popState();
+        } else if (time.asSeconds() > 1.0f) {
+            startDelay_ = true;
+            clock_.restart();
         }
     }
 }
 
+void GameReadyState::processEvent(const sf::Event& event) {
+    if (event.type == sf::Event::KeyReleased) {
+        if (event.key.code == sf::Keyboard::Up ||
+                event.key.code == sf::Keyboard::Down) {
+            clock_.restart();
+            ready_ = true;
+        }
+    }
+
+    DefaultState::processEvent(event);
+}
+
 void GameReadyState::render(sf::RenderTarget& renderTarget) {
     gameState_->render();
-    renderTarget.draw(message_);
-    if (leftReady_) {
-        renderTarget.draw(leftReadyText_);
+
+    if (startDelay_) {
+        return;
     }
-    if (rightReady_) {
-        renderTarget.draw(rightReadyText_);
+
+    if (!ready_) {
+        renderTarget.draw(waitMessage_);
+    } else {
+        renderTarget.draw(startMessage_);
     }
 }
 
-void GameReadyState::setupTexts() {
-    setupMessage();
-    setupLeftReady();
-    setupRightReady();
-}
-
-void GameReadyState::setupMessage() {
-    message_.setString("PRESS ANY MOVEMENT BUTTON WHEN READY");
-    message_.setPosition(WINDOW_HALF_WIDTH, WINDOW_HALF_HEIGHT / 2.0f);
-    applyDefaultStyle(message_);
-}
-
-void GameReadyState::setupLeftReady() {
-    leftReadyText_.setString("READY!");
-    leftReadyText_.setPosition(WINDOW_HALF_WIDTH / 2.0f, WINDOW_HALF_HEIGHT);
-    applyDefaultStyle(leftReadyText_);
-}
-
-void GameReadyState::setupRightReady() {
-    rightReadyText_.setString("READY!");
-    rightReadyText_.setPosition(WINDOW_HALF_WIDTH * 1.5f, WINDOW_HALF_HEIGHT);
-    applyDefaultStyle(rightReadyText_);
-}
-
-void GameReadyState::applyDefaultStyle(sf::Text& text) {
+void GameReadyState::setupWaitMessage() {
     sf::Font* font = app_->assets().defaultFont();
-    text.setFont(*font);
-    text.setCharacterSize(24);
-    sf::FloatRect bounds = text.getLocalBounds();
+    waitMessage_.setFont(*font);
+    waitMessage_.setCharacterSize(DEFAULT_FONT_SIZE);
+    waitMessage_.setString("PRESS ANY MOVEMENT BUTTON WHEN READY");
+    waitMessage_.setPosition(WINDOW_HALF_WIDTH, WINDOW_HALF_HEIGHT / 2.0f);
+
+    sf::FloatRect bounds = waitMessage_.getLocalBounds();
     sf::Vector2f center(bounds.width + bounds.left, bounds.height + bounds.top);
-    center *= 0.5f;
-    text.setOrigin(center);
+    waitMessage_.setOrigin(center / 2.0f);
+}
+
+void GameReadyState:: setupStartMessage() {
+    sf::Font* font = app_->assets().defaultFont();
+    startMessage_.setFont(*font);
+    startMessage_.setCharacterSize(DEFAULT_FONT_SIZE * 2.666);
+    startMessage_.setString("GAME START");
+    startMessage_.setPosition(WINDOW_HALF_WIDTH, WINDOW_HALF_HEIGHT / 2.0f);
+
+    sf::FloatRect bounds = startMessage_.getLocalBounds();
+    sf::Vector2f center(bounds.width + bounds.left, bounds.height + bounds.top);
+    startMessage_.setOrigin(center / 2.0f);
 }
 
 } /* namespace pong */

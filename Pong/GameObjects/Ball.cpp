@@ -16,6 +16,8 @@ void Ball::create() {
     shape_.setOrigin(shape_.getSize() / 2.0f);
 
     reset();
+
+    Utils::syncBodyToTransformable(body_, shape_);
 }
 
 void Ball::update() {
