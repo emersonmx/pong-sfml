@@ -15,7 +15,7 @@ class ComputerRacket : public Racket {
         float yMaxDistance;
 
     protected:
-        virtual void handleInput();
+        void handleInput() override;
 
         b2Body* ball_;
 };

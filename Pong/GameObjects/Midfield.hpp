@@ -9,10 +9,10 @@ namespace pong {
 
 class Midfield : public GameObject {
     public:
-        virtual void create();
+        void create() override;
 
     protected:
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+        void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
         sf::RectangleShape shape_;
 };

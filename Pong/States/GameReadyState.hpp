@@ -11,11 +11,11 @@ class GameReadyState : public DefaultState {
     public:
         GameReadyState(Application* app, GameState* gameState);
 
-        virtual void create();
+        void create() override;
 
     protected:
-        virtual void processEvent(const sf::Event& event);
-        virtual void render(sf::RenderTarget& renderTarget);
+        void processEvent(const sf::Event& event) override;
+        void render(sf::RenderTarget& renderTarget) override;
 
     private:
         void setupTexts();

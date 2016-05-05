@@ -17,8 +17,8 @@ class GameState: public DefaultState {
     public:
         using DefaultState::DefaultState;
 
-        virtual void create();
-        virtual void update();
+        void create() override;
+        void update() override;
 
         using DefaultState::render;
 
@@ -26,8 +26,8 @@ class GameState: public DefaultState {
         void setupGameWorld();
         void setupGameObjects();
 
-        virtual void processEvent(const sf::Event& event);
-        virtual void render(sf::RenderTarget& renderTarget);
+        void processEvent(const sf::Event& event) override;
+        void render(sf::RenderTarget& renderTarget) override;
 
         GameWorld gameWorld_;
 

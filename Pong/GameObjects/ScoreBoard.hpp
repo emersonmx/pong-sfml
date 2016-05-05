@@ -14,18 +14,18 @@ class ScoreBoard : public GameObject, public GameWorld::ScoreListener {
     public:
         ScoreBoard(sf::Font* font) : font_(font) {}
 
-        virtual void create();
+        void create() override;
 
-        virtual void update();
+        void update() override;
 
         void show();
         void hide();
 
-        virtual void leftScored(GameWorld& gameWorld);
-        virtual void rightScored(GameWorld& gameWorld);
+        void leftScored(GameWorld& gameWorld) override;
+        void rightScored(GameWorld& gameWorld) override;
 
     protected:
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+        void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
     private:
         void updateLeftScoreText();

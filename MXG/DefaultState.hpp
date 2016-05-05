@@ -7,15 +7,15 @@ namespace mxg {
 
 class DefaultState: public State {
     public:
-        virtual void create() {}
-        virtual void destroy() {}
+        void create() override {}
+        void destroy() override {}
 
-        virtual void enter() {}
-        virtual void exit() {}
+        void enter() override {}
+        void exit() override {}
 
-        virtual void processEvents() {}
-        virtual void update() {}
-        virtual void render() {}
+        void processEvents() override {}
+        void update() override {}
+        void render() override {}
 };
 
 } /* namespace mxg */

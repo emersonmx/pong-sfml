@@ -53,7 +53,7 @@ class GameWorld: public b2ContactListener {
         void setDebugDraw(b2Draw* debugDraw);
         void drawDebugData();
 
-        virtual void EndContact(b2Contact* contact);
+        void EndContact(b2Contact* contact) override;
 
     protected:
         virtual b2Body* createTopWall();

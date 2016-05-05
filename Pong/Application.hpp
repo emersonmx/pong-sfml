@@ -19,10 +19,10 @@ class Application: public mxg::Game {
         Assets& assets() { return assets_; }
 
     protected:
-        virtual void create();
-        virtual void destroy();
+        void create() override;
+        void destroy() override;
 
-        virtual void tick();
+        void tick() override;
 
         sf::RenderWindow window_;
         sf::Clock clock_;

@@ -14,8 +14,8 @@ class DefaultState: public mxg::DefaultState {
     public:
         DefaultState(Application* app) : app_(app) {}
 
-        virtual void processEvents();
-        virtual void render();
+        void processEvents() override;
+        void render() override;
 
     protected:
         virtual void processEvent(const sf::Event& event);

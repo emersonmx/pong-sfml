@@ -16,17 +16,17 @@ class Ball : public GameObject, public GameWorld::ScoreListener {
     public:
         Ball(GameWorld& gameWorld) : gameWorld_(gameWorld) {}
 
-        virtual void create();
+        void create() override;
 
-        virtual void update();
+        void update() override;
 
         void reset();
 
-        virtual void leftScored(GameWorld& gameWorld);
-        virtual void rightScored(GameWorld& gameWorld);
+        void leftScored(GameWorld& gameWorld) override;
+        void rightScored(GameWorld& gameWorld) override;
 
     protected:
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+        void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
     private:
         GameWorld& gameWorld_;

@@ -12,14 +12,14 @@ class Racket : public GameObject {
     public:
         Racket(b2Body* body) : body_(body) {}
 
-        virtual void create();
+        void create() override;
 
-        virtual void update();
+        void update() override;
 
     protected:
         virtual void handleInput() = 0;
 
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+        void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
         b2Body* body_;
         sf::RectangleShape shape_;
