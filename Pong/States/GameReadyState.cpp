@@ -16,11 +16,9 @@ void GameReadyState::create() {
 void GameReadyState::update() {
     if (ready_) {
         sf::Time time = clock_.getElapsedTime();
-        if (startDelay_ && time.asSeconds() > 0.5f) {
+        if (time.asSeconds() > 1.0f) {
+            gameState_->reset();
             app_->popState();
-        } else if (time.asSeconds() > 1.0f) {
-            startDelay_ = true;
-            clock_.restart();
         }
     }
 }
@@ -39,10 +37,6 @@ void GameReadyState::processEvent(const sf::Event& event) {
 
 void GameReadyState::render(sf::RenderTarget& renderTarget) {
     gameState_->render();
-
-    if (startDelay_) {
-        return;
-    }
 
     if (!ready_) {
         renderTarget.draw(waitMessage_);

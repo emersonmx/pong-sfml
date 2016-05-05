@@ -33,7 +33,6 @@ class GameReadyState : public DefaultState {
 
         sf::Clock clock_;
         bool ready_ = false;
-        bool startDelay_ = false;
 };
 
 } /* namespace pong */

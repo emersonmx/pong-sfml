@@ -22,9 +22,15 @@ void GameState::create() {
 void GameState::update() {
     gameWorld_.update();
 
-    for (auto& object : gameObjects_) {
-        object->update();
-    }
+    ball_->update();
+    leftRacket_->update();
+    rightRacket_->update();
+    scoreBoard_->update();
+}
+
+void GameState::reset() {
+    Ball* ball = static_cast<Ball*>(ball_.get());
+    ball->reset();
 }
 
 void GameState::setupGameWorld() {
@@ -39,15 +45,16 @@ void GameState::setupGameWorld() {
 }
 
 void GameState::setupGameObjects() {
-    Midfield* midfield = new Midfield();
-    gameObjects_.emplace_back(midfield);
+    midfield_.reset(new Midfield());
+    midfield_->create();
 
     Ball* ball = new Ball(gameWorld_);
+    ball_.reset(ball);
+    ball_->create();
     gameWorld_.addScoreListener(ball);
-    gameObjects_.emplace_back(ball);
 
-    PlayerRacket* playerRacket = new PlayerRacket(gameWorld_.leftRacket());
-    gameObjects_.emplace_back(playerRacket);
+    leftRacket_.reset(new PlayerRacket(gameWorld_.leftRacket()));
+    leftRacket_->create();
 
     ComputerRacket* computerRacket = new ComputerRacket(
         gameWorld_.rightRacket(),
@@ -55,21 +62,18 @@ void GameState::setupGameObjects() {
     );
     computerRacket->xMaxDistance = (WINDOW_HALF_WIDTH - RACKET_WIDTH) / PIXELS_PER_METER;
     computerRacket->yMaxDistance = (RACKET_HALF_HEIGHT - 20.0f) / PIXELS_PER_METER;
-    gameObjects_.emplace_back(computerRacket);
+    rightRacket_.reset(computerRacket);
+    rightRacket_->create();
 
-    Wall* topWall = new Wall(gameWorld_.topWall());
-    gameObjects_.emplace_back(topWall);
-
-    Wall* bottomWall = new Wall(gameWorld_.bottomWall());
-    gameObjects_.emplace_back(bottomWall);
+    topWall_.reset(new Wall(gameWorld_.topWall()));
+    topWall_->create();
+    bottomWall_.reset(new Wall(gameWorld_.bottomWall()));
+    bottomWall_->create();
 
     ScoreBoard* scoreBoard = new ScoreBoard(app_->assets().defaultFont());
     gameWorld_.addScoreListener(scoreBoard);
-    gameObjects_.emplace_back(scoreBoard);
-
-    for (auto& object : gameObjects_) {
-        object->create();
-    }
+    scoreBoard_.reset(scoreBoard);
+    scoreBoard_->create();
 }
 
 void GameState::processEvent(const sf::Event& event) {
@@ -77,9 +81,13 @@ void GameState::processEvent(const sf::Event& event) {
 }
 
 void GameState::render(sf::RenderTarget& renderTarget) {
-    for (auto& object : gameObjects_) {
-        renderTarget.draw(*object);
-    }
+    renderTarget.draw(*midfield_);
+    renderTarget.draw(*ball_);
+    renderTarget.draw(*leftRacket_);
+    renderTarget.draw(*rightRacket_);
+    renderTarget.draw(*topWall_);
+    renderTarget.draw(*bottomWall_);
+    renderTarget.draw(*scoreBoard_);
 
 #ifndef NDEBUG
     gameWorld_.drawDebugData();
