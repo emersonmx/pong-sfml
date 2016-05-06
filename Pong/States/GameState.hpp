@@ -8,6 +8,7 @@
 #include "Pong/GameWorld.hpp"
 
 #include "Pong/GameObjects/GameObject.hpp"
+#include "Pong/GameObjects/Shade.hpp"
 
 #include "MXG/SFMLDebugDraw.hpp"
 
@@ -19,6 +20,9 @@ class GameState: public DefaultState {
 
         void create() override;
         void update() override;
+
+        void enter() override;
+        void exit() override;
 
         using DefaultState::render;
 
@@ -40,6 +44,7 @@ class GameState: public DefaultState {
         std::unique_ptr<GameObject> bottomWall_;
         std::unique_ptr<GameObject> midfield_;
         std::unique_ptr<GameObject> scoreBoard_;
+        std::unique_ptr<Shade> shade_;
 
         std::unique_ptr<mxg::SFMLDebugDraw> debugDraw_;
 };

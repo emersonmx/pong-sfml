@@ -28,6 +28,14 @@ void GameState::update() {
     scoreBoard_->update();
 }
 
+void GameState::enter() {
+    shade_->hide();
+}
+
+void GameState::exit() {
+    shade_->show();
+}
+
 void GameState::reset() {
     Ball* ball = static_cast<Ball*>(ball_.get());
     ball->reset();
@@ -74,6 +82,9 @@ void GameState::setupGameObjects() {
     gameWorld_.addScoreListener(scoreBoard);
     scoreBoard_.reset(scoreBoard);
     scoreBoard_->create();
+
+    shade_.reset(new Shade());
+    shade_->create();
 }
 
 void GameState::processEvent(const sf::Event& event) {
@@ -88,6 +99,7 @@ void GameState::render(sf::RenderTarget& renderTarget) {
     renderTarget.draw(*topWall_);
     renderTarget.draw(*bottomWall_);
     renderTarget.draw(*scoreBoard_);
+    renderTarget.draw(*shade_);
 
 #ifndef NDEBUG
     gameWorld_.drawDebugData();
