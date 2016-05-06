@@ -14,6 +14,8 @@ class GameObject : public sf::Drawable {
 
         virtual void update() {}
 
+        bool visible = true;
+
     protected:
         void draw(sf::RenderTarget& target, sf::RenderStates states) const override {}
 };

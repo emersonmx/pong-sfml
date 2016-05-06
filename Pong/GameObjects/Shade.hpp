@@ -16,18 +16,12 @@ class Shade : public GameObject {
         sf::Color fillColor();
         void setFillColor(const sf::Color& color);
 
-        void show();
-        void hide();
-        bool isVisible() { return visible_; }
-
         void create() override;
 
     protected:
         void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
         sf::RectangleShape shape_;
-
-        bool visible_;
 };
 
 } /* namespace pong */

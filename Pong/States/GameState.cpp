@@ -29,11 +29,11 @@ void GameState::update() {
 }
 
 void GameState::enter() {
-    shade_->hide();
+    shade_->visible = false;
 }
 
 void GameState::exit() {
-    shade_->show();
+    shade_->visible = true;
 }
 
 void GameState::reset() {

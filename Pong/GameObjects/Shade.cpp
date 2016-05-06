@@ -31,14 +31,6 @@ void Shade::setFillColor(const sf::Color& color) {
     shape_.setFillColor(color);
 }
 
-void Shade::show() {
-    visible_ = true;
-}
-
-void Shade::hide() {
-    visible_ = false;
-}
-
 void Shade::create() {
     sf::Vector2f size(WINDOW_WIDTH, WINDOW_HEIGHT);
     setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
@@ -46,13 +38,15 @@ void Shade::create() {
     shape_.setOrigin(size / 2.0f);
     setPosition(sf::Vector2f(WINDOW_HALF_WIDTH, WINDOW_HALF_HEIGHT));
 
-    show();
+    visible = true;
 }
 
 void Shade::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    if (visible_) {
-        target.draw(shape_, states);
+    if (!visible) {
+        return;
     }
+
+    target.draw(shape_, states);
 }
 
 } /* namespace pong */

@@ -14,6 +14,10 @@ void Midfield::create() {
 }
 
 void Midfield::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    if (!visible) {
+        return;
+    }
+
     target.draw(shape_, states);
 }
 

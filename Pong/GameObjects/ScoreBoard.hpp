@@ -41,7 +41,6 @@ class ScoreBoard : public GameObject, public GameWorld::ScoreListener {
 
         int leftScore_ = 0;
         int rightScore_ = 0;
-        bool visibility_;
 };
 
 } /* namespace pong */

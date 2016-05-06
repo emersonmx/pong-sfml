@@ -15,11 +15,11 @@ void ScoreBoard::create() {
     rightScoreText_.setCharacterSize(DEFAULT_FONT_SIZE * 2.25f);
     updateRightScoreText();
 
-    visibility_ = false;
+    visible = false;
 }
 
 void ScoreBoard::update() {
-    if (visibility_) {
+    if (visible) {
         sf::Time elapsedTime = clock_.getElapsedTime();
         if (elapsedTime.asSeconds() > 2.0f) {
             hide();
@@ -29,11 +29,11 @@ void ScoreBoard::update() {
 
 void ScoreBoard::show() {
     clock_.restart();
-    visibility_ = true;
+    visible = true;
 }
 
 void ScoreBoard::hide() {
-    visibility_ = false;
+    visible = false;
 }
 
 void ScoreBoard::leftScored(GameWorld& gameWorld) {
@@ -49,10 +49,12 @@ void ScoreBoard::rightScored(GameWorld& gameWorld) {
 }
 
 void ScoreBoard::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    if (visibility_) {
-        target.draw(leftScoreText_, states);
-        target.draw(rightScoreText_, states);
+    if (!visible) {
+        return;
     }
+
+    target.draw(leftScoreText_, states);
+    target.draw(rightScoreText_, states);
 }
 
 void ScoreBoard::updateLeftScoreText() {

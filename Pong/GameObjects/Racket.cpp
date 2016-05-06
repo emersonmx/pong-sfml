@@ -22,6 +22,10 @@ void Racket::update() {
 }
 
 void Racket::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    if (!visible) {
+        return;
+    }
+
     target.draw(shape_, states);
 }
 
