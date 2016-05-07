@@ -106,8 +106,13 @@ void GameState::render(sf::RenderTarget& renderTarget) {
     renderTarget.draw(*rightRacket_);
     renderTarget.draw(*topWall_);
     renderTarget.draw(*bottomWall_);
-    renderTarget.draw(*scoreBoard_);
-    renderTarget.draw(*shade_);
+    if (scoreBoard_->isGameOver()) {
+        renderTarget.draw(*shade_);
+        renderTarget.draw(*scoreBoard_);
+    } else {
+        renderTarget.draw(*scoreBoard_);
+        renderTarget.draw(*shade_);
+    }
 
 #ifndef NDEBUG
     gameWorld_.drawDebugData();
