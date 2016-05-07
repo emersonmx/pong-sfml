@@ -4,6 +4,7 @@
 
 #include "Pong/Application.hpp"
 #include "Pong/States/GameState.hpp"
+#include "Pong/Defs.hpp"
 #include "Pong/Utils.hpp"
 
 namespace pong {
@@ -32,6 +33,11 @@ void GameOverState::create() {
     sf::FloatRect bounds = message_.getLocalBounds();
     message_.setOrigin(Utils::calculateCenterOfRect(bounds));
     message_.setPosition(WINDOW_HALF_WIDTH, WINDOW_HALF_HEIGHT);
+
+    menu_.reset(new Menu({"RESTART GAME", "BACK TO MAIN MENU"},
+                         *defaultFont, DEFAULT_FONT_SIZE, DEFAULT_FONT_SIZE));
+    menu_->setPosition(sf::Vector2f(WINDOW_HALF_WIDTH, WINDOW_HALF_HEIGHT));
+    menu_->create();
 }
 
 void GameOverState::update() {
@@ -39,14 +45,53 @@ void GameOverState::update() {
         sf::Time time = clock_.getElapsedTime();
         if (time.asSeconds() >= 2.0f) {
             delay_ = false;
-            // show menu
+        }
+    }
+}
+
+void GameOverState::endTick() {
+    if (selected_ == MenuOption::RESTART) {
+        app_->newGame();
+    } else if (selected_ == MenuOption::BACK_TO_MAIN_MENU) {
+        app_->changeToMainMenu();
+    }
+    selected_ = MenuOption::NONE;
+}
+
+void GameOverState::processEvent(const sf::Event& event) {
+    DefaultState::processEvent(event);
+
+    if (event.type == sf::Event::KeyPressed) {
+        if (event.key.code == sf::Keyboard::Up) {
+            if (delay_) {
+                delay_ = false;
+            } else {
+                menu_->previous();
+            }
+        } else if (event.key.code == sf::Keyboard::Down) {
+            if (delay_) {
+                delay_ = false;
+            } else {
+                menu_->next();
+            }
+        } else if (event.key.code == sf::Keyboard::Return) {
+            if (delay_) {
+                delay_ = false;
+            } else {
+                selected_ = menu_->selected();
+            }
         }
     }
 }
 
 void GameOverState::render(sf::RenderTarget& renderTarget) {
     gameState_->render();
-    renderTarget.draw(message_);
+
+    if (delay_) {
+        renderTarget.draw(message_);
+    } else {
+        renderTarget.draw(*menu_);
+    }
 }
 
 } /* namespace pong */

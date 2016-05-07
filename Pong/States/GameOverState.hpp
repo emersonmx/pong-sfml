@@ -6,6 +6,7 @@
 
 #include "Pong/States/DefaultState.hpp"
 #include "Pong/GameObjects/ScoreBoard.hpp"
+#include "Pong/GameObjects/Menu.hpp"
 
 namespace pong {
 
@@ -21,7 +22,14 @@ class GameOverState : public DefaultState {
 
         void update() override;
 
+        void endTick() override;
+
     protected:
+        enum MenuOption {
+            NONE = -1, RESTART, BACK_TO_MAIN_MENU
+        };
+
+        void processEvent(const sf::Event& event) override;
         void render(sf::RenderTarget& renderTarget) override;
 
         GameState* gameState_;
@@ -30,6 +38,9 @@ class GameOverState : public DefaultState {
         sf::Text message_;
         sf::Clock clock_;
         bool delay_ = false;
+
+        std::unique_ptr<Menu> menu_;
+        int selected_ = MenuOption::NONE;
 };
 
 } /* namespace pong */

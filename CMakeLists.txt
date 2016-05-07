@@ -66,6 +66,7 @@ add_executable(${PROJECT_NAME}
     Pong/GameObjects/Midfield.cpp
     Pong/GameObjects/ScoreBoard.cpp
     Pong/GameObjects/Shade.cpp
+    Pong/GameObjects/Menu.cpp
 
     Pong/Utils.cpp
 

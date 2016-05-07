@@ -18,6 +18,9 @@ class Application: public mxg::Game {
         sf::RenderWindow& window() { return window_; }
         Assets& assets() { return assets_; }
 
+        void newGame();
+        void changeToMainMenu();
+
     protected:
         void create() override;
         void destroy() override;
