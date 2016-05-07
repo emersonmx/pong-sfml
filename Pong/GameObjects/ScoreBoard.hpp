@@ -12,7 +12,14 @@ namespace pong {
 
 class ScoreBoard : public GameObject, public GameWorld::ScoreListener {
     public:
+        enum class Winner {
+            NONE, PLAYER, COMPUTER
+        };
+
         ScoreBoard(sf::Font* font) : font_(font) {}
+
+        bool isGameOver();
+        Winner winner();
 
         void create() override;
 

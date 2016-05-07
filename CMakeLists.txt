@@ -56,6 +56,7 @@ add_executable(${PROJECT_NAME}
     Pong/States/DefaultState.cpp
     Pong/States/GameState.cpp
     Pong/States/GameReadyState.cpp
+    Pong/States/GameOverState.cpp
 
     Pong/GameObjects/Ball.cpp
     Pong/GameObjects/Racket.cpp

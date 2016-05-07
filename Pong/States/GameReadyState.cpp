@@ -5,8 +5,8 @@
 
 namespace pong {
 
-GameReadyState::GameReadyState(Application* game, GameState* gameState)
-    : DefaultState::DefaultState(game), gameState_(gameState) {}
+GameReadyState::GameReadyState(Application* app, GameState* gameState)
+    : DefaultState::DefaultState(app), gameState_(gameState) {}
 
 void GameReadyState::create() {
     setupWaitMessage();

@@ -4,13 +4,14 @@
 
 #include "Pong/Application.hpp"
 
+#include "Pong/States/GameOverState.hpp"
+
 #include "Pong/GameObjects/Ball.hpp"
 #include "Pong/GameObjects/Racket.hpp"
 #include "Pong/GameObjects/Wall.hpp"
 #include "Pong/GameObjects/Midfield.hpp"
 #include "Pong/GameObjects/PlayerRacket.hpp"
 #include "Pong/GameObjects/ComputerRacket.hpp"
-#include "Pong/GameObjects/ScoreBoard.hpp"
 
 namespace pong {
 
@@ -26,6 +27,13 @@ void GameState::update() {
     leftRacket_->update();
     rightRacket_->update();
     scoreBoard_->update();
+
+    if (scoreBoard_->isGameOver()) {
+        ScoreBoard::Winner winner = scoreBoard_->winner();
+        GameOverState* gameOver = new GameOverState(app_, this, winner);
+        gameOver->create();
+        app_->pushState(gameOver);
+    }
 }
 
 void GameState::enter() {

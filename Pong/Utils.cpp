@@ -16,6 +16,11 @@ void syncBodyToTransformable(b2Body* body, sf::Transformable& transformable) {
     transformable.setRotation(angle * 180.0f / M_PI);
 }
 
+sf::Vector2f calculateCenterOfRect(sf::FloatRect rect) {
+    return sf::Vector2f(rect.left + rect.width / 2.0f,
+                        rect.top + rect.height / 2.0f);
+}
+
 } /* namespace Utils */
 
 } /* namespace pong */

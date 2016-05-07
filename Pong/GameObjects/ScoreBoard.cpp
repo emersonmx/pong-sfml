@@ -6,6 +6,19 @@
 
 namespace pong {
 
+bool ScoreBoard::isGameOver() {
+    return leftScore_ >= MATCH_POINT || rightScore_ >= MATCH_POINT;
+}
+
+ScoreBoard::Winner ScoreBoard::winner() {
+    if (leftScore_ >= MATCH_POINT) {
+        return Winner::PLAYER;
+    } else if (rightScore_ >= MATCH_POINT) {
+        return Winner::COMPUTER;
+    }
+    return Winner::NONE;
+}
+
 void ScoreBoard::create() {
     leftScoreText_.setFont(*font_);
     leftScoreText_.setCharacterSize(DEFAULT_FONT_SIZE * 2.25f);

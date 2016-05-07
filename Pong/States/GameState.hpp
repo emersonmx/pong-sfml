@@ -9,6 +9,7 @@
 
 #include "Pong/GameObjects/GameObject.hpp"
 #include "Pong/GameObjects/Shade.hpp"
+#include "Pong/GameObjects/ScoreBoard.hpp"
 
 #include "MXG/SFMLDebugDraw.hpp"
 
@@ -43,7 +44,7 @@ class GameState: public DefaultState {
         std::unique_ptr<GameObject> topWall_;
         std::unique_ptr<GameObject> bottomWall_;
         std::unique_ptr<GameObject> midfield_;
-        std::unique_ptr<GameObject> scoreBoard_;
+        std::unique_ptr<ScoreBoard> scoreBoard_;
         std::unique_ptr<Shade> shade_;
 
         std::unique_ptr<mxg::SFMLDebugDraw> debugDraw_;

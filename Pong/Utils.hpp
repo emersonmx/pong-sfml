@@ -10,6 +10,8 @@ namespace Utils {
 
 void syncBodyToTransformable(b2Body* body, sf::Transformable& transformable);
 
+sf::Vector2f calculateCenterOfRect(sf::FloatRect rect);
+
 } /* namespace Utils */
 
 } /* namespace pong */
