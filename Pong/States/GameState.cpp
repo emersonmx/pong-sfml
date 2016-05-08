@@ -1,10 +1,9 @@
 #include "Pong/States/GameState.hpp"
 
-#include <iostream>
-
 #include "Pong/Application.hpp"
 
 #include "Pong/States/GameOverState.hpp"
+#include "Pong/States/GameMenuState.hpp"
 
 #include "Pong/GameObjects/Ball.hpp"
 #include "Pong/GameObjects/Racket.hpp"
@@ -18,6 +17,7 @@ namespace pong {
 void GameState::create() {
     setupGameWorld();
     setupGameObjects();
+    gameStarted_ = true;
 }
 
 void GameState::update() {
@@ -29,6 +29,7 @@ void GameState::update() {
     scoreBoard_->update();
 
     if (scoreBoard_->isGameOver()) {
+        highlightScoreBoard_ = true;
         ScoreBoard::Winner winner = scoreBoard_->winner();
         GameOverState* gameOver = new GameOverState(app_, this, winner);
         gameOver->create();
@@ -38,10 +39,14 @@ void GameState::update() {
 
 void GameState::enter() {
     shade_->visible = false;
+    gameStarted_ = true;
+    highlightScoreBoard_ = false;
+    scoreBoard_->hide();
 }
 
 void GameState::exit() {
     shade_->visible = true;
+    gameStarted_ = false;
 }
 
 void GameState::reset() {
@@ -97,6 +102,18 @@ void GameState::setupGameObjects() {
 
 void GameState::processEvent(const sf::Event& event) {
     DefaultState::processEvent(event);
+
+    if (event.type == sf::Event::KeyPressed) {
+        if (event.key.code == sf::Keyboard::Return) {
+            if (gameStarted_) {
+                highlightScoreBoard_ = true;
+                scoreBoard_->show();
+                GameMenuState* gameMenuState = new GameMenuState(app_, this);
+                gameMenuState->create();
+                app_->pushState(gameMenuState);
+            }
+        }
+    }
 }
 
 void GameState::render(sf::RenderTarget& renderTarget) {
@@ -110,7 +127,7 @@ void GameState::render(sf::RenderTarget& renderTarget) {
     renderTarget.draw(*rightRacket_);
     renderTarget.draw(*topWall_);
     renderTarget.draw(*bottomWall_);
-    if (scoreBoard_->isGameOver()) {
+    if (highlightScoreBoard_) {
         renderTarget.draw(*shade_);
         renderTarget.draw(*scoreBoard_);
     } else {

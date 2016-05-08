@@ -22,7 +22,7 @@ void Application::newGame() {
     pushState(gameReadyState);
 }
 
-void Application::changeToMainMenu() {
+void Application::backToMainMenu() {
     clearStates();
 }
 

@@ -48,6 +48,9 @@ class GameState: public DefaultState {
         std::unique_ptr<Shade> shade_;
 
         std::unique_ptr<mxg::SFMLDebugDraw> debugDraw_;
+
+        bool gameStarted_ = false;
+        bool highlightScoreBoard_ = false;
 };
 
 } /* namespace pong */

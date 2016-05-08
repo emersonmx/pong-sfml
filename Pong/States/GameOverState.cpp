@@ -50,10 +50,13 @@ void GameOverState::update() {
 }
 
 void GameOverState::endTick() {
-    if (selected_ == MenuOption::RESTART) {
-        app_->newGame();
-    } else if (selected_ == MenuOption::BACK_TO_MAIN_MENU) {
-        app_->changeToMainMenu();
+    switch (selected_) {
+        case MenuOption::RESTART:
+            app_->newGame();
+            break;
+        case MenuOption::BACK_TO_MAIN_MENU:
+            app_->backToMainMenu();
+            break;
     }
     selected_ = MenuOption::NONE;
 }

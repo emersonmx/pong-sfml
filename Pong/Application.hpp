@@ -19,7 +19,7 @@ class Application: public mxg::Game {
         Assets& assets() { return assets_; }
 
         void newGame();
-        void changeToMainMenu();
+        void backToMainMenu();
 
     protected:
         void create() override;
