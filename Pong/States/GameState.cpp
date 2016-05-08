@@ -100,6 +100,10 @@ void GameState::processEvent(const sf::Event& event) {
 }
 
 void GameState::render(sf::RenderTarget& renderTarget) {
+#ifndef NDEBUG
+    gameWorld_.drawDebugData();
+#endif /* ifndef NDEBUG  */
+
     renderTarget.draw(*midfield_);
     renderTarget.draw(*ball_);
     renderTarget.draw(*leftRacket_);
@@ -113,10 +117,6 @@ void GameState::render(sf::RenderTarget& renderTarget) {
         renderTarget.draw(*scoreBoard_);
         renderTarget.draw(*shade_);
     }
-
-#ifndef NDEBUG
-    gameWorld_.drawDebugData();
-#endif /* ifndef NDEBUG  */
 }
 
 } /* namespace pong */
