@@ -16,6 +16,11 @@ if (CMAKE_BUILD_TYPE STREQUAL "")
     set(CMAKE_BUILD_TYPE Debug)
 endif()
 
+if (WIN32)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__NO_INLINE__ -D_USE_MATH_DEFINES")
+    set(CMAKE_EXE_LINKER_FLAGS "-Wl,--subsystem,windows")
+endif()
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
@@ -74,6 +79,7 @@ add_executable(${PROJECT_NAME}
 
     Pong/GameWorld.cpp
 
+    MXG/Random.cpp
     MXG/SFMLDebugDraw.cpp
     MXG/Game.cpp
     MXG/Application.cpp

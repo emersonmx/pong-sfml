@@ -1,6 +1,8 @@
 #ifndef PONG_STATES_MAINMENUSTATE_HPP_
 #define PONG_STATES_MAINMENUSTATE_HPP_
 
+#include <memory>
+
 #include <SFML/Graphics/Sprite.hpp>
 
 #include "Pong/States/DefaultState.hpp"

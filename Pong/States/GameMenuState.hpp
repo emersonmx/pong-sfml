@@ -1,6 +1,8 @@
 #ifndef PONG_STATES_GAMEMENUSTATE_HPP_
 #define PONG_STATES_GAMEMENUSTATE_HPP_
 
+#include <memory>
+
 #include "Pong/States/DefaultState.hpp"
 
 #include "Pong/GameObjects/Menu.hpp"
