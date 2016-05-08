@@ -13,85 +13,85 @@ SFMLDebugDraw::SFMLDebugDraw(sf::RenderWindow &window, float scale)
 }
 
 void SFMLDebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color) {
-	sf::ConvexShape polygon(vertexCount);
-	sf::Vector2f center;
-	for(int i = 0; i < vertexCount; i++) {
-		sf::Vector2f transformedVec = b2VecToSfVector(vertices[i]);
-		polygon.setPoint(i, sf::Vector2f(transformedVec.x, transformedVec.y));
-	}
-	polygon.setOutlineThickness(-1.f / scale_);
-	polygon.setFillColor(sf::Color::Transparent);
-	polygon.setOutlineColor(glColorToSfColor(color));
+    sf::ConvexShape polygon(vertexCount);
+    sf::Vector2f center;
+    for(int i = 0; i < vertexCount; i++) {
+        sf::Vector2f transformedVec = b2VecToSfVector(vertices[i]);
+        polygon.setPoint(i, sf::Vector2f(transformedVec.x, transformedVec.y));
+    }
+    polygon.setOutlineThickness(-1.f / scale_);
+    polygon.setFillColor(sf::Color::Transparent);
+    polygon.setOutlineColor(glColorToSfColor(color));
 
-	window_->draw(polygon, states_);
+    window_->draw(polygon, states_);
 }
 
 void SFMLDebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color) {
-	sf::ConvexShape polygon(vertexCount);
-	for(int i = 0; i < vertexCount; i++) {
-		sf::Vector2f transformedVec = b2VecToSfVector(vertices[i]);
-		polygon.setPoint(i, sf::Vector2f(transformedVec.x, transformedVec.y));
-	}
+    sf::ConvexShape polygon(vertexCount);
+    for(int i = 0; i < vertexCount; i++) {
+        sf::Vector2f transformedVec = b2VecToSfVector(vertices[i]);
+        polygon.setPoint(i, sf::Vector2f(transformedVec.x, transformedVec.y));
+    }
 
     polygon.setOutlineThickness(1 / scale_);
-	polygon.setFillColor(glColorToSfColor(color, 60));
+    polygon.setFillColor(glColorToSfColor(color, 60));
     polygon.setOutlineColor(glColorToSfColor(color));
 
-	window_->draw(polygon, states_);
+    window_->draw(polygon, states_);
 }
 
 void SFMLDebugDraw::DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color) {
-	sf::CircleShape circle(radius);
-	circle.setOrigin(radius, radius);
-	circle.setPosition(b2VecToSfVector(center));
-	circle.setFillColor(sf::Color::Transparent);
-	circle.setOutlineThickness(-1.f / scale_);
-	circle.setOutlineColor(glColorToSfColor(color));
+    sf::CircleShape circle(radius);
+    circle.setOrigin(radius, radius);
+    circle.setPosition(b2VecToSfVector(center));
+    circle.setFillColor(sf::Color::Transparent);
+    circle.setOutlineThickness(-1.f / scale_);
+    circle.setOutlineColor(glColorToSfColor(color));
 
-	window_->draw(circle, states_);
+    window_->draw(circle, states_);
 }
 
 void SFMLDebugDraw::DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color) {
-	sf::CircleShape circle(radius);
-	circle.setOrigin(radius, radius);
-	circle.setPosition(b2VecToSfVector(center));
-	circle.setFillColor(glColorToSfColor(color, 60));
-	circle.setOutlineThickness(1.f / scale_);
-	circle.setOutlineColor(glColorToSfColor(color));
+    sf::CircleShape circle(radius);
+    circle.setOrigin(radius, radius);
+    circle.setPosition(b2VecToSfVector(center));
+    circle.setFillColor(glColorToSfColor(color, 60));
+    circle.setOutlineThickness(1.f / scale_);
+    circle.setOutlineColor(glColorToSfColor(color));
 
-	b2Vec2 endPoint = center + radius * axis;
+    b2Vec2 endPoint = center + radius * axis;
     sf::VertexArray line(sf::Lines, 2);
     line.append(sf::Vertex(b2VecToSfVector(center), glColorToSfColor(color)));
     line.append(sf::Vertex(b2VecToSfVector(endPoint), glColorToSfColor(color)));
 
-	window_->draw(circle, states_);
-	window_->draw(line, states_);
+    window_->draw(circle, states_);
+    window_->draw(line, states_);
 }
 
 void SFMLDebugDraw::DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color) {
     sf::VertexArray line(sf::Lines, 2);
     line.append(sf::Vertex(b2VecToSfVector(p1), glColorToSfColor(color)));
-	line.append(sf::Vertex(b2VecToSfVector(p2), glColorToSfColor(color)));
+    line.append(sf::Vertex(b2VecToSfVector(p2), glColorToSfColor(color)));
 
-	window_->draw(line, states_);
+    window_->draw(line, states_);
 }
 
 void SFMLDebugDraw::DrawTransform(const b2Transform& xf) {
-	float lineLength = 0.4;
+    float lineLength = 0.4;
 
-	b2Vec2 xAxis = xf.p + lineLength * xf.q.GetXAxis();
+    b2Vec2 xAxis = xf.p + lineLength * xf.q.GetXAxis();
     sf::VertexArray redLine(sf::Lines, 2);
     redLine.append(sf::Vertex(b2VecToSfVector(xf.p), sf::Color::Red));
     redLine.append(sf::Vertex(b2VecToSfVector(xAxis), sf::Color::Red));
 
-	b2Vec2 yAxis = xf.p + lineLength * xf.q.GetYAxis();
+    b2Vec2 yAxis = xf.p + lineLength * xf.q.GetYAxis();
 
     sf::VertexArray greenLine(sf::Lines, 2);
     greenLine.append(sf::Vertex(b2VecToSfVector(xf.p), sf::Color::Green));
     greenLine.append(sf::Vertex(b2VecToSfVector(yAxis), sf::Color::Green));
 
-	window_->draw(redLine, states_);
-	window_->draw(greenLine, states_);
+    window_->draw(redLine, states_);
+    window_->draw(greenLine, states_);
 }
 
 sf::Color SFMLDebugDraw::glColorToSfColor(const b2Color& color, sf::Uint8 alpha) {
