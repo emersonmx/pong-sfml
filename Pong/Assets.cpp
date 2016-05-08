@@ -8,7 +8,7 @@ namespace pong {
 
 void Assets::loadAssets() {
     defaultFont_ = loadDefaultFont();
-    logo_ = loadLogoTexture();
+    loadLogoTexture();
 }
 
 std::unique_ptr<sf::Font> Assets::loadDefaultFont() {
@@ -20,13 +20,13 @@ std::unique_ptr<sf::Font> Assets::loadDefaultFont() {
     return font;
 }
 
-std::unique_ptr<sf::Texture> Assets::loadLogoTexture() {
-    std::unique_ptr<sf::Texture> texture(new sf::Texture());
+void Assets::loadLogoTexture() {
     std::string fileName = ASSETS_PATH + "logo.png";
-    if (!texture->loadFromFile(fileName)) {
+    if (!logoTexture_.loadFromFile(fileName)) {
         std::cout << "Unable to load texture \"" << fileName << "\"." << std::endl;
+        return;
     }
-    return texture;
+    logoTexture_.setSmooth(true);
 }
 
 } /* namespace pong */

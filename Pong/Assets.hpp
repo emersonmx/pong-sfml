@@ -13,17 +13,17 @@ class Assets {
         virtual ~Assets() {}
 
         sf::Font* defaultFont() { return defaultFont_.get(); }
-        sf::Texture* logo() { return logo_.get(); }
+        sf::Texture& logoTexture() { return logoTexture_; }
 
         void loadAssets();
 
     protected:
         virtual std::unique_ptr<sf::Font> loadDefaultFont();
-        virtual std::unique_ptr<sf::Texture> loadLogoTexture();
+        virtual void loadLogoTexture();
 
     private:
         std::unique_ptr<sf::Font> defaultFont_;
-        std::unique_ptr<sf::Texture> logo_;
+        sf::Texture logoTexture_;
 };
 
 } /* namespace pong */

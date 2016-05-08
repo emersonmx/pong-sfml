@@ -19,13 +19,13 @@ void GameMenuState::create() {
 
 void GameMenuState::endTick() {
     switch (selected_) {
-        case RESUME:
+        case MenuOption::RESUME:
             app_->popState();
             break;
-        case RESTART:
+        case MenuOption::RESTART:
             app_->newGame();
             break;
-        case BACK_TO_MAIN_MENU:
+        case MenuOption::BACK_TO_MAIN_MENU:
             app_->backToMainMenu();
             break;
     }

@@ -1,6 +1,7 @@
 #include "Pong/Application.hpp"
 
 #include "Pong/Defs.hpp"
+#include "Pong/States/MainMenuState.hpp"
 #include "Pong/States/GameState.hpp"
 #include "Pong/States/GameReadyState.hpp"
 #include "Pong/States/GameOverState.hpp"
@@ -24,16 +25,20 @@ void Application::newGame() {
 
 void Application::backToMainMenu() {
     clearStates();
+
+    MainMenuState* mainMenu = new MainMenuState(this);
+    mainMenu->create();
+    pushState(mainMenu);
 }
 
 void Application::create() {
     int flags = sf::Style::Titlebar | sf::Style::Close;
     window_.create(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_TITLE, flags);
-    window_.setVerticalSyncEnabled(true);
+    //window_.setVerticalSyncEnabled(true);
 
     assets_.loadAssets();
 
-    newGame();
+    backToMainMenu();
 }
 
 void Application::destroy() {
