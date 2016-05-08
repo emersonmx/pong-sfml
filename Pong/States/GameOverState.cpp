@@ -63,21 +63,15 @@ void GameOverState::processEvent(const sf::Event& event) {
 
     if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::Up) {
-            if (delay_) {
-                delay_ = false;
-            } else {
+            if (!delay_) {
                 menu_->previous();
             }
         } else if (event.key.code == sf::Keyboard::Down) {
-            if (delay_) {
-                delay_ = false;
-            } else {
+            if (!delay_) {
                 menu_->next();
             }
         } else if (event.key.code == sf::Keyboard::Return) {
-            if (delay_) {
-                delay_ = false;
-            } else {
+            if (!delay_) {
                 selected_ = menu_->selected();
             }
         }
