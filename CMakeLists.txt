@@ -2,8 +2,8 @@
 cmake_minimum_required(VERSION 2.6)
 project(pong)
 
-set(pong_VERSION_MAJOR 0)
-set(pong_VERSION_MINOR 5)
+set(pong_VERSION_MAJOR 1)
+set(pong_VERSION_MINOR 0)
 set(pong_VERSION_REVISION 0)
 
 configure_file(
