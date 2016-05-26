@@ -6,3 +6,5 @@ tags
 .project
 .cproject
 *.py[co]
+.idea/
+dist/
